@@ -1,0 +1,38 @@
+.clear-both {
+	clear: both;
+	margin-top: 7%;
+}
+
+.navbar-icon {
+	padding: 10px 15px;
+}
+
+.navbar-icon a {
+	display: block;
+	float: right;
+	height: 70px;
+	line-height: 70px;
+	margin-right: 50px;
+	text-align: center;
+}
+
+.attentions {
+	list-style-type: none;
+	padding: 10px 15px;
+}
+
+.attentions li {
+	margin: 0 4px 0 4px;
+	text-align: center;
+	padding-right: 4px;
+}
+
+.attention {
+	float: left;
+	border-right-width: 1px;
+	border-right-style: solid;
+}
+
+.tab-form {
+	margin-top: 2%;
+}
