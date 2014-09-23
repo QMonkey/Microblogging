@@ -4,7 +4,7 @@
 <!--[if IE]>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <![endif]-->
-<title>Mini Blog</title>
+<title>Micro Blogging</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width">
@@ -15,7 +15,7 @@
 <div class="navbar navbar-inverse" role="navigation">
 	<div class="navbar-header">
 		<div class="logo">
-			<h1>Mini Blog</h1>
+			<h1>Micro Blogging</h1>
 		</div>
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 			<span class="sr-only">Toggle navigation</span>
@@ -66,8 +66,7 @@
 			<li>
 				<div class="navbar-icon">
 					<div>
-						<img src="" width="70" height="70">					
-						<a href="">QMonkey</a>
+						<img src="img/yxh.gif" width="70" height="70"> <strong><a href="">QMonkey</a></strong> 
 					</div>
 				</div>
 			</li>
@@ -161,7 +160,7 @@
 					<div>
 						<div class="col-sm-2">
 							<a href="">
-								<img src="" width="70" height="70"></a>
+								<img src="img/yxh.gif" width="70" height="70"></a>
 						</div>
 						<div class="col-sm-offset-2">
 							<h4>
@@ -196,7 +195,7 @@
 								<div>
 									<div class="col-sm-2">
 										<a href="">
-											<img src="" width="50" height="50"></a>
+											<img src="img/yxh.gif" width="50" height="50"></a>
 									</div>
 									<div class="col-sm-offset-2">
 										<h5>
@@ -218,7 +217,7 @@
 								<div>
 									<div class="col-sm-2">
 										<a href="">
-											<img src="" width="50" height="50"></a>
+											<img src="img/yxh.gif" width="50" height="50"></a>
 									</div>
 									<div class="col-sm-offset-2">
 										<h5>
@@ -247,7 +246,7 @@
 					<div>
 						<div class="col-sm-2">
 							<a href="">
-								<img src="" width="70" height="70"></a>
+								<img src="img/yxh.gif" width="70" height="70"></a>
 						</div>
 						<div class="col-sm-offset-2">
 							<h4>
@@ -283,7 +282,7 @@
 								<div>
 									<div class="col-sm-2">
 										<a href="">
-											<img src="" width="50" height="50"></a>
+											<img src="img/yxh.gif" width="50" height="50"></a>
 									</div>
 									<div class="col-sm-offset-2">
 										<h5>
@@ -330,7 +329,7 @@
 						<div>
 							<div class="col-sm-2">
 								<a href="">
-									<img src="" width="70" height="70"></a>
+									<img src="img/yxh.gif" width="70" height="70"></a>
 							</div>
 							<div class="col-sm-offset-2">
 								<h4>
@@ -365,7 +364,7 @@
 									<div>
 										<div class="col-sm-2">
 											<a href="">
-												<img src="" width="50" height="50"></a>
+												<img src="img/yxh.gif" width="50" height="50"></a>
 										</div>
 										<div class="col-sm-offset-2">
 											<h5>
@@ -394,7 +393,7 @@
 						<div>
 							<div class="col-sm-2">
 								<a href="">
-									<img src="" width="70" height="70"></a>
+									<img src="img/yxh.gif" width="70" height="70"></a>
 							</div>
 							<div class="col-sm-offset-2">
 								<h4>
@@ -446,7 +445,7 @@
 						<div>
 							<div class="col-sm-2">
 								<a href="">
-									<img src="" width="70" height="70"></a>
+									<img src="img/yxh.gif" width="70" height="70"></a>
 							</div>
 							<div class="col-sm-offset-2">
 								<h4>
@@ -480,7 +479,7 @@
 						<div>
 							<div class="col-sm-2">
 								<a href="">
-									<img src="" width="70" height="70"></a>
+									<img src="img/yxh.gif" width="70" height="70"></a>
 							</div>
 							<div class="col-sm-offset-2">
 								<h4>
@@ -503,7 +502,7 @@
 				<div>
 					<div class="col-sm-2">
 						<a href="">
-							<img src="" width="70" height="70"></a>
+							<img src="img/yxh.gif" width="70" height="70"></a>
 					</div>
 					<div class="col-sm-offset-2">
 						<h4>
@@ -519,7 +518,7 @@
 				<div>
 					<div class="col-sm-2">
 						<a href="">
-							<img src="" width="70" height="70"></a>
+							<img src="img/yxh.gif" width="70" height="70"></a>
 					</div>
 					<div class="col-sm-offset-2">
 						<h4>
@@ -606,7 +605,27 @@
 						</form>
 					</div>
 
-					<div class="tab-pane fade" id="iconSetting">Icon</div>
+					<div class="tab-pane fade" id="iconSetting">
+						<iframe class="hidden" id="uploadFileFrame" name="uploadFileFrame"></iframe>
+						<form class="form-horizontal tab-form" role="form" 
+							target="uploadFileFrame" method="post" enctype="multipart/form-data">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">头像</label>
+								<div class="col-sm-8">
+									<img src="img/yxh.gif" width="150" height="150"></div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">上传头像</label>
+								<div class="col-sm-8">
+									<input type="file" class="form-control" id="icon" placeholder="icon"></div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-8">
+									<button type="submit" class="btn btn-default">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
 
 					<div class="tab-pane fade" id="passwordSetting">
 						<form class="form-horizontal tab-form" role="form">
