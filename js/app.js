@@ -16,6 +16,7 @@ var app = (function() {
 		$("#contentSetting").addClass("hidden");
 		$("#contentFocus").addClass("hidden");
 		$("#contentFans").addClass("hidden");
+		$("#contentMicroBloggingDetail").addClass("hidden");
 		$("#contentSearch").addClass("hidden");
 
 		switch(target.parent("li").attr("id")) {
@@ -118,6 +119,7 @@ var app = (function() {
 			$("#contentPrivateMessage").addClass("hidden");
 			$("#contentSetting").addClass("hidden");
 			$("#contentFans").addClass("hidden");
+			$("#contentMicroBloggingDetail").addClass("hidden");
 			$("#contentSearch").addClass("hidden");
 			$("#contentFocus").removeClass("hidden");
 		});
@@ -135,6 +137,7 @@ var app = (function() {
 			$("#contentPrivateMessage").addClass("hidden");
 			$("#contentSetting").addClass("hidden");
 			$("#contentFocus").addClass("hidden");
+			$("#contentMicroBloggingDetail").addClass("hidden");
 			$("#contentSearch").addClass("hidden");
 			$("#contentFans").removeClass("hidden");
 		});
@@ -155,8 +158,63 @@ var app = (function() {
 			$("#contentPrivateMessage").addClass("hidden");
 			$("#contentFocus").addClass("hidden");
 			$("#contentFans").addClass("hidden");
+			$("#contentMicroBloggingDetail").addClass("hidden");
 			$("#contentSetting").addClass("hidden");
 			$("#contentSearch").removeClass("hidden");
+		});
+		$("#content h4").on("click", function(e) {
+			$("#sidebarHome").removeClass("active");
+			$("#sidebarAt").removeClass("active");
+			$("#sidebarMyComment").removeClass("active");
+			$("#sidebarPrivateMessage").removeClass("active");
+			$("#sidebarSetting").removeClass("active");
+			$("#sidebarSignOut").removeClass("active");
+
+			$("#contentHome").addClass("hidden");
+			$("#contentAt").addClass("hidden");
+			$("#contentMyComment").addClass("hidden");
+			$("#contentPrivateMessage").addClass("hidden");
+			$("#contentSetting").addClass("hidden");
+			$("#contentFocus").addClass("hidden");
+			$("#contentFans").addClass("hidden");
+			$("#contentSearch").addClass("hidden");
+			$("#contentMicroBloggingDetail").removeClass("hidden");
+		});
+		$("#content h5").on("click", function(e) {
+			$("#sidebarHome").removeClass("active");
+			$("#sidebarAt").removeClass("active");
+			$("#sidebarMyComment").removeClass("active");
+			$("#sidebarPrivateMessage").removeClass("active");
+			$("#sidebarSetting").removeClass("active");
+			$("#sidebarSignOut").removeClass("active");
+
+			$("#contentHome").addClass("hidden");
+			$("#contentAt").addClass("hidden");
+			$("#contentMyComment").addClass("hidden");
+			$("#contentPrivateMessage").addClass("hidden");
+			$("#contentSetting").addClass("hidden");
+			$("#contentFocus").addClass("hidden");
+			$("#contentFans").addClass("hidden");
+			$("#contentSearch").addClass("hidden");
+			$("#contentMicroBloggingDetail").removeClass("hidden");
+		});
+		$("#content img").on("click", function(e) {
+			$("#sidebarHome").removeClass("active");
+			$("#sidebarAt").removeClass("active");
+			$("#sidebarMyComment").removeClass("active");
+			$("#sidebarPrivateMessage").removeClass("active");
+			$("#sidebarSetting").removeClass("active");
+			$("#sidebarSignOut").removeClass("active");
+
+			$("#contentHome").addClass("hidden");
+			$("#contentAt").addClass("hidden");
+			$("#contentMyComment").addClass("hidden");
+			$("#contentPrivateMessage").addClass("hidden");
+			$("#contentSetting").addClass("hidden");
+			$("#contentFocus").addClass("hidden");
+			$("#contentFans").addClass("hidden");
+			$("#contentSearch").addClass("hidden");
+			$("#contentMicroBloggingDetail").removeClass("hidden");
 		});
 	};
 

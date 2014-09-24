@@ -31,32 +31,105 @@
 			<div class="col-md-12">
 				<label for="username" class="col-sm-2 control-label">用户名</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="username" placeholder="Username"></div>
+					<input type="text" class="form-control" id="signInUsername" placeholder="Username"></div>
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-md-12">
 				<label for="password" class="col-sm-2 control-label">密码</label>
 				<div class="col-sm-10">
-					<input type="password" class="form-control" id="password" placeholder="Password"></div>
+					<input type="password" class="form-control" id="signInPassword" placeholder="Password"></div>
 			</div>
 		</div>
-		<!--
 		<div class="form-group">
 			<div class="col-md-12">
 				<div class="col-sm-offset-2 col-sm-10">
-					<div class="checkbox">
-						<label>
-							<input type="checkbox">Remember me</label>
-					</div>
+					<a id="signInGoToSignUp" href="javascript:;" class="pull-right">还没有帐号？赶快去注册！</a>
+					<input id="signInButton" type="button" value="登录" class="btn btn-default"></div>
+			</div>
+		</div>
+	</form>
+
+	<form id="signUp" class="form-horizontal templatemo-signin-form hidden" role="form">
+		<div class="form-group">
+			<div class="col-md-12">
+				<label class="col-sm-2 control-label">用户名</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="signUpUsername" placeholder="Username"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-12">
+				<label class="col-sm-2 control-label">密码</label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" id="signUpPassword" placeholder="Password"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-12">
+				<label class="col-sm-2 control-label">确认密码</label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" id="signUpConfirmPassword" placeholder="ConfirmPassword"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-12">
+				<label class="col-sm-2 control-label">昵称</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="signUpNickname" placeholder="Nickname"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-12">
+				<label class="col-sm-2 control-label">真实姓名</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="signUpRealname" placeholder="Realname"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-12">
+				<label class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-10">
+					<input type="email" class="form-control" id="signUpEmail" placeholder="Email"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-12">
+				<label class="col-sm-2 control-label">生日</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="signUpBirthday" readonly=""></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-12">
+				<label class="col-sm-2 control-label">性别</label>
+				<div class="col-sm-10">
+					<select id="signUpSex" class="form-control">
+						<option>男</option>
+						<option>女</option>
+					</select>
 				</div>
 			</div>
 		</div>
-		-->
+		<div class="form-group">
+			<div class="col-md-12">
+				<label class="col-sm-2 control-label">手机号</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="signUpPhone" placeholder="Phone"></div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-12">
+				<label class="col-sm-2 control-label">所在地</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="signUpAddress" placeholder="Address"></div>
+			</div>
+		</div>
 		<div class="form-group">
 			<div class="col-md-12">
 				<div class="col-sm-offset-2 col-sm-10">
-					<input id="signInButton" type="button" value="登录" class="btn btn-default"></div>
+					<input id="signUpButton" type="button" value="注册" class="btn btn-default">				
+					<input id="signUpReturn" type="button" value="返回" class="btn btn-default"></div>
 			</div>
 		</div>
 	</form>
@@ -66,24 +139,24 @@
 			<li>
 				<div class="navbar-icon">
 					<div>
-						<img src="img/yxh.gif" width="70" height="70"> <strong><a href="">QMonkey</a></strong> 
+						<img src="img/yxh.gif" width="70" height="70"> <strong><a href="javascript:;">QMonkey</a></strong> 
 					</div>
 				</div>
 			</li>
 			<li>
 				<ul class="attentions">
-					<li class="attention">
-						<a href="" style="display: block;"> <strong>123</strong>
+					<li id="sidebarFocus" class="attention">
+						<a href="javascript:;" style="display: block;"> <strong>123</strong>
 							<span>关注</span>
 						</a>
 					</li>
-					<li class="attention">
-						<a href="" style="display: block;"> <strong>234</strong>
+					<li id="sidebarFans" class="attention">
+						<a href="javascript:;" style="display: block;"> <strong>234</strong>
 							<span>粉丝</span>
 						</a>
 					</li>
-					<li>
-						<a href="" style="display: block;"> <strong>234</strong>
+					<li id="sidebarBlog">
+						<a href="javascript:;" style="display: block;"> <strong>234</strong>
 							<span>微博</span>
 						</a>
 					</li>
@@ -91,43 +164,42 @@
 			</li>
 			<li>
 				<form class="navbar-form">
-					<input type="text" class="form-control" id="templatemo_search_box" placeholder="搜索人或微博">
-					<span class="btn btn-default"><i class="fa fa-search"></i></span>
+					<input type="text" class="form-control" id="templatemo_search_box" placeholder="搜索微博或人">
+					<button type="button" id="searchButton" class="btn btn-default"><i class="fa fa-search"></i></button>
 				</form>
 			</li>
-			<li id="homeMenu" class="active">
+			<li id="sidebarHome" class="active">
 				<a href="javascript:;"> <i class="fa fa-home"></i>
 					我的首页
 				</a>
 			</li>
-			<li id="atMenu">
+			<li id="sidebarAt">
 				<a href="javascript:;"> <i class="fa fa-at"></i>
 					<span class="badge pull-right">9</span>
 					提到我的
 				</a>
 			</li>
-			<li id="myCommentMenu">
+			<li id="sidebarMyComment">
 				<a href="javascript:;">
 					<i class="fa fa-comment"></i>
 					<span class="badge pull-right">42</span>
 					我的评论
 				</a>
 			</li>
-			<li id="privateMessageMenu">
+			<li id="sidebarPrivateMessage">
 				<a href="javascript:;">
 					<i class="fa fa-envelope"></i>
 					<span class="badge pull-right">10</span>
 					我的私信
 				</a>
 			</li>
-			<li id="settingMenu">
+			<li id="sidebarSetting">
 				<a href="javascript:;">
 					<i class="fa fa-cog"></i>
 					个人设置
 				</a>
 			</li>
-			<li id="signOutMenu">
-				<!--<a href="javascript:;" data-toggle="modal" data-target="#confirmModal">-->
+			<li id="sidebarSignOut">
 				<a href="javascript:;">
 					<i class="fa fa-sign-out"></i>
 					注销
@@ -140,7 +212,7 @@
 	<div id="content" class="templatemo-content-wrapper hidden">
 		<div class="templatemo-content">
 			<!-- Home Start -->
-			<div id="home" class="hidden">
+			<div id="contentHome" class="hidden">
 				<form class="form-horizontal" role="form">
 					<div class="form-group">
 						<label class="col-sm-2 control-label">发微博</label>
@@ -159,12 +231,12 @@
 					<!-- Blog Start -->
 					<div>
 						<div class="col-sm-2">
-							<a href="">
+							<a href="javascript:;">
 								<img src="img/yxh.gif" width="70" height="70"></a>
 						</div>
 						<div class="col-sm-offset-2">
 							<h4>
-								<a href="">QMonkey</a>
+								<a href="javascript:;">QMonkey</a>
 							</h4>
 							<p>
 								Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.
@@ -172,12 +244,12 @@
 							<div>
 								<div class="pull-left">2014-09-16 9:00</div>
 								<div class="pull-right">
-									<a href=""> <i class="fa fa-thumbs-up"></i>
+									<a href="javascript:;"> <i class="fa fa-thumbs-up"></i>
 									</a>
 									&nbsp;|&nbsp;
-									<a href="">转发</a>
+									<a href="javascript:;">转发</a>
 									&nbsp;|&nbsp;
-									<a href="">评论</a>
+									<a href="javascript:;">评论</a>
 								</div>
 							</div>
 
@@ -186,29 +258,29 @@
 								<form role="form">
 									<fieldset>
 										<div class="form-group">
-											<input type="text" id="disabledTextInput" class="form-control" placeholder="评论"></div>
+											<input type="text" class="form-control" placeholder="评论"></div>
 										<button type="submit" class="btn btn-primary pull-right">评论</button>
 									</fieldset>
 								</form>
-								<hr/>							
+								<hr/>
 
 								<div>
 									<div class="col-sm-2">
-										<a href="">
+										<a href="javascript:;">
 											<img src="img/yxh.gif" width="50" height="50"></a>
 									</div>
 									<div class="col-sm-offset-2">
 										<h5>
-											<a href="">QMonkey</a>
+											<a href="javascript:;">QMonkey</a>
 										</h5>
 										<p>
 											Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.(2014-09-09 21:38)
 										</p>
 										<div class="pull-right">
-											<a href=""> <i class="fa fa-thumbs-up"></i>
+											<a href="javascript:;"> <i class="fa fa-thumbs-up"></i>
 											</a>
 											&nbsp;|&nbsp;
-											<a href="">回复</a>
+											<a href="javascript:;">回复</a>
 										</div>
 									</div>
 								</div>
@@ -216,21 +288,21 @@
 
 								<div>
 									<div class="col-sm-2">
-										<a href="">
+										<a href="javascript:;">
 											<img src="img/yxh.gif" width="50" height="50"></a>
 									</div>
 									<div class="col-sm-offset-2">
 										<h5>
-											<a href="">QMonkey</a>
+											<a href="javascript:;">QMonkey</a>
 										</h5>
 										<p>
 											Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.(2014-09-09 21:38)
 										</p>
 										<div class="pull-right">
-											<a href=""> <i class="fa fa-thumbs-up"></i>
+											<a href="javascript:;"> <i class="fa fa-thumbs-up"></i>
 											</a>
 											&nbsp;|&nbsp;
-											<a href="">回复</a>
+											<a href="javascript:;">回复</a>
 										</div>
 									</div>
 								</div>
@@ -245,12 +317,12 @@
 					<!-- Blog Start -->
 					<div>
 						<div class="col-sm-2">
-							<a href="">
+							<a href="javascript:;">
 								<img src="img/yxh.gif" width="70" height="70"></a>
 						</div>
 						<div class="col-sm-offset-2">
 							<h4>
-								<a href="">QMonkey</a>
+								<a href="javascript:;">QMonkey</a>
 							</h4>
 							<p>
 								Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.
@@ -258,13 +330,13 @@
 							<div>
 								<div class="pull-left">2014-09-16 9:00</div>
 								<div class="pull-right">
-									<a href="">
+									<a href="javascript:;">
 										<i class="fa fa-thumbs-up"></i>
 									</a>
 									&nbsp;|&nbsp;
-									<a href="">转发</a>
+									<a href="javascript:;">转发</a>
 									&nbsp;|&nbsp;
-									<a href="">评论</a>
+									<a href="javascript:;">评论</a>
 								</div>
 							</div>
 
@@ -273,7 +345,7 @@
 								<form role="form">
 									<fieldset>
 										<div class="form-group">
-											<input type="text" id="disabledTextInput" class="form-control" placeholder="评论"></div>
+											<input type="text" class="form-control" placeholder="评论"></div>
 										<button type="submit" class="btn btn-primary pull-right">评论</button>
 									</fieldset>
 								</form>
@@ -281,21 +353,21 @@
 
 								<div>
 									<div class="col-sm-2">
-										<a href="">
+										<a href="javascript:;">
 											<img src="img/yxh.gif" width="50" height="50"></a>
 									</div>
 									<div class="col-sm-offset-2">
 										<h5>
-											<a href="">QMonkey</a>
+											<a href="javascript:;">QMonkey</a>
 										</h5>
 										<p>
 											Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.(2014-09-09 21:38)
 										</p>
 										<div class="pull-right">
-											<a href=""> <i class="fa fa-thumbs-up"></i>
+											<a href="javascript:;"> <i class="fa fa-thumbs-up"></i>
 											</a>
 											&nbsp;|&nbsp;
-											<a href="">回复</a>
+											<a href="javascript:;">回复</a>
 										</div>
 									</div>
 								</div>
@@ -311,29 +383,29 @@
 			<!-- Home End -->
 
 			<!-- At Start -->
-			<div id="at" class="col-sm-offset-2 col-sm-8 hidden">
+			<div id="contentAt" class="col-sm-offset-2 col-sm-8 hidden">
 				<!-- Nav tabs -->				
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="active">
-						<a href="#atBlog" role="tab" data-toggle="tab">@我的微博</a>
+						<a href="#contentAtBlog" role="tab" data-toggle="tab">@我的微博</a>
 					</li>
 					<li>
-						<a href="#atComment" role="tab" data-toggle="tab">@我的评论</a>
+						<a href="#contentAtComment" role="tab" data-toggle="tab">@我的评论</a>
 					</li>
 				</ul>
 
 				<!-- Tab panes -->				
 				<div class="tab-content">
-					<div class="tab-pane fade in active" id="atBlog">
+					<div class="tab-pane fade in active" id="contentAtBlog">
 						<!-- Blog Start -->
 						<div>
 							<div class="col-sm-2">
-								<a href="">
+								<a href="javascript:;">
 									<img src="img/yxh.gif" width="70" height="70"></a>
 							</div>
 							<div class="col-sm-offset-2">
 								<h4>
-									<a href="">QMonkey</a>
+									<a href="javascript:;">QMonkey</a>
 								</h4>
 								<p>
 									Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.
@@ -341,12 +413,12 @@
 								<div>
 									<div class="pull-left">2014-09-16 9:00</div>
 									<div class="pull-right">
-										<a href=""> <i class="fa fa-thumbs-up"></i>
+										<a href="javascript:;"> <i class="fa fa-thumbs-up"></i>
 										</a>
 										&nbsp;|&nbsp;
-										<a href="">转发</a>
+										<a href="javascript:;">转发</a>
 										&nbsp;|&nbsp;
-										<a href="">评论</a>
+										<a href="javascript:;">评论</a>
 									</div>
 								</div>
 
@@ -355,7 +427,7 @@
 									<form role="form">
 										<fieldset>
 											<div class="form-group">
-												<input type="text" id="disabledTextInput" class="form-control" placeholder="评论"></div>
+												<input type="text" class="form-control" placeholder="评论"></div>
 											<button type="submit" class="btn btn-primary pull-right">评论</button>
 										</fieldset>
 									</form>
@@ -363,21 +435,21 @@
 
 									<div>
 										<div class="col-sm-2">
-											<a href="">
+											<a href="javascript:;">
 												<img src="img/yxh.gif" width="50" height="50"></a>
 										</div>
 										<div class="col-sm-offset-2">
 											<h5>
-												<a href="">QMonkey</a>
+												<a href="javascript:;">QMonkey</a>
 											</h5>
 											<p>
 												Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.(2014-09-09 21:38)
 											</p>
 											<div class="pull-right">
-												<a href=""> <i class="fa fa-thumbs-up"></i>
+												<a href="javascript:;"> <i class="fa fa-thumbs-up"></i>
 												</a>
 												&nbsp;|&nbsp;
-												<a href="">回复</a>
+												<a href="javascript:;">回复</a>
 											</div>
 										</div>
 									</div>
@@ -388,31 +460,31 @@
 						</div>
 						<!-- Blog End -->
 					</div>
-					<div class="tab-pane fade" id="atComment">
+					<div class="tab-pane fade" id="contentAtComment">
 						<!-- Comment Start -->
 						<div>
 							<div class="col-sm-2">
-								<a href="">
+								<a href="javascript:;">
 									<img src="img/yxh.gif" width="70" height="70"></a>
 							</div>
 							<div class="col-sm-offset-2">
 								<h4>
-									<a href="">QMonkey</a>
+									<a href="javascript:;">QMonkey</a>
 								</h4>
 								<p>
 									Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.(2014-09-09 21:38)
 								</p>
 								<div class="pull-right">
-									<a href=""> <i class="fa fa-thumbs-up"></i>
+									<a href="javascript:;"> <i class="fa fa-thumbs-up"></i>
 									</a>
 									&nbsp;|&nbsp;
-									<a href="">回复</a>
+									<a href="javascript:;">回复</a>
 								</div>
 								<div class="clear-both">
 									<form role="form">
 										<fieldset>
 											<div class="form-group">
-												<input type="text" id="disabledTextInput" class="form-control" placeholder="评论"></div>
+												<input type="text" class="form-control" placeholder="评论"></div>
 											<button type="submit" class="btn btn-primary pull-right">回复</button>
 										</fieldset>
 									</form>
@@ -427,44 +499,44 @@
 			<!-- At End -->
 
 			<!-- My Comment Start -->
-			<div id="myComment" class="col-sm-offset-2 col-sm-8 hidden">
+			<div id="contentMyComment" class="col-sm-offset-2 col-sm-8 hidden">
 				<!-- Nav tabs -->				
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="active">
-						<a href="#sendComment" role="tab" data-toggle="tab">发出的评论</a>
+						<a href="#contentMyCommentSend" role="tab" data-toggle="tab">发出的评论</a>
 					</li>
 					<li>
-						<a href="#receiveComment" role="tab" data-toggle="tab">收到的评论</a>
+						<a href="#contentMyCommentReceive" role="tab" data-toggle="tab">收到的评论</a>
 					</li>
 				</ul>
 
 				<!-- Tab panes -->				
 				<div class="tab-content">
-					<div class="tab-pane fade in active" id="sendComment">
+					<div class="tab-pane fade in active" id="contentMyCommentSend">
 						<!-- Send Comment Start -->
 						<div>
 							<div class="col-sm-2">
-								<a href="">
+								<a href="javascript:;">
 									<img src="img/yxh.gif" width="70" height="70"></a>
 							</div>
 							<div class="col-sm-offset-2">
 								<h4>
-									<a href="">QMonkey</a>
+									<a href="javascript:;">QMonkey</a>
 								</h4>
 								<p>
 									Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.(2014-09-09 21:38)
 								</p>
 								<div class="pull-right">
-									<a href=""> <i class="fa fa-thumbs-up"></i>
+									<a href="javascript:;"> <i class="fa fa-thumbs-up"></i>
 									</a>
 									&nbsp;|&nbsp;
-									<a href="">回复</a>
+									<a href="javascript:;">回复</a>
 								</div>
 								<div class="clear-both">
 									<form role="form">
 										<fieldset>
 											<div class="form-group">
-												<input type="text" id="disabledTextInput" class="form-control" placeholder="评论"></div>
+												<input type="text" class="form-control" placeholder="评论"></div>
 											<button type="submit" class="btn btn-primary pull-right">回复</button>
 										</fieldset>
 									</form>
@@ -474,16 +546,16 @@
 						<!-- Send Comment End -->
 						<hr/>
 					</div>
-					<div class="tab-pane fade" id="receiveComment">
+					<div class="tab-pane fade" id="contentMyCommentReceive">
 						<!-- Receive Comment Start -->
 						<div>
 							<div class="col-sm-2">
-								<a href="">
+								<a href="javascript:;">
 									<img src="img/yxh.gif" width="70" height="70"></a>
 							</div>
 							<div class="col-sm-offset-2">
 								<h4>
-									<a href="">QMonkey</a>
+									<a href="javascript:;">QMonkey</a>
 								</h4>
 								<p>
 									Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.(2014-09-09 21:38)
@@ -498,15 +570,15 @@
 			<!-- My Comment End -->
 
 			<!-- Private Message Start -->
-			<div id="privateMessage" class="col-sm-offset-2 col-sm-8 hidden">
+			<div id="contentPrivateMessage" class="col-sm-offset-2 col-sm-8 hidden">
 				<div>
 					<div class="col-sm-2">
-						<a href="">
+						<a href="javascript:;">
 							<img src="img/yxh.gif" width="70" height="70"></a>
 					</div>
 					<div class="col-sm-offset-2">
 						<h4>
-							<a href="">QMonkey</a>
+							<a href="javascript:;">QMonkey</a>
 						</h4>
 						<p>
 							Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.(2014-09-09 21:38)
@@ -517,12 +589,12 @@
 
 				<div>
 					<div class="col-sm-2">
-						<a href="">
+						<a href="javascript:;">
 							<img src="img/yxh.gif" width="70" height="70"></a>
 					</div>
 					<div class="col-sm-offset-2">
 						<h4>
-							<a href="">QMonkey</a>
+							<a href="javascript:;">QMonkey</a>
 						</h4>
 						<p>
 							Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.(2014-09-09 21:38)
@@ -534,48 +606,48 @@
 			<!-- Private Message End -->
 
 			<!-- Setting Start -->
-			<div id="setting" class="col-sm-offset-2 col-sm-8 hidden">
+			<div id="contentSetting" class="col-sm-offset-2 col-sm-8 hidden">
 				<!-- Nav tabs -->				
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="active">
-						<a href="#basicInfoSetting" role="tab" data-toggle="tab">基本信息</a>
+						<a href="#contentSettingBasicInfo" role="tab" data-toggle="tab">基本信息</a>
 					</li>
 					<li>
-						<a href="#iconSetting" role="tab" data-toggle="tab">头像</a>
+						<a href="#contentSettingIcon" role="tab" data-toggle="tab">头像</a>
 					</li>
 					<li>
-						<a href="#passwordSetting" role="tab" data-toggle="tab">密码</a>
+						<a href="#contentSettingPassword" role="tab" data-toggle="tab">密码</a>
 					</li>
 				</ul>
 
 				<!-- Tab panes -->				
 				<div class="tab-content">
-					<div class="tab-pane fade in active" id="basicInfoSetting">
+					<div class="tab-pane fade in active" id="contentSettingBasicInfo">
 						<form class="form-horizontal tab-form" role="form">
 							<div class="form-group">
 								<label class="col-sm-2 control-label">昵称</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" id="nickName" placeholder="昵称"></div>
+									<input type="text" class="form-control" id="contentSettingBasicInfoNickName" placeholder="昵称"></div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">真实姓名</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" id="realName" placeholder="真实姓名"></div>
+									<input type="text" class="form-control" id="contentSettingBasicInfoRealName" placeholder="真实姓名"></div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">邮箱</label>
 								<div class="col-sm-8">
-									<input type="email" class="form-control" id="email" placeholder="邮箱"></div>
+									<input type="email" class="form-control" id="contentSettingBasicInfoEmail" placeholder="邮箱"></div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">生日</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" id="birthday" readonly="" placeholder="生日"></div>
+									<input type="text" class="form-control" id="contentSettingBasicInfoBirthday" readonly=""></div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">性别</label>
 								<div class="col-sm-8">
-									<select id="sex" class="form-control">
+									<select id="contentSettingBasicInfoSex" class="form-control">
 										<option>男</option>
 										<option>女</option>
 									</select>
@@ -584,17 +656,17 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">手机号</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" id="phone" placeholder="手机号"></div>
+									<input type="text" class="form-control" id="contentSettingBasicInfoPhone" placeholder="手机号"></div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">所在地</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" id="address" placeholder="所在地"></div>
+									<input type="text" class="form-control" id="contentSettingBasicInfoAddress" placeholder="所在地"></div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">简介</label>
 								<div class="col-sm-9">
-									<textarea class="form-control" id="introduction" rows="9" placeholder="简介"></textarea>
+									<textarea class="form-control" id="contentSettingBasicInfoIntroduction" rows="9" placeholder="简介"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -605,10 +677,10 @@
 						</form>
 					</div>
 
-					<div class="tab-pane fade" id="iconSetting">
-						<iframe class="hidden" id="uploadFileFrame" name="uploadFileFrame"></iframe>
+					<div class="tab-pane fade" id="contentSettingIcon">
+						<iframe class="hidden" id="contentSettingIconFrame" name="contentSettingIconFrame"></iframe>
 						<form class="form-horizontal tab-form" role="form" 
-							target="uploadFileFrame" method="post" enctype="multipart/form-data">
+							target="contentSettingIconFrame" method="post" enctype="multipart/form-data">
 							<div class="form-group">
 								<label class="col-sm-2 control-label">头像</label>
 								<div class="col-sm-8">
@@ -617,7 +689,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">上传头像</label>
 								<div class="col-sm-8">
-									<input type="file" class="form-control" id="icon" placeholder="icon"></div>
+									<input type="file" class="form-control" id="contentSettingIconFile" placeholder="icon"></div>
 							</div>
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-8">
@@ -627,7 +699,7 @@
 						</form>
 					</div>
 
-					<div class="tab-pane fade" id="passwordSetting">
+					<div class="tab-pane fade" id="contentSettingPassword">
 						<form class="form-horizontal tab-form" role="form">
 							<div class="form-group">
 								<label class="col-sm-2 control-label">原密码</label>
@@ -654,29 +726,512 @@
 				</div>
 			</div>
 			<!-- Setting End -->
-		</div>
-	</div>
 
-	<!-- Modal -->
-	<!--
-	<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">&times;</span>
-						<span class="sr-only">Close</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>
+			<!-- Focus Start -->
+			<div id="contentFocus" class="col-sm-offset-2 col-sm-8 hidden">
+				<div>
+					<div class="col-sm-2">
+						<a href="javascript:;">
+							<img src="img/yxh.gif" width="70" height="70"></a>
+					</div>
+					<div class="col-sm-offset-2">
+						<h4>
+							<a href="javascript:;">QMonkey</a>
+						</h4>
+						<div> <strong><span class="pull-right">已关注</span></strong>
+						</div>
+						<p>广东汕头</p>
+						<p>
+							关注
+							<a href="javascript:;">123</a>
+							&nbsp;粉丝
+							<a href="javascript:;">234</a>
+							&nbsp;微博
+							<a href="javascript:;">234</a>
+						</p>
+						<p>
+							简介：Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.
+						</p>
+					</div>
 				</div>
-				<div class="modal-footer">
-					<a href="sign-in.html" class="btn btn-primary">Yes</a>
-					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+				<hr/>			
+
+				<div>
+					<div class="col-sm-2">
+						<a href="javascript:;">
+							<img src="img/yxh.gif" width="70" height="70"></a>
+					</div>
+					<div class="col-sm-offset-2">
+						<h4>
+							<a href="javascript:;">QMonkey</a>
+						</h4>
+						<div> <strong><span class="pull-right">互相关注</span></strong>
+						</div>
+						<p>广东汕头</p>
+						<p>
+							关注
+							<a href="javascript:;">123</a>
+							&nbsp;粉丝
+							<a href="javascript:;">234</a>
+							&nbsp;微博
+							<a href="javascript:;">234</a>
+						</p>
+						<p>
+							简介：Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.
+						</p>
+					</div>
+				</div>
+				<hr/>			
+			</div>
+			<!-- Focus End -->
+
+			<!-- Fans Start -->
+			<div id="contentFans" class="col-sm-offset-2 col-sm-8 hidden">
+				<div>
+					<div class="col-sm-2">
+						<a href="javascript:;">
+							<img src="img/yxh.gif" width="70" height="70"></a>
+					</div>
+					<div class="col-sm-offset-2">
+						<h4>
+							<a href="javascript:;">QMonkey</a>
+						</h4>
+						<div>
+							<button type="button" class="btn btn-default pull-right">关注</button>
+						</div>
+						<p>广东汕头</p>
+						<p>
+							关注
+							<a href="javascript:;">123</a>
+							&nbsp;粉丝
+							<a href="javascript:;">234</a>
+							&nbsp;微博
+							<a href="javascript:;">234</a>
+						</p>
+						<p>
+							简介：Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.
+						</p>
+					</div>
+				</div>
+				<hr/>
+
+				<div>
+					<div class="col-sm-2">
+						<a href="javascript:;">
+							<img src="img/yxh.gif" width="70" height="70"></a>
+					</div>
+					<div class="col-sm-offset-2">
+						<h4>
+							<a href="javascript:;">QMonkey</a>
+						</h4>
+						<div> <strong><span class="pull-right">互相关注</span></strong>
+						</div>
+						<p>广东汕头</p>
+						<p>
+							关注
+							<a href="javascript:;">123</a>
+							&nbsp;粉丝
+							<a href="javascript:;">234</a>
+							&nbsp;微博
+							<a href="javascript:;">234</a>
+						</p>
+						<p>
+							简介：Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.
+						</p>
+					</div>
+				</div>
+				<hr/>			
+			</div>
+			<!-- Fans End -->
+
+			<!-- Search Start -->
+			<div id="contentSearch" class="col-sm-offset-2 col-sm-8 hidden">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="active">
+						<a href="#contentSearchBlog" role="tab" data-toggle="tab">找微博</a>
+					</li>
+					<li>
+						<a href="#contentSearchPeople" role="tab" data-toggle="tab">找人</a>
+					</li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div class="tab-pane fade in active" id="contentSearchBlog">
+						<div>
+							<!-- Blog Start -->					
+							<div>
+								<div class="col-sm-2">
+									<a href="javascript:;">
+										<img src="img/yxh.gif" width="70" height="70"></a>
+								</div>
+								<div class="col-sm-offset-2">
+									<h4>
+										<a href="javascript:;">QMonkey</a>
+									</h4>
+									<p>
+										Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.
+									</p>
+									<div>
+										<div class="pull-left">2014-09-16 9:00</div>
+										<div class="pull-right">
+											<a href="javascript:;"> <i class="fa fa-thumbs-up"></i>
+											</a>
+											&nbsp;|&nbsp;
+											<a href="javascript:;">转发</a>
+											&nbsp;|&nbsp;
+											<a href="javascript:;">评论</a>
+										</div>
+									</div>
+
+									<!-- Comment Start -->					
+									<div class="clear-both">
+										<form role="form">
+											<fieldset>
+												<div class="form-group">
+													<input type="text" class="form-control" placeholder="评论"></div>
+												<button type="submit" class="btn btn-primary pull-right">评论</button>
+											</fieldset>
+										</form>
+										<hr/>					
+
+										<div>
+											<div class="col-sm-2">
+												<a href="javascript:;">
+													<img src="img/yxh.gif" width="50" height="50"></a>
+											</div>
+											<div class="col-sm-offset-2">
+												<h5>
+													<a href="javascript:;">QMonkey</a>
+												</h5>
+												<p>
+													Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.(2014-09-09 21:38)
+												</p>
+												<div class="pull-right">
+													<a href="javascript:;"> <i class="fa fa-thumbs-up"></i>
+													</a>
+													&nbsp;|&nbsp;
+													<a href="javascript:;">回复</a>
+												</div>
+											</div>
+										</div>
+										<hr class="clear-both" />					
+
+										<div>
+											<div class="col-sm-2">
+												<a href="javascript:;">
+													<img src="img/yxh.gif" width="50" height="50"></a>
+											</div>
+											<div class="col-sm-offset-2">
+												<h5>
+													<a href="javascript:;">QMonkey</a>
+												</h5>
+												<p>
+													Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.(2014-09-09 21:38)
+												</p>
+												<div class="pull-right">
+													<a href="javascript:;">
+														<i class="fa fa-thumbs-up"></i>
+													</a>
+													&nbsp;|&nbsp;
+													<a href="javascript:;">回复</a>
+												</div>
+											</div>
+										</div>
+										<hr class="clear-both" />					
+									</div>
+									<!-- Comment End -->					
+								</div>
+							</div>
+							<hr/>					
+							<!-- Blog End -->					
+
+							<!-- Blog Start -->					
+							<div>
+								<div class="col-sm-2">
+									<a href="javascript:;">
+										<img src="img/yxh.gif" width="70" height="70"></a>
+								</div>
+								<div class="col-sm-offset-2">
+									<h4>
+										<a href="javascript:;">QMonkey</a>
+									</h4>
+									<p>
+										Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.
+									</p>
+									<div>
+										<div class="pull-left">2014-09-16 9:00</div>
+										<div class="pull-right">
+											<a href="javascript:;">
+												<i class="fa fa-thumbs-up"></i>
+											</a>
+											&nbsp;|&nbsp;
+											<a href="javascript:;">转发</a>
+											&nbsp;|&nbsp;
+											<a href="javascript:;">评论</a>
+										</div>
+									</div>
+
+									<!-- Comment Start -->					
+									<div class="clear-both">
+										<form role="form">
+											<fieldset>
+												<div class="form-group">
+													<input type="text" class="form-control" placeholder="评论"></div>
+												<button type="submit" class="btn btn-primary pull-right">评论</button>
+											</fieldset>
+										</form>
+										<hr/>					
+
+										<div>
+											<div class="col-sm-2">
+												<a href="javascript:;">
+													<img src="img/yxh.gif" width="50" height="50"></a>
+											</div>
+											<div class="col-sm-offset-2">
+												<h5>
+													<a href="javascript:;">QMonkey</a>
+												</h5>
+												<p>
+													Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.(2014-09-09 21:38)
+												</p>
+												<div class="pull-right">
+													<a href="javascript:;">
+														<i class="fa fa-thumbs-up"></i>
+													</a>
+													&nbsp;|&nbsp;
+													<a href="javascript:;">回复</a>
+												</div>
+											</div>
+										</div>
+										<hr class="clear-both" />
+									</div>
+									<!-- Comment End -->
+								</div>
+							</div>
+							<hr/>
+							<!-- Blog End -->
+						</div>
+					</div>
+
+					<div class="tab-pane fade" id="contentSearchPeople">
+						<div>
+							<div class="col-sm-2">
+								<a href="javascript:;">
+									<img src="img/yxh.gif" width="70" height="70"></a>
+							</div>
+							<div class="col-sm-offset-2">
+								<h4>
+									<a href="javascript:;">QMonkey</a>
+								</h4>
+								<div>
+									<button type="button" class="btn btn-default pull-right">关注</button>
+								</div>
+								<p>广东汕头</p>
+								<p>
+									关注
+									<a href="javascript:;">123</a>
+									&nbsp;粉丝
+									<a href="javascript:;">234</a>
+									&nbsp;微博
+									<a href="javascript:;">234</a>
+								</p>
+								<p>
+									简介：Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.
+								</p>
+							</div>
+						</div>
+						<hr/>
+					</div>
 				</div>
 			</div>
+			<!-- Search End -->
+
+			<!-- MicroBloggingDetail Start -->
+			<div id="contentMicroBloggingDetail" class="col-sm-offset-2 col-sm-8 hidden">
+				<div>
+					<div class="col-sm-3">
+						<a href="javascript:;">
+							<img src="img/yxh.gif" width="130" height="130"></a>
+					</div>
+					<div class="col-sm-offset-3">
+						<h4>
+							<a href="javascript:;">QMonkey</a>
+						</h4>
+						<div>
+							<button type="button" class="btn btn-default pull-right">关注</button>
+						</div>
+						<p>广东汕头</p>
+						<p>
+							关注
+							<a href="javascript:;">123</a>
+							&nbsp;粉丝
+							<a href="javascript:;">234</a>
+							&nbsp;微博
+							<a href="javascript:;">234</a>
+						</p>
+						<p>
+							简介：Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.
+						</p>
+					</div>
+				</div>
+
+				<div>
+					<div class="col-sm-2">
+						<a href="javascript:;">
+							<img src="img/yxh.gif" width="70" height="70"></a>
+					</div>
+					<div class="col-sm-offset-2">
+						<h4>
+							<a href="javascript:;">QMonkey</a>
+						</h4>
+						<p>
+							Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.
+						</p>
+						<div>
+							<div class="pull-left">2014-09-16 9:00</div>
+							<div class="pull-right">
+								<a href="javascript:;"> <i class="fa fa-thumbs-up"></i>
+								</a>
+								&nbsp;|&nbsp;
+								<a href="javascript:;">转发</a>
+								&nbsp;|&nbsp;
+								<a href="javascript:;">评论</a>
+							</div>
+						</div>
+
+						<!-- Comment Start -->
+						<div class="clear-both">
+							<form role="form">
+								<fieldset>
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="评论"></div>
+									<button type="submit" class="btn btn-primary pull-right">评论</button>
+								</fieldset>
+							</form>
+							<hr/>			
+
+							<div>
+								<div class="col-sm-2">
+									<a href="javascript:;">
+										<img src="img/yxh.gif" width="50" height="50"></a>
+								</div>
+								<div class="col-sm-offset-2">
+									<h5>
+										<a href="javascript:;">QMonkey</a>
+									</h5>
+									<p>
+										Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.(2014-09-09 21:38)
+									</p>
+									<div class="pull-right">
+										<a href="javascript:;"> <i class="fa fa-thumbs-up"></i>
+										</a>
+										&nbsp;|&nbsp;
+										<a href="javascript:;">回复</a>
+									</div>
+								</div>
+							</div>
+							<hr class="clear-both" />			
+
+							<div>
+								<div class="col-sm-2">
+									<a href="javascript:;">
+										<img src="img/yxh.gif" width="50" height="50"></a>
+								</div>
+								<div class="col-sm-offset-2">
+									<h5>
+										<a href="javascript:;">QMonkey</a>
+									</h5>
+									<p>
+										Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.(2014-09-09 21:38)
+									</p>
+									<div class="pull-right">
+										<a href="javascript:;">
+											<i class="fa fa-thumbs-up"></i>
+										</a>
+										&nbsp;|&nbsp;
+										<a href="javascript:;">回复</a>
+									</div>
+								</div>
+							</div>
+							<hr class="clear-both" />			
+						</div>
+						<!-- Comment End -->			
+					</div>
+				</div>
+				<hr/>			
+				<!-- Blog End -->			
+
+				<!-- Blog Start -->			
+				<div>
+					<div class="col-sm-2">
+						<a href="javascript:;">
+							<img src="img/yxh.gif" width="70" height="70"></a>
+					</div>
+					<div class="col-sm-offset-2">
+						<h4>
+							<a href="javascript:;">QMonkey</a>
+						</h4>
+						<p>
+							Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.
+						</p>
+						<div>
+							<div class="pull-left">2014-09-16 9:00</div>
+							<div class="pull-right">
+								<a href="javascript:;">
+									<i class="fa fa-thumbs-up"></i>
+								</a>
+								&nbsp;|&nbsp;
+								<a href="javascript:;">转发</a>
+								&nbsp;|&nbsp;
+								<a href="javascript:;">评论</a>
+							</div>
+						</div>
+
+						<!-- Comment Start -->			
+						<div class="clear-both">
+							<form role="form">
+								<fieldset>
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="评论"></div>
+									<button type="submit" class="btn btn-primary pull-right">评论</button>
+								</fieldset>
+							</form>
+							<hr/>			
+
+							<div>
+								<div class="col-sm-2">
+									<a href="javascript:;">
+										<img src="img/yxh.gif" width="50" height="50"></a>
+								</div>
+								<div class="col-sm-offset-2">
+									<h5>
+										<a href="javascript:;">QMonkey</a>
+									</h5>
+									<p>
+										Don't use data attributes from multiple plugins on the same element. For example, a button cannot both have a tooltip and toggle a modal. To accomplish this, use a wrapping element.(2014-09-09 21:38)
+									</p>
+									<div class="pull-right">
+										<a href="javascript:;">
+											<i class="fa fa-thumbs-up"></i>
+										</a>
+										&nbsp;|&nbsp;
+										<a href="javascript:;">回复</a>
+									</div>
+								</div>
+							</div>
+							<hr class="clear-both" />			
+						</div>
+						<!-- Comment End -->			
+					</div>
+				</div>
+				<hr/>			
+				<!-- Blog End -->			
+			</div>
+			<!-- MicroBloggingDetail End -->
 		</div>
 	</div>
-	-->
 
 	<footer class="templatemo-footer">
 		<div class="templatemo-copyright">
