@@ -2,46 +2,49 @@ var app = (function() {
 	var app = {};
 
 	var toggle = function(target) {
-		$("#homeMenu").removeClass("active");
-		$("#atMenu").removeClass("active");
-		$("#myCommentMenu").removeClass("active");
-		$("#privateMessageMenu").removeClass("active");
-		$("#settingMenu").removeClass("active");
-		$("#signOutMenu").removeClass("active");
+		$("#sidebarHome").removeClass("active");
+		$("#sidebarAt").removeClass("active");
+		$("#sidebarMyComment").removeClass("active");
+		$("#sidebarPrivateMessage").removeClass("active");
+		$("#sidebarSetting").removeClass("active");
+		$("#sidebarSignOut").removeClass("active");
 
-		$("#home").addClass("hidden");
-		$("#at").addClass("hidden");
-		$("#myComment").addClass("hidden");
-		$("#privateMessage").addClass("hidden");
-		$("#setting").addClass("hidden");
+		$("#contentHome").addClass("hidden");
+		$("#contentAt").addClass("hidden");
+		$("#contentMyComment").addClass("hidden");
+		$("#contentPrivateMessage").addClass("hidden");
+		$("#contentSetting").addClass("hidden");
+		$("#contentFocus").addClass("hidden");
+		$("#contentFans").addClass("hidden");
+		$("#contentSearch").addClass("hidden");
 
 		switch(target.parent("li").attr("id")) {
-			case "homeMenu":
-				$("#home").removeClass("hidden");
-				$("#homeMenu").addClass("active");
+			case "sidebarHome":
+				$("#contentHome").removeClass("hidden");
+				$("#sidebarHome").addClass("active");
 				break;
 
-			case "atMenu":
-				$("#at").removeClass("hidden");
-				$("#atMenu").addClass("active");
+			case "sidebarAt":
+				$("#contentAt").removeClass("hidden");
+				$("#sidebarAt").addClass("active");
 				break;
 
-			case "myCommentMenu":
-				$("#myComment").removeClass("hidden");
-				$("#myCommentMenu").addClass("active");
+			case "sidebarMyComment":
+				$("#contentMyComment").removeClass("hidden");
+				$("#sidebarMyComment").addClass("active");
 				break;
 
-			case "privateMessageMenu":
-				$("#privateMessage").removeClass("hidden");
-				$("#privateMessageMenu").addClass("active");
+			case "sidebarPrivateMessage":
+				$("#contentPrivateMessage").removeClass("hidden");
+				$("#sidebarPrivateMessage").addClass("active");
 				break;
 
-			case "settingMenu":
-				$("#setting").removeClass("hidden");
-				$("#settingMenu").addClass("active");
+			case "sidebarSetting":
+				$("#contentSetting").removeClass("hidden");
+				$("#sidebarSetting").addClass("active");
 				break;
 
-			case "signOutMenu":
+			case "sidebarSignOut":
 				$("#sidebar").addClass("hidden");
 				$("#content").addClass("hidden");
 				$("#signIn").removeClass("hidden");
@@ -53,39 +56,118 @@ var app = (function() {
 	};
 
 	var bindEvent = function() {
-		$("#homeMenu").on("click", function(e) {
+		$("#sidebarHome").on("click", function(e) {
+			/*
+			var lastActived = $("ul.templatemo-sidebar-menu li.active");
+			lastActived.removeClass("active");
+			lastActived.attr("id");
+			*/
 			toggle($(e.target));
 		});
-		$("#atMenu").on("click", function(e) {
+		$("#sidebarAt").on("click", function(e) {
 			toggle($(e.target));
 		});
-		$("#myCommentMenu").on("click", function(e) {
+		$("#sidebarMyComment").on("click", function(e) {
 			toggle($(e.target));
 		});
-		$("#privateMessageMenu").on("click", function(e) {
+		$("#sidebarPrivateMessage").on("click", function(e) {
 			toggle($(e.target));
 		});
-		$("#settingMenu").on("click", function(e) {
+		$("#sidebarSetting").on("click", function(e) {
 			toggle($(e.target));
 		});
-		$("#signOutMenu").on("click", function(e) {
+		$("#sidebarSignOut").on("click", function(e) {
 			toggle($(e.target));
 		});
 		$("#signInButton").on("click", function(e) {
 			$("#signIn").addClass("hidden");
 			$("#sidebar").removeClass("hidden");
 			$("#content").removeClass("hidden");
-			$("#homeMenu").addClass("active");
-			$("#home").removeClass("hidden");
+			$("#sidebarHome").addClass("active");
+			$("#contentHome").removeClass("hidden");
+		});
+		$("#signInGoToSignUp").on("click", function(e) {
+			$("#signIn").addClass("hidden");
+			$("#sidebar").addClass("hidden");
+			$("#content").addClass("hidden");
+			$("#signUp").removeClass("hidden");
+		});
+		$("#signUpButton").on("click", function(e) {
+			$("#signUp").addClass("hidden");
+			$("#sidebar").addClass("hidden");
+			$("#content").addClass("hidden");
+			$("#signIn").removeClass("hidden");
+		});
+		$("#signUpReturn").on("click", function(e) {
+			$("#signUp").addClass("hidden");
+			$("#sidebar").addClass("hidden");
+			$("#content").addClass("hidden");
+			$("#signIn").removeClass("hidden");
+		});
+		$("#sidebarFocus").on("click", function(e) {
+			$("#sidebarHome").removeClass("active");
+			$("#sidebarAt").removeClass("active");
+			$("#sidebarMyComment").removeClass("active");
+			$("#sidebarPrivateMessage").removeClass("active");
+			$("#sidebarSetting").removeClass("active");
+			$("#sidebarSignOut").removeClass("active");
+
+			$("#contentHome").addClass("hidden");
+			$("#contentAt").addClass("hidden");
+			$("#contentMyComment").addClass("hidden");
+			$("#contentPrivateMessage").addClass("hidden");
+			$("#contentSetting").addClass("hidden");
+			$("#contentFans").addClass("hidden");
+			$("#contentSearch").addClass("hidden");
+			$("#contentFocus").removeClass("hidden");
+		});
+		$("#sidebarFans").on("click", function(e) {
+			$("#sidebarHome").removeClass("active");
+			$("#sidebarAt").removeClass("active");
+			$("#sidebarMyComment").removeClass("active");
+			$("#sidebarPrivateMessage").removeClass("active");
+			$("#sidebarSetting").removeClass("active");
+			$("#sidebarSignOut").removeClass("active");
+
+			$("#contentHome").addClass("hidden");
+			$("#contentAt").addClass("hidden");
+			$("#contentMyComment").addClass("hidden");
+			$("#contentPrivateMessage").addClass("hidden");
+			$("#contentSetting").addClass("hidden");
+			$("#contentFocus").addClass("hidden");
+			$("#contentSearch").addClass("hidden");
+			$("#contentFans").removeClass("hidden");
+		});
+		$("#sidebarBlog").on("click", function(e) {
+			$("#sidebarHome a").trigger("click");
+		});
+		$("#searchButton").on("click", function(e) {
+			$("#sidebarHome").removeClass("active");
+			$("#sidebarAt").removeClass("active");
+			$("#sidebarMyComment").removeClass("active");
+			$("#sidebarPrivateMessage").removeClass("active");
+			$("#sidebarSetting").removeClass("active");
+			$("#sidebarSignOut").removeClass("active");
+
+			$("#contentHome").addClass("hidden");
+			$("#contentAt").addClass("hidden");
+			$("#contentMyComment").addClass("hidden");
+			$("#contentPrivateMessage").addClass("hidden");
+			$("#contentFocus").addClass("hidden");
+			$("#contentFans").addClass("hidden");
+			$("#contentSetting").addClass("hidden");
+			$("#contentSearch").removeClass("hidden");
 		});
 	};
 
 	app.init = function() {
 		bindEvent();
-		$( "#birthday" ).datetimepicker({
-       		format:'Y/m/d',
+		var datepicker = {
+			format:'Y/m/d',
             timepicker: false
-        });
+		};
+		$("#birthday").datetimepicker(datepicker);
+        $("#signUpBirthday").datetimepicker(datepicker);
 	};
 
 	return app;
