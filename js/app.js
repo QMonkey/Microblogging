@@ -135,6 +135,15 @@ var app = (function() {
 			$("#whisperBox ul, #whisperBox .tab-content").empty();
 			$("#whisper, #whisperBox").addClass("hidden");
 		});
+
+		$(".pull-right button").each(function(index) {
+			if($(this).text() === "私信") {
+				$(this).on("click", function(e) {
+					$("#whisper, #whisperBox").removeClass("hidden");
+					$("#whisperMiniBox").addClass("hidden");
+				});
+			}
+		});
 	};
 
 	app.init = function() {
