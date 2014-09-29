@@ -1,23 +1,20 @@
 var app = (function() {
 	var app = {};
 
-	var toggle = function(target) {
-		$("#sidebarHome").removeClass("active");
-		$("#sidebarAt").removeClass("active");
-		$("#sidebarMyComment").removeClass("active");
-		$("#sidebarPrivateMessage").removeClass("active");
-		$("#sidebarSetting").removeClass("active");
-		$("#sidebarSignOut").removeClass("active");
+	var disactivateSidebar = function() {
+		$("#sidebarHome, #sidebarAt, #sidebarMyComment, #sidebarPrivateMessage, " + 
+			"#sidebarSetting, #sidebarSignOut").removeClass("active");
+	};
 
-		$("#contentHome").addClass("hidden");
-		$("#contentAt").addClass("hidden");
-		$("#contentMyComment").addClass("hidden");
-		$("#contentPrivateMessage").addClass("hidden");
-		$("#contentSetting").addClass("hidden");
-		$("#contentFocus").addClass("hidden");
-		$("#contentFans").addClass("hidden");
-		$("#contentMicroBloggingDetail").addClass("hidden");
-		$("#contentSearch").addClass("hidden");
+	var hideContent = function() {
+		$("#contentHome, #contentAt, #contentMyComment, #contentPrivateMessage, " + 
+			"#contentSetting, #contentFocus, #contentFans, " + 
+			"#contentMicroBloggingDetail, #contentSearch").addClass("hidden");
+	};
+
+	var toggle = function(target) {
+		disactivateSidebar();
+		hideContent();
 
 		switch(target.parent("li").attr("id")) {
 			case "sidebarHome":
@@ -46,8 +43,7 @@ var app = (function() {
 				break;
 
 			case "sidebarSignOut":
-				$("#sidebar").addClass("hidden");
-				$("#content").addClass("hidden");
+				$("#sidebar, #content, #messenger, #whisper, #whisperMiniBox, #whisperBox").addClass("hidden");
 				$("#signIn").removeClass("hidden");
 				break;
 
@@ -57,175 +53,97 @@ var app = (function() {
 	};
 
 	var bindEvent = function() {
-		$("#sidebarHome").on("click", function(e) {
-			/*
-			var lastActived = $("ul.templatemo-sidebar-menu li.active");
-			lastActived.removeClass("active");
-			lastActived.attr("id");
-			*/
+		$("#sidebarHome, #sidebarAt, #sidebarMyComment, #sidebarPrivateMessage, " + 
+			"#sidebarSetting, #sidebarSignOut").on("click", function(e) {
 			toggle($(e.target));
 		});
-		$("#sidebarAt").on("click", function(e) {
-			toggle($(e.target));
-		});
-		$("#sidebarMyComment").on("click", function(e) {
-			toggle($(e.target));
-		});
-		$("#sidebarPrivateMessage").on("click", function(e) {
-			toggle($(e.target));
-		});
-		$("#sidebarSetting").on("click", function(e) {
-			toggle($(e.target));
-		});
-		$("#sidebarSignOut").on("click", function(e) {
-			toggle($(e.target));
-		});
+
 		$("#signInButton").on("click", function(e) {
 			$("#signIn").addClass("hidden");
-			$("#sidebar").removeClass("hidden");
-			$("#content").removeClass("hidden");
 			$("#sidebarHome").addClass("active");
-			$("#contentHome").removeClass("hidden");
+			$("#sidebar, #content, #contentHome, #messenger, #whisper, #whisperMiniBox").removeClass("hidden");
 		});
+
 		$("#signInGoToSignUp").on("click", function(e) {
-			$("#signIn").addClass("hidden");
-			$("#sidebar").addClass("hidden");
-			$("#content").addClass("hidden");
+			$("#signIn, #sidebar, #content").addClass("hidden");
 			$("#signUp").removeClass("hidden");
 		});
-		$("#signUpButton").on("click", function(e) {
-			$("#signUp").addClass("hidden");
-			$("#sidebar").addClass("hidden");
-			$("#content").addClass("hidden");
-			$("#signIn").removeClass("hidden");
-		});
-		$("#signUpReturn").on("click", function(e) {
-			$("#signUp").addClass("hidden");
-			$("#sidebar").addClass("hidden");
-			$("#content").addClass("hidden");
-			$("#signIn").removeClass("hidden");
-		});
-		$("#sidebarFocus").on("click", function(e) {
-			$("#sidebarHome").removeClass("active");
-			$("#sidebarAt").removeClass("active");
-			$("#sidebarMyComment").removeClass("active");
-			$("#sidebarPrivateMessage").removeClass("active");
-			$("#sidebarSetting").removeClass("active");
-			$("#sidebarSignOut").removeClass("active");
 
-			$("#contentHome").addClass("hidden");
-			$("#contentAt").addClass("hidden");
-			$("#contentMyComment").addClass("hidden");
-			$("#contentPrivateMessage").addClass("hidden");
-			$("#contentSetting").addClass("hidden");
-			$("#contentFans").addClass("hidden");
-			$("#contentMicroBloggingDetail").addClass("hidden");
-			$("#contentSearch").addClass("hidden");
+		$("#signUpButton").on("click", function(e) {
+			$("#signUp, #sidebar, #content").addClass("hidden");
+			$("#signIn").removeClass("hidden");
+		});
+
+		$("#signUpReturn").on("click", function(e) {
+			$("#signUp, #sidebar, #content").addClass("hidden");
+			$("#signIn").removeClass("hidden");
+		});
+
+		$("#sidebarFocus").on("click", function(e) {
+			disactivateSidebar();
+			hideContent();
 			$("#contentFocus").removeClass("hidden");
 		});
-		$("#sidebarFans").on("click", function(e) {
-			$("#sidebarHome").removeClass("active");
-			$("#sidebarAt").removeClass("active");
-			$("#sidebarMyComment").removeClass("active");
-			$("#sidebarPrivateMessage").removeClass("active");
-			$("#sidebarSetting").removeClass("active");
-			$("#sidebarSignOut").removeClass("active");
 
-			$("#contentHome").addClass("hidden");
-			$("#contentAt").addClass("hidden");
-			$("#contentMyComment").addClass("hidden");
-			$("#contentPrivateMessage").addClass("hidden");
-			$("#contentSetting").addClass("hidden");
-			$("#contentFocus").addClass("hidden");
-			$("#contentMicroBloggingDetail").addClass("hidden");
-			$("#contentSearch").addClass("hidden");
+		$("#sidebarFans").on("click", function(e) {
+			disactivateSidebar();
+			hideContent();
 			$("#contentFans").removeClass("hidden");
 		});
+
 		$("#sidebarBlog").on("click", function(e) {
 			$("#sidebarHome a").trigger("click");
 		});
-		$("#searchButton").on("click", function(e) {
-			$("#sidebarHome").removeClass("active");
-			$("#sidebarAt").removeClass("active");
-			$("#sidebarMyComment").removeClass("active");
-			$("#sidebarPrivateMessage").removeClass("active");
-			$("#sidebarSetting").removeClass("active");
-			$("#sidebarSignOut").removeClass("active");
 
-			$("#contentHome").addClass("hidden");
-			$("#contentAt").addClass("hidden");
-			$("#contentMyComment").addClass("hidden");
-			$("#contentPrivateMessage").addClass("hidden");
-			$("#contentFocus").addClass("hidden");
-			$("#contentFans").addClass("hidden");
-			$("#contentMicroBloggingDetail").addClass("hidden");
-			$("#contentSetting").addClass("hidden");
+		$("#searchButton").on("click", function(e) {
+			disactivateSidebar();
+			hideContent();
 			$("#contentSearch").removeClass("hidden");
 		});
-		$("#content h4").on("click", function(e) {
-			$("#sidebarHome").removeClass("active");
-			$("#sidebarAt").removeClass("active");
-			$("#sidebarMyComment").removeClass("active");
-			$("#sidebarPrivateMessage").removeClass("active");
-			$("#sidebarSetting").removeClass("active");
-			$("#sidebarSignOut").removeClass("active");
 
-			$("#contentHome").addClass("hidden");
-			$("#contentAt").addClass("hidden");
-			$("#contentMyComment").addClass("hidden");
-			$("#contentPrivateMessage").addClass("hidden");
-			$("#contentSetting").addClass("hidden");
-			$("#contentFocus").addClass("hidden");
-			$("#contentFans").addClass("hidden");
-			$("#contentSearch").addClass("hidden");
+		$("#content h4, #content h5, #content img").on("click", function(e) {
+			disactivateSidebar();
+			hideContent();
 			$("#contentMicroBloggingDetail").removeClass("hidden");
 		});
-		$("#content h5").on("click", function(e) {
-			$("#sidebarHome").removeClass("active");
-			$("#sidebarAt").removeClass("active");
-			$("#sidebarMyComment").removeClass("active");
-			$("#sidebarPrivateMessage").removeClass("active");
-			$("#sidebarSetting").removeClass("active");
-			$("#sidebarSignOut").removeClass("active");
 
-			$("#contentHome").addClass("hidden");
-			$("#contentAt").addClass("hidden");
-			$("#contentMyComment").addClass("hidden");
-			$("#contentPrivateMessage").addClass("hidden");
-			$("#contentSetting").addClass("hidden");
-			$("#contentFocus").addClass("hidden");
-			$("#contentFans").addClass("hidden");
-			$("#contentSearch").addClass("hidden");
-			$("#contentMicroBloggingDetail").removeClass("hidden");
+		$("#sidebar .navbar-icon a").on("click", function(e) {
+			disactivateSidebar();
+			hideContent();
+			$("#sidebarHome").addClass("active");
+			$("#contentHome").removeClass("hidden");
 		});
-		$("#content img").on("click", function(e) {
-			$("#sidebarHome").removeClass("active");
-			$("#sidebarAt").removeClass("active");
-			$("#sidebarMyComment").removeClass("active");
-			$("#sidebarPrivateMessage").removeClass("active");
-			$("#sidebarSetting").removeClass("active");
-			$("#sidebarSignOut").removeClass("active");
 
-			$("#contentHome").addClass("hidden");
-			$("#contentAt").addClass("hidden");
-			$("#contentMyComment").addClass("hidden");
-			$("#contentPrivateMessage").addClass("hidden");
-			$("#contentSetting").addClass("hidden");
-			$("#contentFocus").addClass("hidden");
-			$("#contentFans").addClass("hidden");
-			$("#contentSearch").addClass("hidden");
-			$("#contentMicroBloggingDetail").removeClass("hidden");
+		$("#content img").on("mouseover", function(e) {
+		});
+
+		$("#messengerButton").on("click", function(e) {
+			$("#messenger").addClass("hidden");
+		});
+
+		$("#whisperMiniBox").on("click", function(e) {
+			$("#whisperMiniBox").addClass("hidden");
+			$("#whisperBox").removeClass("hidden");
+		});
+
+		$("#whisperBoxMinimize").on("click", function(e) {
+			$("#whisperBox").addClass("hidden");
+			$("#whisperMiniBox").removeClass("hidden");
+		});
+
+		$("#whisperBoxClose").on("click", function(e) {
+			$("#whisperBox ul, #whisperBox .tab-content").empty();
+			$("#whisper, #whisperBox").addClass("hidden");
 		});
 	};
 
 	app.init = function() {
 		bindEvent();
-		var datepicker = {
+
+		$("#signUpBirthday, #contentSettingBasicInfoBirthday").datetimepicker({
 			format:'Y/m/d',
             timepicker: false
-		};
-		$("#birthday").datetimepicker(datepicker);
-        $("#signUpBirthday").datetimepicker(datepicker);
+		});
 	};
 
 	return app;
