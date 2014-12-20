@@ -13,7 +13,8 @@
 		href="css/jquery.datetimepicker.css">
 	<link rel="stylesheet" type="text/css" href="css/templatemo_main.css">
 	<link rel="stylesheet" type="text/css" href="css/tabs.css">
-	<link rel="stylesheet" type="text/css" href="css/app.css"></head>
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+</head>
 <body>
 	<div class="navbar navbar-inverse" role="navigation">
 		<div class="navbar-header">
@@ -33,7 +34,20 @@
 	</div>
 
 	<div class="template-page-wrapper">
-		<form id="signIn" class="form-horizontal templatemo-signin-form"
+		<ul class="nav nav-tabs hidden" role="tablist">
+			<li class="active">
+				<a href="#signIn" role="tab" data-toggle="tab"></a>
+			</li>
+			<li>
+				<a href="#signUp" role="tab" data-toggle="tab"></a>
+			</li>
+			<li>
+				<a href="#signedIn" role="tab" data-toggle="tab"></a>
+			</li>
+		</ul>
+
+		<div class="tab-content">
+		<form id="signIn" class="form-horizontal templatemo-signin-form tab-pane fade in active"
 			role="form">
 			<div class="form-group">
 				<div class="col-md-12">
@@ -62,7 +76,7 @@
 		</form>
 
 		<form id="signUp"
-			class="form-horizontal templatemo-signin-form hidden" role="form">
+			class="form-horizontal templatemo-signin-form tab-pane fade" role="form">
 			<div class="form-group">
 				<div class="col-md-12">
 					<label class="col-sm-2 control-label">用户名</label>
@@ -157,8 +171,35 @@
 			</div>
 		</form>
 
+		<div id="signedIn" class="tab-pane fade">
 		<div id="sidebar"
-			class="navbar-collapse collapse templatemo-sidebar hidden">
+			class="navbar-collapse collapse templatemo-sidebar">
+			<ul class="nav nav-tabs hidden" role="tablist">
+				<li class="active">
+					<a href="#contentHome" role="tab" data-toggle="tab"></a>
+				</li>
+				<li>
+					<a href="#contentAt" role="tab" data-toggle="tab"></a>
+				</li>
+				<li>
+					<a href="#contentMyComment" role="tab" data-toggle="tab"></a>
+				</li>
+				<li>
+					<a href="#contentPrivateMessage" role="tab" data-toggle="tab"></a>
+				</li>
+				<li>
+					<a href="#contentSetting" role="tab" data-toggle="tab"></a>
+				</li>
+				<li>
+					<a href="#contentFocus" role="tab" data-toggle="tab"></a>
+				</li>
+				<li>
+					<a href="#contentFans" role="tab" data-toggle="tab"></a>
+				</li>
+				<li>
+					<a href="#contentMicroBloggingDetail" role="tab" data-toggle="tab"></a>
+				</li>
+			</ul>
 			<ul class="templatemo-sidebar-menu">
 				<li>
 					<div class="navbar-icon">
@@ -247,10 +288,10 @@
 		</div>
 		<!--/.navbar-collapse -->
 
-		<div id="content" class="templatemo-content-wrapper hidden">
-			<div class="templatemo-content">
+		<div id="content" class="templatemo-content-wrapper">
+			<div class="templatemo-content tab-content">
 				<!-- Home Start -->
-				<div id="contentHome" class="hidden">
+				<div id="contentHome" class="tab-pane fade in active">
 					<form class="form-horizontal" role="form">
 						<div class="form-group">
 							<label class="col-sm-2 control-label">发微博</label>
@@ -445,7 +486,7 @@
 				<!-- Home End -->
 
 				<!-- At Start -->
-				<div id="contentAt" class="col-sm-offset-2 col-sm-8 hidden">
+				<div id="contentAt" class="col-sm-offset-2 col-sm-8 tab-pane fade">
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="active">
@@ -578,7 +619,7 @@
 				<!-- At End -->
 
 				<!-- My Comment Start -->
-				<div id="contentMyComment" class="col-sm-offset-2 col-sm-8 hidden">
+				<div id="contentMyComment" class="col-sm-offset-2 col-sm-8 tab-pane fade">
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="active">
@@ -661,7 +702,7 @@
 
 				<!-- Private Message Start -->
 				<div id="contentPrivateMessage"
-					class="col-sm-offset-2 col-sm-8 hidden">
+					class="col-sm-offset-2 col-sm-8 tab-pane fade">
 					<div>
 						<div class="col-sm-2">
 							<a href="javascript:;">
@@ -705,7 +746,7 @@
 				<!-- Private Message End -->
 
 				<!-- Setting Start -->
-				<div id="contentSetting" class="col-sm-offset-2 col-sm-8 hidden">
+				<div id="contentSetting" class="col-sm-offset-2 col-sm-8 tab-pane fade">
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="active">
@@ -844,7 +885,7 @@
 				<!-- Setting End -->
 
 				<!-- Focus Start -->
-				<div id="contentFocus" class="col-sm-offset-2 col-sm-8 hidden">
+				<div id="contentFocus" class="col-sm-offset-2 col-sm-8 tab-pane fade">
 					<div>
 						<div class="col-sm-2">
 							<a href="javascript:;">
@@ -913,7 +954,7 @@
 				<!-- Focus End -->
 
 				<!-- Fans Start -->
-				<div id="contentFans" class="col-sm-offset-2 col-sm-8 hidden">
+				<div id="contentFans" class="col-sm-offset-2 col-sm-8 tab-pane fade">
 					<div>
 						<div class="col-sm-2">
 							<a href="javascript:;">
@@ -982,7 +1023,7 @@
 				<!-- Fans End -->
 
 				<!-- Search Start -->
-				<div id="contentSearch" class="col-sm-offset-2 col-sm-8 hidden">
+				<div id="contentSearch" class="col-sm-offset-2 col-sm-8 tab-pane fade">
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="active">
@@ -1219,7 +1260,7 @@
 
 				<!-- MicroBloggingDetail Start -->
 				<div id="contentMicroBloggingDetail"
-					class="col-sm-offset-2 col-sm-8 hidden">
+					class="col-sm-offset-2 col-sm-8 tab-pane fade">
 					<div>
 						<div class="col-sm-3">
 							<a href="javascript:;">
@@ -1466,192 +1507,202 @@
 
 		<!-- Whisper Start -->
 		<div id="whisper" class="hidden">
-			<div id="whisperMiniBox" class="hidden">QMonkey</div>
-			<div id="whisperBox" class="tabbable tabs-left hidden">
-				<div class="popover-title">
-					<img src="img/yxh.gif" width="50" height="50">
-					QMonkey
-					<button id="whisperBoxClose" type="button" class="close">
-						<span class="glyphicon glyphicon-remove"></span>
-					</button>
-					<button id="whisperBoxMinimize" type="button" class="close">
-						<span class="glyphicon glyphicon-minus"></span>
-					</button>
-				</div>
-				<!-- Nav tabs -->
-				<ul class="nav nav-tabs" role="tablist">
-					<li class="active">
-						<a href="#whisper1" role="tab" data-toggle="tab">QMonkey</a>
-					</li>
-					<li>
-						<a href="#whisper2" role="tab" data-toggle="tab">YoCiMonkey</a>
-					</li>
-					<li>
-						<a href="#whisper3" role="tab" data-toggle="tab">Monkey</a>
-					</li>
-					<li>
-						<a href="#whisper3" role="tab" data-toggle="tab">Monkey</a>
-					</li>
-					<li>
-						<a href="#whisper3" role="tab" data-toggle="tab">Monkey</a>
-					</li>
-					<li>
-						<a href="#whisper3" role="tab" data-toggle="tab">Monkey</a>
-					</li>
-
-				</ul>
-
-				<!-- Tab panes -->
-				<div class="tab-content">
-					<div class="tab-pane fade col-sm-offset-3 in active" id="whisper1">
-						<div class="whisperMessageBox">
-							<div class="pull-right col-sm-7">
-								<div class="popover left clear-both">
-									<div class="arrow"></div>
-									<div class="popover-title">
-										<small>2011-12-12 19:00</small>
-									</div>
-									<div class="popover-content">
-										<p class="whisperMessageContent">您好！</p>
-									</div>
-								</div>
-							</div>
-							<div class="pull-left col-sm-7">
-								<div class="popover right clear-both">
-									<div class="arrow"></div>
-									<div class="popover-title">
-										<small>2011-12-12 19:00</small>
-									</div>
-									<div class="popover-content">
-										<p class="whisperMessageContent">Hello! Nice to meet you!</p>
-									</div>
-								</div>
-							</div>
-							<div class="pull-right col-sm-7">
-								<div class="popover left clear-both">
-									<div class="arrow"></div>
-									<div class="popover-title">
-										<small>2011-12-12 19:00</small>
-									</div>
-									<div class="popover-content">
-										<p class="whisperMessageContent">Nice to meet you, too!</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<hr class="whisper-split-line" />
-						<form class="form-horizontal" role="form">
-							<div class="form-group">
-								<div class="col-sm-12">
-									<textarea class="form-control" rows="5"></textarea>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-12">
-									<button type="submit" class="btn btn-default pull-right">发送</button>
-								</div>
-							</div>
-						</form>
+			<ul class="nav nav-tabs hidden" role="tablist">
+				<li class="active">
+					<a href="#whisperMiniBox" role="tab" data-toggle="tab"></a>
+				</li>
+				<li>
+					<a href="#whisperBox" role="tab" data-toggle="tab"></a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div id="whisperMiniBox" class="tab-pane active">QMonkey</div>
+				<div id="whisperBox" class="tab-pane tabbable tabs-left">
+					<div class="popover-title">
+						<img src="img/yxh.gif" width="50" height="50">
+						QMonkey
+						<button id="whisperBoxClose" type="button" class="close">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+						<button id="whisperBoxMinimize" type="button" class="close">
+							<span class="glyphicon glyphicon-minus"></span>
+						</button>
 					</div>
-					<div class="tab-pane fade col-sm-offset-3" id="whisper2">
-						<div class="whisperMessageBox">
-							<div class="pull-right col-sm-7">
-								<div class="popover left clear-both">
-									<div class="arrow"></div>
-									<div class="popover-title">
-										<small>2011-12-12 19:00</small>
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="active">
+							<a href="#whisper1" role="tab" data-toggle="tab">QMonkey</a>
+						</li>
+						<li>
+							<a href="#whisper2" role="tab" data-toggle="tab">YoCiMonkey</a>
+						</li>
+						<li>
+							<a href="#whisper3" role="tab" data-toggle="tab">Monkey</a>
+						</li>
+						<li>
+							<a href="#whisper3" role="tab" data-toggle="tab">Monkey</a>
+						</li>
+						<li>
+							<a href="#whisper3" role="tab" data-toggle="tab">Monkey</a>
+						</li>
+						<li>
+							<a href="#whisper3" role="tab" data-toggle="tab">Monkey</a>
+						</li>
+
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div class="tab-pane fade col-sm-offset-3 in active" id="whisper1">
+							<div class="whisperMessageBox">
+								<div class="pull-right col-sm-7">
+									<div class="popover left clear-both">
+										<div class="arrow"></div>
+										<div class="popover-title">
+											<small>2011-12-12 19:00</small>
+										</div>
+										<div class="popover-content">
+											<p class="whisperMessageContent">您好！</p>
+										</div>
 									</div>
-									<div class="popover-content">
-										<p class="whisperMessageContent">您好！</p>
+								</div>
+								<div class="pull-left col-sm-7">
+									<div class="popover right clear-both">
+										<div class="arrow"></div>
+										<div class="popover-title">
+											<small>2011-12-12 19:00</small>
+										</div>
+										<div class="popover-content">
+											<p class="whisperMessageContent">Hello! Nice to meet you!</p>
+										</div>
+									</div>
+								</div>
+								<div class="pull-right col-sm-7">
+									<div class="popover left clear-both">
+										<div class="arrow"></div>
+										<div class="popover-title">
+											<small>2011-12-12 19:00</small>
+										</div>
+										<div class="popover-content">
+											<p class="whisperMessageContent">Nice to meet you, too!</p>
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="pull-left col-sm-7">
-								<div class="popover right clear-both">
-									<div class="arrow"></div>
-									<div class="popover-title">
-										<small>2011-12-12 19:00</small>
-									</div>
-									<div class="popover-content">
-										<p class="whisperMessageContent">Hello! Nice to meet you!</p>
+							<hr class="whisper-split-line" />
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<div class="col-sm-12">
+										<textarea class="form-control" rows="5"></textarea>
 									</div>
 								</div>
-							</div>
-							<div class="pull-right col-sm-7">
-								<div class="popover left clear-both">
-									<div class="arrow"></div>
-									<div class="popover-title">
-										<small>2011-12-12 19:00</small>
-									</div>
-									<div class="popover-content">
-										<p class="whisperMessageContent">Nice to meet you, too!</p>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<button type="submit" class="btn btn-default pull-right">发送</button>
 									</div>
 								</div>
-							</div>
+							</form>
 						</div>
-						<hr class="whisper-split-line" />
-						<form class="form-horizontal" role="form">
-							<div class="form-group">
-								<div class="col-sm-12">
-									<textarea class="form-control" rows="5"></textarea>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-12">
-									<button type="submit" class="btn btn-default pull-right">发送</button>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="tab-pane fade col-sm-offset-3" id="whisper3">
-						<div class="whisperMessageBox">
-							<div class="pull-right col-sm-7">
-								<div class="popover left clear-both">
-									<div class="arrow"></div>
-									<div class="popover-title">
-										<small>2011-12-12 19:00</small>
-									</div>
-									<div class="popover-content">
-										<p class="whisperMessageContent">您好！</p>
+						<div class="tab-pane fade col-sm-offset-3" id="whisper2">
+							<div class="whisperMessageBox">
+								<div class="pull-right col-sm-7">
+									<div class="popover left clear-both">
+										<div class="arrow"></div>
+										<div class="popover-title">
+											<small>2011-12-12 19:00</small>
+										</div>
+										<div class="popover-content">
+											<p class="whisperMessageContent">您好！</p>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="pull-left col-sm-7">
-								<div class="popover right clear-both">
-									<div class="arrow"></div>
-									<div class="popover-title">
-										<small>2011-12-12 19:00</small>
-									</div>
-									<div class="popover-content">
-										<p class="whisperMessageContent">Hello! Nice to meet you!</p>
+								<div class="pull-left col-sm-7">
+									<div class="popover right clear-both">
+										<div class="arrow"></div>
+										<div class="popover-title">
+											<small>2011-12-12 19:00</small>
+										</div>
+										<div class="popover-content">
+											<p class="whisperMessageContent">Hello! Nice to meet you!</p>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="pull-right col-sm-7">
-								<div class="popover left clear-both">
-									<div class="arrow"></div>
-									<div class="popover-title">
-										<small>2011-12-12 19:00</small>
-									</div>
-									<div class="popover-content">
-										<p class="whisperMessageContent">Nice to meet you, too!</p>
+								<div class="pull-right col-sm-7">
+									<div class="popover left clear-both">
+										<div class="arrow"></div>
+										<div class="popover-title">
+											<small>2011-12-12 19:00</small>
+										</div>
+										<div class="popover-content">
+											<p class="whisperMessageContent">Nice to meet you, too!</p>
+										</div>
 									</div>
 								</div>
 							</div>
+							<hr class="whisper-split-line" />
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<div class="col-sm-12">
+										<textarea class="form-control" rows="5"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<button type="submit" class="btn btn-default pull-right">发送</button>
+									</div>
+								</div>
+							</form>
 						</div>
-						<hr class="whisper-split-line" />
-						<form class="form-horizontal" role="form">
-							<div class="form-group">
-								<div class="col-sm-12">
-									<textarea class="form-control" rows="5"></textarea>
+						<div class="tab-pane fade col-sm-offset-3" id="whisper3">
+							<div class="whisperMessageBox">
+								<div class="pull-right col-sm-7">
+									<div class="popover left clear-both">
+										<div class="arrow"></div>
+										<div class="popover-title">
+											<small>2011-12-12 19:00</small>
+										</div>
+										<div class="popover-content">
+											<p class="whisperMessageContent">您好！</p>
+										</div>
+									</div>
+								</div>
+								<div class="pull-left col-sm-7">
+									<div class="popover right clear-both">
+										<div class="arrow"></div>
+										<div class="popover-title">
+											<small>2011-12-12 19:00</small>
+										</div>
+										<div class="popover-content">
+											<p class="whisperMessageContent">Hello! Nice to meet you!</p>
+										</div>
+									</div>
+								</div>
+								<div class="pull-right col-sm-7">
+									<div class="popover left clear-both">
+										<div class="arrow"></div>
+										<div class="popover-title">
+											<small>2011-12-12 19:00</small>
+										</div>
+										<div class="popover-content">
+											<p class="whisperMessageContent">Nice to meet you, too!</p>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div class="form-group">
-								<div class="col-sm-12">
-									<button type="submit" class="btn btn-default pull-right">发送</button>
+							<hr class="whisper-split-line" />
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<div class="col-sm-12">
+										<textarea class="form-control" rows="5"></textarea>
+									</div>
 								</div>
-							</div>
-						</form>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<button type="submit" class="btn btn-default pull-right">发送</button>
+									</div>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -1663,11 +1714,13 @@
 				<p>Copyright &copy; 2014 QMonkey</p>
 			</div>
 		</footer>
+		</div>
+		</div>
 	</div>
 
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.datetimepicker.js"></script>
-	<script src="js/app.js"></script>
+	<script src="js/index.js"></script>
 </body>
 </html>
