@@ -18,7 +18,7 @@ var app = (function() {
 			$(".nav-tabs a[href='#signIn']").tab('show');
 		});
 
-		$("#sidebarHome, #sidebarBlog, #sidebar .navbar-icon a").on("click", function(e) {
+		$("#sidebarHome").on("click", function(e) {
 			$(".nav-tabs a[href='#contentHome']").tab('show');
 		});
 
@@ -54,7 +54,8 @@ var app = (function() {
 			$(".nav-tabs a[href='#contentSearch']").tab('show');
 		});
 
-		$("#content h4, #content h5, #content img").on("click", function(e) {
+		$("#sidebarBlog, #sidebar .navbar-icon a, " + 
+			"#content h4, #content h5, #content img").on("click", function(e) {
 			$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
 		});
 
