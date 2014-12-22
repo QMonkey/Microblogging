@@ -13,12 +13,29 @@ mongoose.connect("mongodb://localhost/Microblogging");
 router.get("/current", function(request, response) {
 	var accountId = request.session.accountId;
 	if(accountId) {
-		model.Account.findOne({ _id: new ObjectId(accountId) }, function(err, doc) {
+		model.Account.findOne({ _id: new ObjectId(accountId) }).populate("info").exec(function(err, doc) {
 			if(doc) {
+				var messageCounter = 0;
+				doc.messages.forEach(function(message) {
+					if(message.type === 0) {
+						++messageCounter;
+					}
+				});
 				response.send({
 					id: doc._id,
 					userName: doc.userName,
-					info: doc.info,
+					followings: doc.followings.length,
+					followers: doc.followers.length,
+					messages: messageCounter,
+					info: {
+						nickname: doc.info.nickname,
+						realName: doc.info.realName,
+						email: doc.info.email,
+						birthday: doc.info.birthday,
+						sex: doc.info.sex,
+						phone: doc.info.phone,
+						address: doc.info.address
+					},
 				});
 			} else {
 				response.send({});
@@ -31,7 +48,9 @@ router.get("/current", function(request, response) {
 
 router.post("/doSignIn", function(request, response) {
 	var requestData = request.body;
-	model.Account.findOne({ userName: requestData.userName }).populate("info").exec(function(err, doc) {
+	model.Account.findOne({ 
+		userName: requestData.userName 
+	}).populate("info").populate("messages").exec(function(err, doc) {
 		if(err) {
 			response.send({
 				error: err.message
@@ -40,10 +59,27 @@ router.post("/doSignIn", function(request, response) {
 			var sha1 = crypto.createHash("sha1");
 			if(doc.password === sha1.update(requestData.password + doc.salt).digest("hex")) {
 				request.session.accountId = doc._id;
+				var messageCounter = 0;
+				doc.messages.forEach(function(message) {
+					if(message.type === 0) {
+						++messageCounter;
+					}
+				});
 				response.send({
 					id: doc._id,
 					userName: doc.userName,
-					info: doc.info,
+					followings: doc.followings.length,
+					followers: doc.followers.length,
+					messages: messageCounter,
+					info: {
+						nickname: doc.info.nickname,
+						realName: doc.info.realName,
+						email: doc.info.email,
+						birthday: doc.info.birthday,
+						sex: doc.info.sex,
+						phone: doc.info.phone,
+						address: doc.info.address
+					},
 				});
 			} else {
 				response.send({

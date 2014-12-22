@@ -6,6 +6,7 @@ var AccountSchema = new Schema({
 	password: { type: String, require: true },
 	salt: { type: String, require: true },
 	info: { type: Schema.Types.ObjectId, ref: "AccountInfo" },
+	followings: [{ type: Schema.Types.ObjectId, ref: "Account" }], 
 	followers: [{ type: Schema.Types.ObjectId, ref: "Account" }],
 	messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
 	ats: [{ type: Schema.Types.ObjectId, ref: "At" }],

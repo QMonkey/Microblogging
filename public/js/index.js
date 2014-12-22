@@ -6,9 +6,9 @@ var app = (function() {
 			$.get("/account/current", function(responseData) {
 				if(responseData.id) {
 					$("#sidebarNickname").text(responseData.info.nickname);
-					$("#sidebarFollowCount").text();
-					$("#sidebarFansCount").text();
-					$("#sidebarBlogCount").text();
+					$("#sidebarFollowCount").text(responseData.followings);
+					$("#sidebarFansCount").text(responseData.followers);
+					$("#sidebarBlogCount").text(responseData.messages);
 					$(".nav-tabs a[href='#signedIn']").tab('show');
 					$("#sidebarHome").click();
 				} else {
@@ -27,9 +27,9 @@ var app = (function() {
 			}).done(function(responseData) {
 				if(!responseData.error) {
 					$("#sidebarNickname").text(responseData.info.nickname);
-					$("#sidebarFollowCount").text();
-					$("#sidebarFansCount").text();
-					$("#sidebarBlogCount").text();
+					$("#sidebarFollowCount").text(responseData.followings);
+					$("#sidebarFansCount").text(responseData.followers);
+					$("#sidebarBlogCount").text(responseData.messages);
 					$("#signIn")[0].reset();
 					$(".nav-tabs a[href='#signedIn']").tab('show');
 					$("#sidebarHome").click();
