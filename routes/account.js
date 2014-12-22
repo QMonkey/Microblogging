@@ -13,7 +13,9 @@ mongoose.connect("mongodb://localhost/Microblogging");
 router.get("/current", function(request, response) {
 	var accountId = request.session.accountId;
 	if(accountId) {
-		model.Account.findOne({ _id: new ObjectId(accountId) }).populate("info").exec(function(err, doc) {
+		model.Account.findOne({
+			_id: new ObjectId(accountId)
+		}).populate("info").populate("messages").exec(function(err, doc) {
 			if(doc) {
 				var messageCounter = 0;
 				doc.messages.forEach(function(message) {
