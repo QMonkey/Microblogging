@@ -4,9 +4,11 @@ var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require("express-session");
+var mongoose = require("mongoose");
 
 var routes = require('./routes/index');
 var account = require("./routes/account");
+var setting = require("./routes/setting");
 
 var app = express();
 
@@ -20,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-    secret: 'secret key',
+    secret: 'session secret key',
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -29,8 +31,11 @@ app.use(session({
     }
 }));
 
+mongoose.connect("mongodb://localhost/Microblogging");
+
 app.use('/', routes);
 app.use("/account", account);
+app.use("/setting", setting);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

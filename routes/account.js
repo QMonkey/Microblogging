@@ -8,8 +8,6 @@ var model = require("./model");
 var router = express.Router();
 var ObjectId = mongoose.Types.ObjectId;
 
-mongoose.connect("mongodb://localhost/Microblogging");
-
 router.get("/current", function(request, response) {
 	var accountId = request.session.accountId;
 	if(accountId) {
@@ -36,7 +34,8 @@ router.get("/current", function(request, response) {
 						birthday: doc.info.birthday,
 						sex: doc.info.sex,
 						phone: doc.info.phone,
-						address: doc.info.address
+						address: doc.info.address,
+						introduction: doc.info.introduction
 					},
 				});
 			} else {
@@ -80,7 +79,8 @@ router.post("/doSignIn", function(request, response) {
 						birthday: doc.info.birthday,
 						sex: doc.info.sex,
 						phone: doc.info.phone,
-						address: doc.info.address
+						address: doc.info.address,
+						introduction: doc.info.introduction
 					},
 				});
 			} else {

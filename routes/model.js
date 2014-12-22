@@ -20,7 +20,8 @@ var AccountInfoSchema = new Schema({
 	birthday: Number,
 	sex: Number,
 	phone: String,
-	address: String
+	address: String,
+	introduction: String
 });
 
 var MessageSchema = new Schema({

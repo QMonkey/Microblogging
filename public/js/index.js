@@ -56,7 +56,7 @@ var app = (function() {
 			var address = $("#signUpAddress").val();
 
 			if(password !== confirmPassword) {
-				alert("Password and confirmPassword is inconsistent.");
+				alert("Password and confirm password is inconsistent.");
 				return;
 			}
 
@@ -101,7 +101,24 @@ var app = (function() {
 		});
 
 		$("#sidebarSetting").on("click", function(e) {
-			$(".nav-tabs a[href='#contentSetting']").tab('show');
+			$.get("/account/current", function(responseData) {
+				if(responseData.id) {
+					$("#contentSettingBasicInfoNickName").val(responseData.info.nickname);
+					$("#contentSettingBasicInfoRealName").val(responseData.info.realName);
+					$("#contentSettingBasicInfoEmail").val(responseData.info.email);
+					var date = new Date(responseData.info.birthday);
+					$("#contentSettingBasicInfoBirthday").val(date.getFullYear() + "/" + 
+						(date.getMonth() + 1) + "/" + date.getDate());
+					$("#contentSettingBasicInfoSex").val(responseData.info.sex);
+					$("#contentSettingBasicInfoPhone").val(responseData.info.phone);
+					$("#contentSettingBasicInfoAddress").val(responseData.info.address);
+					$("#contentSettingBasicInfoIntroduction").val(responseData.info.introduction);
+					$(".nav-tabs a[href='#contentSetting']").tab('show');
+				} else {
+					alert("Please sign in first!");
+					$(".nav-tabs a[href='#signIn']").tab('show');
+				}
+			});
 		});
 
 		$("#sidebarSignOut").on("click", function(e) {
@@ -128,6 +145,55 @@ var app = (function() {
 		});
 
 		$("#content img").on("mouseover", function(e) {
+		});
+
+		$("#contentSettingBasicInfoButton").on("click", function(e) {
+			var nickname = $("#contentSettingBasicInfoNickName").val();
+			var realName = $("#contentSettingBasicInfoRealName").val();
+			var email = $("#contentSettingBasicInfoEmail").val();
+			var birthday = $("#contentSettingBasicInfoBirthday").val();
+			var sex = $("#contentSettingBasicInfoSex").val();
+			var phone = $("#contentSettingBasicInfoPhone").val();
+			var address = $("#contentSettingBasicInfoAddress").val();
+			var introduction = $("#contentSettingBasicInfoIntroduction").val();
+
+			$.post("/setting/updateInfo", {
+				nickname: nickname,
+				realName: realName,
+				email: email,
+				birthday: new Date(birthday).valueOf(),
+				sex: Number(sex),
+				phone: phone,
+				address: address,
+				introduction: introduction
+			}).done(function(responseData) {
+				if(responseData.error) {
+					alert(responseData.error);
+				}
+			});
+		});
+
+		$("#contentSettingPasswordButton").on("click", function(e) {
+			var originalPassword = $("#contentSettingOriginalPassword").val();
+			var newPassword = $("#contentSettingNewPassword").val();
+			var confirmPassword = $("#contentSettingConfirmPassword").val();
+
+			if(newPassword !== confirmPassword) {
+				alert("New password and confirm password is inconsistent.");
+				return;
+			}
+
+			$.post("/setting/changePassword", {
+				originalPassword: originalPassword,
+				newPassword: newPassword
+			}).done(function(responseData) {
+				if(!responseData.error) {
+					$(".nav-tabs a[href='#signIn']").tab('show');
+					$("#contentSettingPassword form")[0].reset();
+				} else {
+					alert(responseData.error);
+				}
+			});
 		});
 
 		$("#messengerButton").on("click", function(e) {
