@@ -16,18 +16,18 @@
 	text-align: center;
 }
 
-.attentions {
+.sidebar-basic-infos {
 	list-style-type: none;
 	padding: 10px 15px;
 }
 
-.attentions li {
+.sidebar-basic-infos li {
 	margin: 0 4px 0 4px;
 	text-align: center;
 	padding-right: 4px;
 }
 
-.attention {
+.sidebar-basic-info {
 	float: left;
 	border-right-width: 1px;
 	border-right-style: solid;

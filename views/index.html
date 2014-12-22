@@ -13,7 +13,7 @@
 		href="css/jquery.datetimepicker.css">
 	<link rel="stylesheet" type="text/css" href="css/templatemo_main.css">
 	<link rel="stylesheet" type="text/css" href="css/tabs.css">
-	<link rel="stylesheet" type="text/css" href="css/app.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
 	<div class="navbar navbar-inverse" role="navigation">
@@ -35,7 +35,7 @@
 
 	<div class="template-page-wrapper">
 		<ul class="nav nav-tabs hidden" role="tablist">
-			<li class="active">
+			<li>
 				<a href="#signIn" role="tab" data-toggle="tab"></a>
 			</li>
 			<li>
@@ -47,14 +47,14 @@
 		</ul>
 
 		<div class="tab-content">
-		<form id="signIn" class="form-horizontal templatemo-signin-form tab-pane fade in active"
+		<form id="signIn" class="form-horizontal templatemo-signin-form tab-pane fade"
 			role="form">
 			<div class="form-group">
 				<div class="col-md-12">
 					<label for="username" class="col-sm-2 control-label">用户名</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="signInUsername"
-							placeholder="Username"></div>
+						<input type="text" class="form-control" id="signInUserName"
+							placeholder="User Name"></div>
 				</div>
 			</div>
 			<div class="form-group">
@@ -81,8 +81,8 @@
 				<div class="col-md-12">
 					<label class="col-sm-2 control-label">用户名</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="signUpUsername"
-							placeholder="Username"></div>
+						<input type="text" class="form-control" id="signUpUserName"
+							placeholder="User Name"></div>
 				</div>
 			</div>
 			<div class="form-group">
@@ -98,7 +98,7 @@
 					<label class="col-sm-2 control-label">确认密码</label>
 					<div class="col-sm-10">
 						<input type="password" class="form-control"
-							id="signUpConfirmPassword" placeholder="ConfirmPassword"></div>
+							id="signUpConfirmPassword" placeholder="Confirm Password"></div>
 				</div>
 			</div>
 			<div class="form-group">
@@ -113,8 +113,8 @@
 				<div class="col-md-12">
 					<label class="col-sm-2 control-label">真实姓名</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="signUpRealname"
-							placeholder="Realname"></div>
+						<input type="text" class="form-control" id="signUpRealName"
+							placeholder="Real Name"></div>
 				</div>
 			</div>
 			<div class="form-group">
@@ -138,8 +138,8 @@
 					<label class="col-sm-2 control-label">性别</label>
 					<div class="col-sm-10">
 						<select id="signUpSex" class="form-control">
-							<option>男</option>
-							<option>女</option>
+							<option value="0">男</option>
+							<option value="1">女</option>
 						</select>
 					</div>
 				</div>
@@ -191,7 +191,7 @@
 					<a href="#contentSetting" role="tab" data-toggle="tab"></a>
 				</li>
 				<li>
-					<a href="#contentFocus" role="tab" data-toggle="tab"></a>
+					<a href="#contentFollow" role="tab" data-toggle="tab"></a>
 				</li>
 				<li>
 					<a href="#contentFans" role="tab" data-toggle="tab"></a>
@@ -204,31 +204,31 @@
 				<li>
 					<div class="navbar-icon">
 						<div>
-							<img src="img/yxh.gif" width="70" height="70"> <strong><a
-								href="javascript:;">QMonkey</a></strong> 
+							<img src="img/yxh.gif" width="70" height="70">
+							<strong>
+								<a id="sidebarNickname" href="javascript:;"></a>
+							</strong> 
 						</div>
 					</div>
 				</li>
 				<li>
-					<ul class="attentions">
-						<li id="sidebarFocus" class="attention">
-							<a
-							href="javascript:;" style="display: block;"> <strong>123</strong>
+					<ul class="sidebar-basic-infos">
+						<li id="sidebarFollow" class="sidebar-basic-info">
+							<a href="javascript:;" style="display: block;">
 								<span>关注</span>
+								<strong id="sidebarFollowCount"></strong>
 							</a>
 						</li>
-						<li id="sidebarFans" class="attention">
-							<a href="javascript:;"
-							style="display: block;">
-								<strong>234</strong>
+						<li id="sidebarFans" class="sidebar-basic-info">
+							<a href="javascript:;" style="display: block;">
 								<span>粉丝</span>
+								<strong id="sidebarFansCount"></strong>
 							</a>
 						</li>
 						<li id="sidebarBlog">
-							<a href="javascript:;"
-							style="display: block;">
-								<strong>234</strong>
+							<a href="javascript:;" style="display: block;">
 								<span>微博</span>
+								<strong id="sidebarBlogCount"></strong>
 							</a>
 						</li>
 					</ul>
@@ -884,8 +884,8 @@
 				</div>
 				<!-- Setting End -->
 
-				<!-- Focus Start -->
-				<div id="contentFocus" class="col-sm-offset-2 col-sm-8 tab-pane fade">
+				<!-- Follow Start -->
+				<div id="contentFollow" class="col-sm-offset-2 col-sm-8 tab-pane fade">
 					<div>
 						<div class="col-sm-2">
 							<a href="javascript:;">
@@ -951,7 +951,7 @@
 					</div>
 					<hr />
 				</div>
-				<!-- Focus End -->
+				<!-- Follow End -->
 
 				<!-- Fans Start -->
 				<div id="contentFans" class="col-sm-offset-2 col-sm-8 tab-pane fade">
