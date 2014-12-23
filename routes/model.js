@@ -8,9 +8,8 @@ var AccountSchema = new Schema({
 	info: { type: Schema.Types.ObjectId, ref: "AccountInfo" },
 	followings: [{ type: Schema.Types.ObjectId, ref: "Account" }], 
 	followers: [{ type: Schema.Types.ObjectId, ref: "Account" }],
-	messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
-	ats: [{ type: Schema.Types.ObjectId, ref: "At" }],
-	whispers: [{ type: Schema.Types.ObjectId, ref: "Whisper" }]
+	blogs: [{ type: Schema.Types.ObjectId, ref: "Blog" }],
+	messages: [{ type: Schema.Types.ObjectId, ref: "Message" }]
 });
 
 var AccountInfoSchema = new Schema({
@@ -24,28 +23,24 @@ var AccountInfoSchema = new Schema({
 	introduction: String
 });
 
+var BlogSchema = new Schema({
+	content: { type: String, default: null },
+	publishTime: { type: Number, default: Date.now() },
+	forward: { type: Schema.Types.ObjectId, ref: "Blog" },
+	comments: [{ type: Schema.Types.ObjectId, ref: "Message" }],
+	ats: [{ type: Schema.Types.ObjectId, ref: "Message" }],
+	greats: [{ type: Schema.Types.ObjectId, ref: "Message" }]
+});
+
 var MessageSchema = new Schema({
-	content: { type: String, require: true },
-	publishTime: Number,
-	great: { type: Number, default: 0 },
-	message: { type: Schema.Types.ObjectId, ref: "Message" },
-	type: { type: Number, default: 0 }
-});
-
-var AtSchema = new Schema({
-	receiver: { type: Schema.Types.ObjectId, ref: "Account", require: true },
-	message: { type: Schema.Types.ObjectId, ref: "Message", require: true }
-});
-
-var WhisperSchema = new Schema({
-	receiver: { type: Schema.Types.ObjectId, ref: "Account", require: true },
-	content: { type: String, require: true },
-	sendTime: Number,
-	receiveTime: { type: Number, default: 0 }
+	content: { type: String, default: null },
+	sendTime: { type: Number, default: Date.now() },
+	receiveTime: { type: Number, default: 0 },
+	receiver: { type: Schema.Types.ObjectId, ref: "Account", default: null },
+	type: { type: String, default: "comment" }	//comment, great, at, whisper
 });
 
 module.exports.Account = mongoose.model("Account", AccountSchema, "Account");
 module.exports.AccountInfo = mongoose.model("AccountInfo", AccountInfoSchema, "AccountInfo");
+module.exports.Blog = mongoose.model("Blog", BlogSchema, "Blog");
 module.exports.Message = mongoose.model("Message", MessageSchema, "Message");
-module.exports.At = mongoose.model("At", AtSchema, "At");
-module.exports.Whisper = mongoose.model("Whisper", WhisperSchema, "Whisper");

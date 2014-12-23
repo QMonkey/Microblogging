@@ -9,6 +9,7 @@ var mongoose = require("mongoose");
 var routes = require('./routes/index');
 var account = require("./routes/account");
 var setting = require("./routes/setting");
+var blog = require("./routes/blog");
 
 var app = express();
 
@@ -36,6 +37,7 @@ mongoose.connect("mongodb://localhost/Microblogging");
 app.use('/', routes);
 app.use("/account", account);
 app.use("/setting", setting);
+app.use("/blog", blog);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

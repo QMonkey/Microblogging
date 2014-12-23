@@ -9,8 +9,7 @@
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" type="text/css"
-		href="css/jquery.datetimepicker.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css">
 	<link rel="stylesheet" type="text/css" href="css/templatemo_main.css">
 	<link rel="stylesheet" type="text/css" href="css/tabs.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
@@ -68,7 +67,7 @@
 			<div class="form-group">
 				<div class="col-md-12">
 					<div class="col-sm-offset-2 col-sm-10">
-						<a id="signInGoToSignUp" href="javascript:;" class="pull-right">还没有帐号？赶快去注册！</a>
+						<a id="signInGoToSignUp" href="javascript:;" class="pull-right">还没有帐号？赶快去注册吧！</a>
 						<input id="signInButton" type="button" value="登录"
 							class="btn btn-default"></div>
 				</div>
@@ -199,6 +198,9 @@
 				<li>
 					<a href="#contentMicroBloggingDetail" role="tab" data-toggle="tab"></a>
 				</li>
+				<li>
+					<a href="#contentSearch" role="tab" data-toggle="tab"></a>
+				</li>
 			</ul>
 			<ul class="templatemo-sidebar-menu">
 				<li>
@@ -296,12 +298,12 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label">发微博</label>
 							<div class="col-sm-8">
-								<textarea class="form-control" rows="5"></textarea>
+								<textarea id="contentHomePublishBlogContent" class="form-control" rows="5"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-8">
-								<button type="submit" class="btn btn-default pull-right">发布</button>
+								<button type="button" id="contentHomePublishBlogButton" class="btn btn-default pull-right">发布</button>
 							</div>
 						</div>
 					</form>
@@ -1259,13 +1261,48 @@
 				<!-- Search End -->
 
 				<!-- MicroBloggingDetail Start -->
-				<div id="contentMicroBloggingDetail"
-					class="col-sm-offset-2 col-sm-8 tab-pane fade">
+				<div id="contentMicroBloggingDetail" class="col-sm-offset-2 col-sm-8 tab-pane fade">
+					<div id="contentMicroBloggingDetailInfoContainer"></div>
+					<script id="contentMicroBloggingDetailInfoTemplate" type="text/html">
+						<div class="col-sm-3">
+							<a href="javascript:;">
+								<img src="img/yxh.gif" width="120" height="120">
+							</a>
+						</div>
+						<div class="col-sm-offset-3">
+							<h4>
+								<a href="javascript:;">{{ blogger.info.nickname }}</a>
+							</h4>
+							{{if blogger.relation }}
+							<div class="pull-right">
+								<button type="button" class="btn btn-default">
+									{{if blogger.relation === "friend" || blogger.relation === "following" }}
+										取消关注
+									{{else}}
+										关注
+									{{/if}}
+								</button>
+								<button type="button" class="btn btn-default">私信</button>
+							</div>
+							{{/if}}
+							<p><strong>所在地：&nbsp;</strong>{{ blogger.info.address }}</p>
+							<p>
+								<strong>关注</strong>
+								<a href="javascript:;">{{ blogger.followings }}</a>
+								<strong>&nbsp;粉丝</strong>
+								<a href="javascript:;">{{ blogger.followers }}</a>
+								<strong>&nbsp;微博</strong>
+								<a href="javascript:;">{{ blogger.blogs }}</a>
+							</p>
+							<p><strong>简介：&nbsp;</strong>{{ blogger.info.introduction }}</p>
+						</div>
+					</script>
+					<!--
 					<div>
 						<div class="col-sm-3">
 							<a href="javascript:;">
-								<img src="img/yxh.gif" width="130"
-								height="130"></a>
+								<img src="img/yxh.gif" width="120"
+								height="120"></a>
 						</div>
 						<div class="col-sm-offset-3">
 							<h4>
@@ -1275,13 +1312,12 @@
 								<button type="button" class="btn btn-default">关注</button>
 								<button type="button" class="btn btn-default">私信</button>
 							</div>
-							<p>广东汕头</p>
+							<p>所在地： 广东汕头</p>
 							<p>
 								关注
 								<a href="javascript:;">123</a>
 								&nbsp;粉丝
-								<a
-									href="javascript:;">234</a>
+								<a href="javascript:;">234</a>
 								&nbsp;微博
 								<a href="javascript:;">234</a>
 							</p>
@@ -1292,7 +1328,8 @@
 							</p>
 						</div>
 					</div>
-
+					-->
+					<hr class="clear-both" />
 					<div>
 						<div class="col-sm-2">
 							<a href="javascript:;">
@@ -1721,6 +1758,7 @@
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.datetimepicker.js"></script>
+	<script src="js/template.js"></script>
 	<script src="js/index.js"></script>
 </body>
 </html>

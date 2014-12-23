@@ -13,20 +13,14 @@ router.get("/current", function(request, response) {
 	if(accountId) {
 		model.Account.findOne({
 			_id: new ObjectId(accountId)
-		}).populate("info").populate("messages").exec(function(err, doc) {
+		}).populate("info").populate("blogs").exec(function(err, doc) {
 			if(doc) {
-				var messageCounter = 0;
-				doc.messages.forEach(function(message) {
-					if(message.type === 0) {
-						++messageCounter;
-					}
-				});
 				response.send({
 					id: doc._id,
 					userName: doc.userName,
 					followings: doc.followings.length,
 					followers: doc.followers.length,
-					messages: messageCounter,
+					blogs: doc.blogs.length,
 					info: {
 						nickname: doc.info.nickname,
 						realName: doc.info.realName,
@@ -36,7 +30,7 @@ router.get("/current", function(request, response) {
 						phone: doc.info.phone,
 						address: doc.info.address,
 						introduction: doc.info.introduction
-					},
+					}
 				});
 			} else {
 				response.send({});
@@ -51,7 +45,7 @@ router.post("/doSignIn", function(request, response) {
 	var requestData = request.body;
 	model.Account.findOne({ 
 		userName: requestData.userName 
-	}).populate("info").populate("messages").exec(function(err, doc) {
+	}).populate("info").populate("blogs").exec(function(err, doc) {
 		if(err) {
 			response.send({
 				error: err.message
@@ -60,18 +54,12 @@ router.post("/doSignIn", function(request, response) {
 			var sha1 = crypto.createHash("sha1");
 			if(doc.password === sha1.update(requestData.password + doc.salt).digest("hex")) {
 				request.session.accountId = doc._id;
-				var messageCounter = 0;
-				doc.messages.forEach(function(message) {
-					if(message.type === 0) {
-						++messageCounter;
-					}
-				});
 				response.send({
 					id: doc._id,
 					userName: doc.userName,
 					followings: doc.followings.length,
 					followers: doc.followers.length,
-					messages: messageCounter,
+					blogs: doc.blogs.length,
 					info: {
 						nickname: doc.info.nickname,
 						realName: doc.info.realName,

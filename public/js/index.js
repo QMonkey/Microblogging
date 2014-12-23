@@ -1,14 +1,16 @@
 var app = (function() {
 	var app = {};
+	var id;
 
 	var bindEvent = function() {
 		$().ready(function() {
 			$.get("/account/current", function(responseData) {
 				if(responseData.id) {
+					id = responseData.id;
 					$("#sidebarNickname").text(responseData.info.nickname);
 					$("#sidebarFollowCount").text(responseData.followings);
 					$("#sidebarFansCount").text(responseData.followers);
-					$("#sidebarBlogCount").text(responseData.messages);
+					$("#sidebarBlogCount").text(responseData.blogs);
 					$(".nav-tabs a[href='#signedIn']").tab('show');
 					$("#sidebarHome").click();
 				} else {
@@ -26,10 +28,11 @@ var app = (function() {
 				password: password
 			}).done(function(responseData) {
 				if(!responseData.error) {
+					id = responseData.id;
 					$("#sidebarNickname").text(responseData.info.nickname);
 					$("#sidebarFollowCount").text(responseData.followings);
 					$("#sidebarFansCount").text(responseData.followers);
-					$("#sidebarBlogCount").text(responseData.messages);
+					$("#sidebarBlogCount").text(responseData.blogs);
 					$("#signIn")[0].reset();
 					$(".nav-tabs a[href='#signedIn']").tab('show');
 					$("#sidebarHome").click();
@@ -122,7 +125,7 @@ var app = (function() {
 		});
 
 		$("#sidebarSignOut").on("click", function(e) {
-			$.get("/account/doSignOut", function(data) {
+			$.get("/account/doSignOut", function() {
 				$(".nav-tabs a[href='#signIn']").tab('show');
 			});
 		});
@@ -135,16 +138,44 @@ var app = (function() {
 			$(".nav-tabs a[href='#contentFans']").tab('show');
 		});
 
+		$("#sidebarBlog, #sidebar .navbar-icon a").on("click", function(e) {
+			$.get("/blog/getBloggerInfo?id=" + id, function(responseData) {
+				var html = template("contentMicroBloggingDetailInfoTemplate", { blogger: responseData });
+				$("#contentMicroBloggingDetailInfoContainer").html(html);
+				$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
+			});
+		});
+
 		$("#searchButton").on("click", function(e) {
 			$(".nav-tabs a[href='#contentSearch']").tab('show');
 		});
 
-		$("#sidebarBlog, #sidebar .navbar-icon a, " + 
-			"#content h4, #content h5, #content img").on("click", function(e) {
+		$("#content h4, #content h5, #content img").on("click", function(e) {
 			$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
 		});
 
 		$("#content img").on("mouseover", function(e) {
+		});
+
+		$("#contentHomePublishBlogButton").on("click", function(e) {
+			var content = $("#contentHomePublishBlogContent").val();
+			$.post("/blog/publish", {
+				content: content
+			}).done(function(responseData) {
+				if(!responseData.error) {
+					$("#contentHome form")[0].reset();
+					$.get("/account/current", function(responseData) {
+						if(responseData.id) {
+							$("#sidebarNickname").text(responseData.info.nickname);
+							$("#sidebarFollowCount").text(responseData.followings);
+							$("#sidebarFansCount").text(responseData.followers);
+							$("#sidebarBlogCount").text(responseData.blogs);
+						}
+					});
+				} else {
+					alert(responseData.error);
+				}
+			});
 		});
 
 		$("#contentSettingBasicInfoButton").on("click", function(e) {
@@ -221,6 +252,10 @@ var app = (function() {
 				});
 			}
 		});
+	};
+
+	app.getId = function() {
+		return id;
 	};
 
 	app.init = function() {
