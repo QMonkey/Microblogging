@@ -27,7 +27,7 @@ var BlogSchema = new Schema({
 	content: { type: String, default: null },
 	publisher: { type: Schema.Types.ObjectId, ref: "Account" },
 	publishTime: { type: Number, default: Date.now() },
-	forward: { type: Schema.Types.ObjectId, ref: "Blog" },
+	forward: { type: Schema.Types.ObjectId, ref: "Blog", default: null },
 	comments: [{ type: Schema.Types.ObjectId, ref: "Message" }],
 	ats: [{ type: Schema.Types.ObjectId, ref: "Message" }],
 	greats: [{ type: Schema.Types.ObjectId, ref: "Message" }]

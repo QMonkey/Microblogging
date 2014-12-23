@@ -11,9 +11,7 @@ var ObjectId = mongoose.Types.ObjectId;
 router.get("/current", function(request, response) {
 	var accountId = request.session.accountId;
 	if(accountId) {
-		model.Account.findOne({
-			_id: new ObjectId(accountId)
-		}).populate("info").populate("blogs").exec(function(err, doc) {
+		model.Account.findOne({ _id: new ObjectId(accountId) }).populate("info blogs").exec(function(err, doc) {
 			if(doc) {
 				response.send({
 					id: doc._id,
@@ -43,9 +41,7 @@ router.get("/current", function(request, response) {
 
 router.post("/doSignIn", function(request, response) {
 	var requestData = request.body;
-	model.Account.findOne({ 
-		userName: requestData.userName 
-	}).populate("info").populate("blogs").exec(function(err, doc) {
+	model.Account.findOne({ userName: requestData.userName }).populate("info blogs").exec(function(err, doc) {
 		if(err) {
 			response.send({
 				error: err.message

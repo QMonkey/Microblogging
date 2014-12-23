@@ -74,12 +74,35 @@ router.get("/bloggerInfo", function(request, response) {
 router.get("/blogs", function(request, response) {
 	var bloggerId = request.query.id;
 	if(bloggerId) {
-		model.Account.findOne({ _id: new ObjectId(bloggerId) }).populate("blogs").exec(function(err, doc) {
+		model.Account.findOne({ _id: new ObjectId(bloggerId) }).populate("info blogs").exec(function(err, doc) {
 			if(doc) {
 				doc.blogs.sort(function(a, b) {
 					return a.publishTime < b.publishTime;
 				});
-				response.send(doc.blogs);
+				var publisher = {
+					id: doc._id,
+					userName: doc.userName,
+					info: {
+						nickname: doc.info.nickname,
+						realName: doc.info.realName,
+						email: doc.info.email,
+						birthday: doc.info.birthday,
+						sex: doc.info.sex,
+						phone: doc.info.phone,
+						address: doc.info.address,
+						introduction: doc.info.introduction
+					}
+				};
+				response.send(doc.blogs.map(function(blog) {
+					return {
+						content: blog.content,
+						publisher: null,
+						publishTime: blog.publishTime,
+						forward: blog.forward,
+						comments: blog.comments.length,
+						greats: blog.greats.length
+					}
+				}));
 			} else {
 				response.send({});
 			}
