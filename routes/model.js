@@ -6,7 +6,7 @@ var AccountSchema = new Schema({
 	password: { type: String, require: true },
 	salt: { type: String, require: true },
 	info: { type: Schema.Types.ObjectId, ref: "AccountInfo" },
-	followings: [{ type: Schema.Types.ObjectId, ref: "Account" }], 
+	followings: [{ type: Schema.Types.ObjectId, ref: "Account" }],
 	followers: [{ type: Schema.Types.ObjectId, ref: "Account" }],
 	blogs: [{ type: Schema.Types.ObjectId, ref: "Blog" }],
 	messages: [{ type: Schema.Types.ObjectId, ref: "Message" }]
@@ -25,6 +25,7 @@ var AccountInfoSchema = new Schema({
 
 var BlogSchema = new Schema({
 	content: { type: String, default: null },
+	publisher: { type: Schema.Types.ObjectId, ref: "Account" },
 	publishTime: { type: Number, default: Date.now() },
 	forward: { type: Schema.Types.ObjectId, ref: "Blog" },
 	comments: [{ type: Schema.Types.ObjectId, ref: "Message" }],
@@ -36,6 +37,7 @@ var MessageSchema = new Schema({
 	content: { type: String, default: null },
 	sendTime: { type: Number, default: Date.now() },
 	receiveTime: { type: Number, default: 0 },
+	sender: { type: Schema.Types.ObjectId, ref: "Account" },
 	receiver: { type: Schema.Types.ObjectId, ref: "Account", default: null },
 	type: { type: String, default: "comment" }	//comment, great, at, whisper
 });

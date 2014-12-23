@@ -6,7 +6,7 @@ var model = require("./model");
 var router = express.Router();
 var ObjectId = mongoose.Types.ObjectId;
 
-router.get("/getBloggerInfo", function(request, response) {
+router.get("/bloggerInfo", function(request, response) {
 	var accountId = request.session.accountId;
 	var bloggerId = request.query.id;
 	if(bloggerId) {
@@ -71,13 +71,32 @@ router.get("/getBloggerInfo", function(request, response) {
 	}
 });
 
+router.get("/blogs", function(request, response) {
+	var bloggerId = request.query.id;
+	if(bloggerId) {
+		model.Account.findOne({ _id: new ObjectId(bloggerId) }).populate("blogs").exec(function(err, doc) {
+			if(doc) {
+				doc.blogs.sort(function(a, b) {
+					return a.publishTime < b.publishTime;
+				});
+				response.send(doc.blogs);
+			} else {
+				response.send({});
+			}
+		});
+	} else {
+		response.send({});
+	}
+});
+
 router.post("/publish", function(request, response) {
 	var accountId = request.session.accountId;
 	if(accountId) {
 		model.Account.findOne({ _id: new ObjectId(accountId) }, function(err, doc) {
 			if(doc) {
 				var blog = new model.Blog({
-					content: request.body.content
+					content: request.body.content,
+					publisher: accountId
 				});
 				blog.save(function(err) {
 					if(!err) {

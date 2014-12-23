@@ -139,7 +139,7 @@ var app = (function() {
 		});
 
 		$("#sidebarBlog, #sidebar .navbar-icon a").on("click", function(e) {
-			$.get("/blog/getBloggerInfo?id=" + id, function(responseData) {
+			$.get("/blog/bloggerInfo?id=" + id, function(responseData) {
 				var html = template("contentMicroBloggingDetailInfoTemplate", { blogger: responseData });
 				$("#contentMicroBloggingDetailInfoContainer").html(html);
 				$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
