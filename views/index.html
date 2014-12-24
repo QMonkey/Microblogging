@@ -1298,41 +1298,41 @@
 						</div>
 					</script>
 					<hr class="clear-both" />
-					
+
 					<div id="contentMicroBloggingDetailBlogsContainer"></div>
 					<script id="contentMicroBloggingDetailBlogsTemplate" type="text/html">
 						{{each blogs as blog}}
-						<div>
-							{{if blog.publisher}}
+						<div id="{{ blog.id }}">
+							{{if blog.publisher }}
 							<div class="col-sm-2">
-								<a href="javascript:;">
+								<a href="javascript:;" href-action="personal" account-id="{{ blog.publisher.id }}">
 									<img src="img/yxh.gif" width="70" height="70">
 								</a>
 							</div>
 							{{/if}}
-							<div {{if blog.publisher }}class="col-sm-offset-2"{{/if}}>
+							<div class={{if blog.publisher }}"col-sm-offset-2"{{else}}"col-sm-offset-1"{{/if}}>
 								{{if blog.publisher }}
 								<h4>
-									<a href="javascript:;">{{ blog.publisher.info.nickname }}</a>
+									<a href="javascript:;" href-action="personal" account-id="{{ blog.publisher.id }}">{{ blog.publisher.info.nickname }}</a>
 								</h4>
 								{{/if}}
 								<p>{{ blog.content }}</p>
 								<div>
 									<div class="pull-left">{{ blog.publishTime | dateFormat:'yyyy-MM-dd hh:mm' }}</div>
 									<div class="pull-right">
-										<a href="javascript:;">
+										<a href="javascript:;" href-action="great">
 											<i class="fa fa-thumbs-up"></i>
 											{{if blog.greats > 0 }}({{ blog.greats }}){{/if}}
 										</a>
 										&nbsp;|&nbsp;
-										<a href="javascript:;">转发</a>
+										<a href="javascript:;" href-action="forward">转发</a>
 										&nbsp;|&nbsp;
-										<a href="javascript:;">评论{{if blog.comments > 0 }}({{ blog.comments }}){{/if}}</a>
+										<a href="javascript:;" href-action="comment">评论{{if blog.comments > 0 }}({{ blog.comments }}){{/if}}</a>
 									</div>
 								</div>
 
 								<!-- Comment Start -->
-								<div class="clear-both">
+								<div id="comment_{{ blog.id }}" class="clear-both hidden">
 									<form role="form">
 										<fieldset>
 											<div class="form-group">
@@ -1399,7 +1399,7 @@
 								<!-- Comment End -->
 							</div>
 						</div>
-						<!--<hr />-->
+						<hr class="clear-both" />
 						{{/each}}
 					</script>
 				</div>

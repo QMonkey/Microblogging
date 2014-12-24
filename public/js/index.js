@@ -231,6 +231,30 @@ var app = (function() {
 			});
 		});
 
+		$("#contentMicroBloggingDetailBlogsContainer").on('click', '[href-action]', function() {
+			var target = $(this);
+			var action = target.attr("href-action");
+			var blogContainer = target.closest("div[id]");
+			var blogId = blogContainer.attr("id");
+			switch(action) {
+				case "comment":
+					$("#comment_" + blogId).toggleClass("hidden");
+					break;
+
+				case "forward":
+					break;
+
+				case "great":
+					break;
+
+				case "personal":
+					break;
+
+				default:
+					break;
+			}
+		});
+
 		$("#messengerButton").on("click", function(e) {
 			$("#messenger").addClass("hidden");
 		});

@@ -95,6 +95,7 @@ router.get("/blogs", function(request, response) {
 				};
 				response.send(doc.blogs.map(function(blog) {
 					return {
+						id: blog._id,
 						content: blog.content,
 						publisher: null,
 						publishTime: blog.publishTime,

@@ -39,6 +39,7 @@ var MessageSchema = new Schema({
 	receiveTime: { type: Number, default: 0 },
 	sender: { type: Schema.Types.ObjectId, ref: "Account" },
 	receiver: { type: Schema.Types.ObjectId, ref: "Account", default: null },
+	message: { type: Schema.Types.ObjectId, ref: "Message", default: null },
 	type: { type: String, default: "comment" }	//comment, great, at, whisper
 });
 
