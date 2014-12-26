@@ -7,7 +7,7 @@ var app = (function() {
 			$.get("/account/current", function(responseData) {
 				if(responseData.id) {
 					id = responseData.id;
-					$("#sidebarNickname").text(responseData.info.nickname);
+					$("#sidebarNickname").text(responseData.nickname);
 					$("#sidebarFollowCount").text(responseData.followings);
 					$("#sidebarFansCount").text(responseData.followers);
 					$("#sidebarBlogCount").text(responseData.blogs);
@@ -29,7 +29,8 @@ var app = (function() {
 			}).done(function(responseData) {
 				if(!responseData.error) {
 					id = responseData.id;
-					$("#sidebarNickname").text(responseData.info.nickname);
+					console.log(responseData);
+					$("#sidebarNickname").text(responseData.nickname);
 					$("#sidebarFollowCount").text(responseData.followings);
 					$("#sidebarFansCount").text(responseData.followers);
 					$("#sidebarBlogCount").text(responseData.blogs);
@@ -87,6 +88,19 @@ var app = (function() {
 			$(".nav-tabs a[href='#signIn']").tab('show');
 		});
 
+		$("#sidebarSearchButton").on("click", function(e) {
+			var key = $("#templatemo_search_box").val();
+			$.get("/blog/search/?key=" + key, function(responseData) {
+				var html = template("contentMicroBloggingDetailBlogsTemplate", { blogs: responseData });
+				$("#contentSearchBlogs").html(html);
+				$(".nav-tabs a[href='#contentSearch']").tab('show');
+			});
+			$.get("/blog/searchBloggers/?key=" + key, function(responseData) {
+				var html = template("contentSearchPeopleTemplate", { bloggers: responseData });
+				$("#contentSearchPeople").html(html);
+			});
+		});
+
 		$("#sidebarHome").on("click", function(e) {
 			$(".nav-tabs a[href='#contentHome']").tab('show');
 		});
@@ -106,16 +120,16 @@ var app = (function() {
 		$("#sidebarSetting").on("click", function(e) {
 			$.get("/account/current", function(responseData) {
 				if(responseData.id) {
-					$("#contentSettingBasicInfoNickName").val(responseData.info.nickname);
-					$("#contentSettingBasicInfoRealName").val(responseData.info.realName);
-					$("#contentSettingBasicInfoEmail").val(responseData.info.email);
-					var date = new Date(responseData.info.birthday);
+					$("#contentSettingBasicInfoNickName").val(responseData.nickname);
+					$("#contentSettingBasicInfoRealName").val(responseData.realName);
+					$("#contentSettingBasicInfoEmail").val(responseData.email);
+					var date = new Date(responseData.birthday);
 					$("#contentSettingBasicInfoBirthday").val(date.getFullYear() + "/" + 
 						(date.getMonth() + 1) + "/" + date.getDate());
-					$("#contentSettingBasicInfoSex").val(responseData.info.sex);
-					$("#contentSettingBasicInfoPhone").val(responseData.info.phone);
-					$("#contentSettingBasicInfoAddress").val(responseData.info.address);
-					$("#contentSettingBasicInfoIntroduction").val(responseData.info.introduction);
+					$("#contentSettingBasicInfoSex").val(responseData.sex);
+					$("#contentSettingBasicInfoPhone").val(responseData.phone);
+					$("#contentSettingBasicInfoAddress").val(responseData.address);
+					$("#contentSettingBasicInfoIntroduction").val(responseData.introduction);
 					$(".nav-tabs a[href='#contentSetting']").tab('show');
 				} else {
 					alert("Please sign in first!");
@@ -170,7 +184,7 @@ var app = (function() {
 					$("#contentHome form")[0].reset();
 					$.get("/account/current", function(responseData) {
 						if(responseData.id) {
-							$("#sidebarNickname").text(responseData.info.nickname);
+							$("#sidebarNickname").text(responseData.nickname);
 							$("#sidebarFollowCount").text(responseData.followings);
 							$("#sidebarFansCount").text(responseData.followers);
 							$("#sidebarBlogCount").text(responseData.blogs);
@@ -231,7 +245,7 @@ var app = (function() {
 			});
 		});
 
-		$("#contentMicroBloggingDetailBlogsContainer").on('click', '[href-action]', function() {
+		$("#contentSearchBlogs, #contentMicroBloggingDetailBlogsContainer").on('click', '[href-action]', function() {
 			var target = $(this);
 			var action = target.attr("href-action");
 			var blogContainer = target.closest("div[id]");
@@ -245,6 +259,15 @@ var app = (function() {
 					break;
 
 				case "great":
+					$.post("/blog/great", {
+						id: blogId
+					}).done(function(responseData) {
+						if(!responseData.error) {
+							alert("已赞！");
+						} else {
+							alert(responseData.error);
+						}
+					});
 					break;
 
 				case "personal":

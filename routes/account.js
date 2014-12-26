@@ -6,12 +6,11 @@ var uuid = require('node-uuid');
 var model = require("./model");
 
 var router = express.Router();
-var ObjectId = mongoose.Types.ObjectId;
 
 router.get("/current", function(request, response) {
 	var accountId = request.session.accountId;
 	if(accountId) {
-		model.Account.findOne({ _id: new ObjectId(accountId) }).populate("info blogs").exec(function(err, doc) {
+		model.Account.findById(accountId).populate("blogs").exec(function(err, doc) {
 			if(doc) {
 				response.send({
 					id: doc._id,
@@ -19,16 +18,14 @@ router.get("/current", function(request, response) {
 					followings: doc.followings.length,
 					followers: doc.followers.length,
 					blogs: doc.blogs.length,
-					info: {
-						nickname: doc.info.nickname,
-						realName: doc.info.realName,
-						email: doc.info.email,
-						birthday: doc.info.birthday,
-						sex: doc.info.sex,
-						phone: doc.info.phone,
-						address: doc.info.address,
-						introduction: doc.info.introduction
-					}
+					nickname: doc.nickname,
+					realName: doc.realName,
+					email: doc.email,
+					birthday: doc.birthday,
+					sex: doc.sex,
+					phone: doc.phone,
+					address: doc.address,
+					introduction: doc.introduction
 				});
 			} else {
 				response.send({});
@@ -41,7 +38,7 @@ router.get("/current", function(request, response) {
 
 router.post("/doSignIn", function(request, response) {
 	var requestData = request.body;
-	model.Account.findOne({ userName: requestData.userName }).populate("info blogs").exec(function(err, doc) {
+	model.Account.findOne({ userName: requestData.userName }).populate("blogs").exec(function(err, doc) {
 		if(err) {
 			response.send({
 				error: err.message
@@ -56,16 +53,14 @@ router.post("/doSignIn", function(request, response) {
 					followings: doc.followings.length,
 					followers: doc.followers.length,
 					blogs: doc.blogs.length,
-					info: {
-						nickname: doc.info.nickname,
-						realName: doc.info.realName,
-						email: doc.info.email,
-						birthday: doc.info.birthday,
-						sex: doc.info.sex,
-						phone: doc.info.phone,
-						address: doc.info.address,
-						introduction: doc.info.introduction
-					},
+					nickname: doc.nickname,
+					realName: doc.realName,
+					email: doc.email,
+					birthday: doc.birthday,
+					sex: doc.sex,
+					phone: doc.phone,
+					address: doc.address,
+					introduction: doc.introduction
 				});
 			} else {
 				response.send({
@@ -82,7 +77,9 @@ router.post("/doSignIn", function(request, response) {
 
 router.post("/doSignUp", function(request, response) {
 	var requestData = request.body;
-	var accountInfo = new model.AccountInfo({
+	var account = new model.Account({
+		userName: requestData.userName,
+		salt: uuid.v4().replace(/-/g, ""),
 		nickname: requestData.nickname,
 		realName: requestData.realName,
 		email: requestData.email,
@@ -91,27 +88,14 @@ router.post("/doSignUp", function(request, response) {
 		phone: requestData.phone,
 		address: requestData.address
 	});
-	accountInfo.save(function(err) {
-		if(err) {
+	var sha1 = crypto.createHash("sha1");
+	account.password = sha1.update(requestData.password + account.salt).digest("hex");
+	account.save(function(err) {
+		if(!err) {
+			response.send({});
+		} else {
 			response.send({
 				error: err.message
-			});
-		} else {
-			var account = new model.Account({
-				userName: requestData.userName,
-				salt: uuid.v4().replace(/-/g, ""),
-				info: accountInfo._id
-			});
-			var sha1 = crypto.createHash("sha1");
-			account.password = sha1.update(requestData.password + account.salt).digest("hex");
-			account.save(function(err) {
-				if(!err) {
-					response.send({});
-				} else {
-					response.send({
-						error: err.message
-					});
-				}
 			});
 		}
 	});

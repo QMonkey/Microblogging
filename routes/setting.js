@@ -11,17 +11,17 @@ router.post("/updateInfo", function(request, response) {
 	var requestData = request.body;
 	var accountId = request.session.accountId;
 	if(accountId) {
-		model.Account.findOne({ _id: new ObjectId(accountId) }).populate("info").exec(function(err, doc) {
+		model.Account.findById(accountId, function(err, doc) {
 			if(doc) {
-				doc.info.nickname = requestData.nickname;
-				doc.info.realName = requestData.realName;
-				doc.info.email = requestData.email;
-				doc.info.birthday = requestData.birthday;
-				doc.info.sex = requestData.sex;
-				doc.info.phone = requestData.phone;
-				doc.info.address = requestData.address;
-				doc.info.introduction = requestData.introduction;
-				doc.info.save(function(err) {
+				doc.nickname = requestData.nickname;
+				doc.realName = requestData.realName;
+				doc.email = requestData.email;
+				doc.birthday = requestData.birthday;
+				doc.sex = requestData.sex;
+				doc.phone = requestData.phone;
+				doc.address = requestData.address;
+				doc.introduction = requestData.introduction;
+				doc.save(function(err) {
 					if(!err) {
 						response.send({});
 					} else {
@@ -43,7 +43,7 @@ router.post("/changePassword", function(request, response) {
 	var requestData = request.body;
 	var accountId = request.session.accountId;
 	if(accountId) {
-		model.Account.findOne({ _id: new ObjectId(accountId) }, function(err, doc) {
+		model.Account.findById(accountId, function(err, doc) {
 			if(doc) {
 				if(doc.password === crypto.createHash("sha1").update(
 					requestData.originalPassword + doc.salt).digest("hex")) {

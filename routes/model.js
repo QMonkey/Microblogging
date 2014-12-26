@@ -5,14 +5,6 @@ var AccountSchema = new Schema({
 	userName: { type: String, require: true },
 	password: { type: String, require: true },
 	salt: { type: String, require: true },
-	info: { type: Schema.Types.ObjectId, ref: "AccountInfo" },
-	followings: [{ type: Schema.Types.ObjectId, ref: "Account" }],
-	followers: [{ type: Schema.Types.ObjectId, ref: "Account" }],
-	blogs: [{ type: Schema.Types.ObjectId, ref: "Blog" }],
-	messages: [{ type: Schema.Types.ObjectId, ref: "Message" }]
-});
-
-var AccountInfoSchema = new Schema({
 	nickname: String,
 	realName: String,
 	email: String,
@@ -20,7 +12,11 @@ var AccountInfoSchema = new Schema({
 	sex: Number,
 	phone: String,
 	address: String,
-	introduction: String
+	introduction: String,
+	followings: [{ type: Schema.Types.ObjectId, ref: "Account" }],
+	followers: [{ type: Schema.Types.ObjectId, ref: "Account" }],
+	blogs: [{ type: Schema.Types.ObjectId, ref: "Blog" }],
+	messages: [{ type: Schema.Types.ObjectId, ref: "Message" }]
 });
 
 var BlogSchema = new Schema({
@@ -44,6 +40,5 @@ var MessageSchema = new Schema({
 });
 
 module.exports.Account = mongoose.model("Account", AccountSchema, "Account");
-module.exports.AccountInfo = mongoose.model("AccountInfo", AccountInfoSchema, "AccountInfo");
 module.exports.Blog = mongoose.model("Blog", BlogSchema, "Blog");
 module.exports.Message = mongoose.model("Message", MessageSchema, "Message");

@@ -235,11 +235,11 @@
 						</li>
 					</ul>
 				</li>
-				<li>
+				<li id="sidebarSearch">
 					<form class="navbar-form">
 						<input type="text" class="form-control" id="templatemo_search_box"
 							placeholder="搜索微博或人">
-						<button type="button" id="searchButton" class="btn btn-default"> <i class="fa fa-search"></i>
+						<button type="button" id="sidebarSearchButton" class="btn btn-default"> <i class="fa fa-search"></i>
 						</button>
 					</form>
 				</li>
@@ -1029,7 +1029,7 @@
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="active">
-							<a href="#contentSearchBlog" role="tab"
+							<a href="#contentSearchBlogs" role="tab"
 							data-toggle="tab">找微博</a>
 						</li>
 						<li>
@@ -1040,222 +1040,46 @@
 
 					<!-- Tab panes -->
 					<div class="tab-content">
-						<div class="tab-pane fade in active" id="contentSearchBlog">
-							<div>
-								<!-- Blog Start -->
-								<div>
-									<div class="col-sm-2">
-										<a href="javascript:;">
-											<img src="img/yxh.gif" width="70"
-											height="70"></a>
-									</div>
-									<div class="col-sm-offset-2">
-										<h4>
-											<a href="javascript:;">QMonkey</a>
-										</h4>
-										<p>
-											Don't use data attributes from multiple plugins on the
-											same element. For example, a button cannot both have a
-											tooltip and toggle a modal. To accomplish this, use a
-											wrapping element.
-										</p>
-										<div>
-											<div class="pull-left">2014-09-16 9:00</div>
-											<div class="pull-right">
-												<a href="javascript:;">
-													<i class="fa fa-thumbs-up"></i>
-												</a>
-												&nbsp;|&nbsp;
-												<a href="javascript:;">转发</a>
-												&nbsp;|&nbsp;
-												<a
-													href="javascript:;">评论</a>
-											</div>
-										</div>
+						<div class="tab-pane fade in active" id="contentSearchBlogs"></div>
 
-										<!-- Comment Start -->
-										<div class="clear-both">
-											<form role="form">
-												<fieldset>
-													<div class="form-group">
-														<input type="text" class="form-control" placeholder="评论"></div>
-													<button type="submit" class="btn btn-primary pull-right">评论</button>
-												</fieldset>
-											</form>
-											<hr />
-
-											<div>
-												<div class="col-sm-2">
-													<a href="javascript:;">
-														<img src="img/yxh.gif"
-														width="50" height="50"></a>
-												</div>
-												<div class="col-sm-offset-2">
-													<h5>
-														<a href="javascript:;">QMonkey</a>
-													</h5>
-													<p>
-														Don't use data attributes from multiple plugins on
-														the same element. For example, a button cannot both have a
-														tooltip and toggle a modal. To accomplish this, use a
-														wrapping element.(2014-09-09 21:38)
-													</p>
-													<div class="pull-right">
-														<a href="javascript:;">
-															<i class="fa fa-thumbs-up"></i>
-														</a>
-														&nbsp;|&nbsp;
-														<a href="javascript:;">回复</a>
-													</div>
-												</div>
-											</div>
-											<hr class="clear-both" />
-
-											<div>
-												<div class="col-sm-2">
-													<a href="javascript:;">
-														<img src="img/yxh.gif"
-														width="50" height="50"></a>
-												</div>
-												<div class="col-sm-offset-2">
-													<h5>
-														<a href="javascript:;">QMonkey</a>
-													</h5>
-													<p>
-														Don't use data attributes from multiple plugins on
-														the same element. For example, a button cannot both have a
-														tooltip and toggle a modal. To accomplish this, use a
-														wrapping element.(2014-09-09 21:38)
-													</p>
-													<div class="pull-right">
-														<a href="javascript:;">
-															<i class="fa fa-thumbs-up"></i>
-														</a>
-														&nbsp;|&nbsp;
-														<a href="javascript:;">回复</a>
-													</div>
-												</div>
-											</div>
-											<hr class="clear-both" />
-										</div>
-										<!-- Comment End -->
-									</div>
-								</div>
-								<hr />
-								<!-- Blog End -->
-
-								<!-- Blog Start -->
-								<div>
-									<div class="col-sm-2">
-										<a href="javascript:;">
-											<img src="img/yxh.gif" width="70"
-											height="70"></a>
-									</div>
-									<div class="col-sm-offset-2">
-										<h4>
-											<a href="javascript:;">QMonkey</a>
-										</h4>
-										<p>
-											Don't use data attributes from multiple plugins on the
-											same element. For example, a button cannot both have a
-											tooltip and toggle a modal. To accomplish this, use a
-											wrapping element.
-										</p>
-										<div>
-											<div class="pull-left">2014-09-16 9:00</div>
-											<div class="pull-right">
-												<a href="javascript:;">
-													<i class="fa fa-thumbs-up"></i>
-												</a>
-												&nbsp;|&nbsp;
-												<a href="javascript:;">转发</a>
-												&nbsp;|&nbsp;
-												<a
-													href="javascript:;">评论</a>
-											</div>
-										</div>
-
-										<!-- Comment Start -->
-										<div class="clear-both">
-											<form role="form">
-												<fieldset>
-													<div class="form-group">
-														<input type="text" class="form-control" placeholder="评论"></div>
-													<button type="submit" class="btn btn-primary pull-right">评论</button>
-												</fieldset>
-											</form>
-											<hr />
-
-											<div>
-												<div class="col-sm-2">
-													<a href="javascript:;">
-														<img src="img/yxh.gif"
-														width="50" height="50"></a>
-												</div>
-												<div class="col-sm-offset-2">
-													<h5>
-														<a href="javascript:;">QMonkey</a>
-													</h5>
-													<p>
-														Don't use data attributes from multiple plugins on
-														the same element. For example, a button cannot both have a
-														tooltip and toggle a modal. To accomplish this, use a
-														wrapping element.(2014-09-09 21:38)
-													</p>
-													<div class="pull-right">
-														<a href="javascript:;">
-															<i class="fa fa-thumbs-up"></i>
-														</a>
-														&nbsp;|&nbsp;
-														<a href="javascript:;">回复</a>
-													</div>
-												</div>
-											</div>
-											<hr class="clear-both" />
-										</div>
-										<!-- Comment End -->
-									</div>
-								</div>
-								<hr />
-								<!-- Blog End -->
-							</div>
-						</div>
-
-						<div class="tab-pane fade" id="contentSearchPeople">
-							<div>
-								<div class="col-sm-2">
+						<div class="tab-pane fade" id="contentSearchPeople"></div>
+						<script id="contentSearchPeopleTemplate" type="text/html">
+							{{each bloggers as blogger}}
+								<div class="col-sm-3">
 									<a href="javascript:;">
-										<img src="img/yxh.gif" width="70"
-										height="70"></a>
+										<img src="img/yxh.gif" width="120" height="120">
+									</a>
 								</div>
-								<div class="col-sm-offset-2">
+								<div class="col-sm-offset-3">
 									<h4>
-										<a href="javascript:;">QMonkey</a>
+										<a href="javascript:;">{{ blogger.nickname }}</a>
 									</h4>
+									{{if blogger.relation }}
 									<div class="pull-right">
-										<button type="button" class="btn btn-default">关注</button>
+										<button type="button" class="btn btn-default">
+											{{if blogger.relation === "friend" || blogger.relation === "following" }}
+												取消关注
+											{{else}}
+												关注
+											{{/if}}
+										</button>
 										<button type="button" class="btn btn-default">私信</button>
 									</div>
-									<p>广东汕头</p>
+									{{/if}}
+									<p><strong>所在地：&nbsp;</strong>{{ blogger.address }}</p>
 									<p>
-										关注
-										<a href="javascript:;">123</a>
-										&nbsp;粉丝
-										<a
-											href="javascript:;">234</a>
-										&nbsp;微博
-										<a href="javascript:;">234</a>
+										<strong>关注</strong>
+										<a href="javascript:;">{{ blogger.followings }}</a>
+										<strong>&nbsp;粉丝</strong>
+										<a href="javascript:;">{{ blogger.followers }}</a>
+										<strong>&nbsp;微博</strong>
+										<a href="javascript:;">{{ blogger.blogs }}</a>
 									</p>
-									<p>
-										简介：Don't use data attributes from multiple plugins on
-										the same element. For example, a button cannot both have a
-										tooltip and toggle a modal. To accomplish this, use a wrapping
-										element.
-									</p>
+									<p><strong>简介：&nbsp;</strong>{{ blogger.introduction }}</p>
 								</div>
-							</div>
-							<hr />
-						</div>
+								<hr class="clear-both" />
+							{{/each}}
+						</script>
 					</div>
 				</div>
 				<!-- Search End -->
@@ -1271,7 +1095,7 @@
 						</div>
 						<div class="col-sm-offset-3">
 							<h4>
-								<a href="javascript:;">{{ blogger.info.nickname }}</a>
+								<a href="javascript:;">{{ blogger.nickname }}</a>
 							</h4>
 							{{if blogger.relation }}
 							<div class="pull-right">
@@ -1285,7 +1109,7 @@
 								<button type="button" class="btn btn-default">私信</button>
 							</div>
 							{{/if}}
-							<p><strong>所在地：&nbsp;</strong>{{ blogger.info.address }}</p>
+							<p><strong>所在地：&nbsp;</strong>{{ blogger.address }}</p>
 							<p>
 								<strong>关注</strong>
 								<a href="javascript:;">{{ blogger.followings }}</a>
@@ -1294,7 +1118,7 @@
 								<strong>&nbsp;微博</strong>
 								<a href="javascript:;">{{ blogger.blogs }}</a>
 							</p>
-							<p><strong>简介：&nbsp;</strong>{{ blogger.info.introduction }}</p>
+							<p><strong>简介：&nbsp;</strong>{{ blogger.introduction }}</p>
 						</div>
 					</script>
 					<hr class="clear-both" />
@@ -1313,7 +1137,7 @@
 							<div class={{if blog.publisher }}"col-sm-offset-2"{{else}}"col-sm-offset-1"{{/if}}>
 								{{if blog.publisher }}
 								<h4>
-									<a href="javascript:;" href-action="personal" account-id="{{ blog.publisher.id }}">{{ blog.publisher.info.nickname }}</a>
+									<a href="javascript:;" href-action="personal" account-id="{{ blog.publisher.id }}">{{ blog.publisher.nickname }}</a>
 								</h4>
 								{{/if}}
 								<p>{{ blog.content }}</p>
