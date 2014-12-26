@@ -16,10 +16,10 @@ router.get("/bloggerInfo", function(request, response) {
 				if(bloggerId === accountId) {
 					relation = null;
 				} else {
-					if(accountId in doc.followings) {
+					if(doc.followings.indexOf(accountId) !== -1) {
 						marks += 1;
 					}
-					if(accountId in doc.followers) {
+					if(doc.followers.indexOf(accountId) !== -1) {
 						marks += 2;
 					}
 					switch(marks) {
@@ -79,10 +79,10 @@ router.get("/searchBloggers", function(request, response) {
 				if(account._id.toString() === accountId) {
 					relation = null;
 				} else {
-					if(accountId in account.followings) {
+					if(account.followings.indexOf(accountId) !== -1) {
 						marks += 1;
 					}
-					if(accountId in account.followers) {
+					if(account.followers.indexOf(accountId) !== -1) {
 						marks += 2;
 					}
 					switch(marks) {

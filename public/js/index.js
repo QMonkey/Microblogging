@@ -2,14 +2,26 @@ var app = (function() {
 	var app = {};
 	var id;
 
+	var updateSidebar = function() {
+		$.get("/account/current", function(responseData) {
+			if(responseData.id) {
+				id = responseData.id;
+				$("#sidebarNickname").text(responseData.nickname);
+				$("#sidebarFollowingCount").text(responseData.followings);
+				$("#sidebarFollowerCount").text(responseData.followers);
+				$("#sidebarBlogCount").text(responseData.blogs);
+			}
+		});
+	};
+
 	var bindEvent = function() {
 		$().ready(function() {
 			$.get("/account/current", function(responseData) {
 				if(responseData.id) {
 					id = responseData.id;
 					$("#sidebarNickname").text(responseData.nickname);
-					$("#sidebarFollowCount").text(responseData.followings);
-					$("#sidebarFansCount").text(responseData.followers);
+					$("#sidebarFollowingCount").text(responseData.followings);
+					$("#sidebarFollowerCount").text(responseData.followers);
 					$("#sidebarBlogCount").text(responseData.blogs);
 					$(".nav-tabs a[href='#signedIn']").tab('show');
 					$("#sidebarHome").click();
@@ -29,10 +41,9 @@ var app = (function() {
 			}).done(function(responseData) {
 				if(!responseData.error) {
 					id = responseData.id;
-					console.log(responseData);
 					$("#sidebarNickname").text(responseData.nickname);
-					$("#sidebarFollowCount").text(responseData.followings);
-					$("#sidebarFansCount").text(responseData.followers);
+					$("#sidebarFollowingCount").text(responseData.followings);
+					$("#sidebarFollowerCount").text(responseData.followers);
 					$("#sidebarBlogCount").text(responseData.blogs);
 					$("#signIn")[0].reset();
 					$(".nav-tabs a[href='#signedIn']").tab('show');
@@ -144,12 +155,20 @@ var app = (function() {
 			});
 		});
 
-		$("#sidebarFollow").on("click", function(e) {
-			$(".nav-tabs a[href='#contentFollow']").tab('show');
+		$("#sidebarFollowings").on("click", function(e) {
+			$.get("/account/followings?id=" + id, function(responseData) {
+				var html = template("contentSearchPeopleTemplate", { bloggers: responseData });
+				$("#contentFollowings").html(html);
+				$(".nav-tabs a[href='#contentFollowings']").tab('show');
+			});
 		});
 
-		$("#sidebarFans").on("click", function(e) {
-			$(".nav-tabs a[href='#contentFans']").tab('show');
+		$("#sidebarFollowers").on("click", function(e) {
+			$.get("/account/followers?id=" + id, function(responseData) {
+				var html = template("contentSearchPeopleTemplate", { bloggers: responseData });
+				$("#contentFollowers").html(html);
+				$(".nav-tabs a[href='#contentFollowers']").tab('show');
+			});
 		});
 
 		$("#sidebarBlog, #sidebar .navbar-icon a").on("click", function(e) {
@@ -182,14 +201,7 @@ var app = (function() {
 			}).done(function(responseData) {
 				if(!responseData.error) {
 					$("#contentHome form")[0].reset();
-					$.get("/account/current", function(responseData) {
-						if(responseData.id) {
-							$("#sidebarNickname").text(responseData.nickname);
-							$("#sidebarFollowCount").text(responseData.followings);
-							$("#sidebarFansCount").text(responseData.followers);
-							$("#sidebarBlogCount").text(responseData.blogs);
-						}
-					});
+					updateSidebar();
 				} else {
 					alert(responseData.error);
 				}
@@ -245,14 +257,69 @@ var app = (function() {
 			});
 		});
 
-		$("#contentSearchBlogs, #contentMicroBloggingDetailBlogsContainer").on('click', '[href-action]', function() {
+		$("#contentSearchPeople").on("click", "[click-action]", function() {
 			var target = $(this);
-			var action = target.attr("href-action");
-			var blogContainer = target.closest("div[id]");
-			var blogId = blogContainer.attr("id");
+			var action = target.attr("click-action");
+			var container = target.closest("div[id]");
+			var id = container.attr("id");
 			switch(action) {
+				case "personal":
+					break;
+
+				case "follow":
+					$.post("/account/follow", {
+						id: id
+					}).done(function(responseData) {
+						if(!responseData.error) {
+							$("#sidebarSearchButton").click();
+							updateSidebar();
+						} else {
+							alert(responseData.error);
+						}
+					});
+					break;
+
+				case "unfollow":
+					$.post("/account/unfollow", {
+						id: id
+					}).done(function(responseData) {
+						if(!responseData.error) {
+							$("#sidebarSearchButton").click();
+							updateSidebar();
+						} else {
+							alert(responseData.error);
+						}
+					});
+					break;
+
+				case "whisper":
+					break;
+
+				case "followings":
+					break;
+
+				case "followers":
+					break;
+
+				case "blogs":
+					break;
+
+				default:
+					break;
+			}
+		});
+
+		$("#contentSearchBlogs, #contentMicroBloggingDetailBlogsContainer").on("click", "[click-action]", function() {
+			var target = $(this);
+			var action = target.attr("click-action");
+			var container = target.closest("div[id]");
+			var id = container.attr("id");
+			switch(action) {
+				case "personal":
+					break;
+
 				case "comment":
-					$("#comment_" + blogId).toggleClass("hidden");
+					$("#comment_" + id).toggleClass("hidden");
 					break;
 
 				case "forward":
@@ -260,7 +327,7 @@ var app = (function() {
 
 				case "great":
 					$.post("/blog/great", {
-						id: blogId
+						id: id
 					}).done(function(responseData) {
 						if(!responseData.error) {
 							alert("已赞！");
@@ -268,9 +335,6 @@ var app = (function() {
 							alert(responseData.error);
 						}
 					});
-					break;
-
-				case "personal":
 					break;
 
 				default:

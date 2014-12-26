@@ -106,4 +106,162 @@ router.get("/doSignOut", function(request, response) {
 	response.send({});
 });
 
+router.get("/followers", function(request, response) {
+	var accountId = request.query.id;
+	model.Account.findById(accountId).populate("followers").exec(function(err, doc) {
+		if(doc && doc.followers.length > 0) {
+			response.send(doc.followers.map(function(account) {
+				return {
+					id: account._id,
+					userName: account.userName,
+					followings: account.followings.length,
+					followers: account.followers.length,
+					blogs: account.blogs.length,
+					nickname: account.nickname,
+					realName: account.realName,
+					email: account.email,
+					birthday: account.birthday,
+					sex: account.sex,
+					phone: account.phone,
+					address: account.address,
+					introduction: account.introduction,
+					relation: "follower"
+				}
+			}));
+		} else {
+			response.send({});
+		}
+	});
+});
+
+router.get("/followings", function(request, response) {
+	var accountId = request.query.id;
+	model.Account.findById(accountId).populate("followings").exec(function(err, doc) {
+		if(doc && doc.followings.length > 0) {
+			response.send(doc.followings.map(function(account) {
+				return {
+					id: account._id,
+					userName: account.userName,
+					followings: account.followings.length,
+					followers: account.followers.length,
+					blogs: account.blogs.length,
+					nickname: account.nickname,
+					realName: account.realName,
+					email: account.email,
+					birthday: account.birthday,
+					sex: account.sex,
+					phone: account.phone,
+					address: account.address,
+					introduction: account.introduction,
+					relation: "following"
+				}
+			}));
+		} else {
+			response.send({});
+		}
+	});
+});
+
+router.post("/follow", function(request, response) {
+	var accountId = request.session.accountId;
+	var followedId = request.body.id;
+	if(accountId) {
+		if(accountId !== followedId) {
+			model.Account.findById(followedId, function(err, doc) {
+				if(doc) {
+					doc.followers.push(accountId);
+					doc.save(function(err) {
+						if(!err) {
+							model.Account.findById(accountId, function(err, doc) {
+								if(doc) {
+									doc.followings.push(followedId);
+									doc.save(function(err) {
+										if(!err) {
+											response.send({});
+										} else {
+											response.send({
+												error: err.message
+											});
+										}
+									});
+								} else {
+									response.send({
+										error: "Please sign in first!"
+									});
+								}
+							});
+						} else {
+							response.send({
+								error: err.message
+							});
+						}
+					});
+				} else {
+					response.send({
+						error: "Wrong parameter!"
+					});
+				}
+			});
+		} else {
+			response.send({});
+		}
+	} else {
+		response.send({
+			error: "Please sign in first!"
+		});
+	}
+});
+
+router.post("/unfollow", function(request, response) {
+	var accountId = request.session.accountId;
+	var unfollowedId = request.body.id;
+	if(accountId) {
+		if(accountId !== unfollowedId) {
+			model.Account.findById(unfollowedId, function(err, doc) {
+				var index;
+				if(doc && (index = doc.followers.indexOf(accountId)) !== -1) {
+					doc.followers.splice(index, 1);
+					doc.save(function(err) {
+						if(!err) {
+							model.Account.findById(accountId, function(err, doc) {
+								var index;
+								if(doc && (index = doc.followings.indexOf(unfollowedId)) !== -1) {
+									doc.followings.splice(index, 1);
+									doc.save(function(err) {
+										if(!err) {
+											response.send({});
+										} else {
+											response.send({
+												error: err.message
+											});
+										}
+									});
+								} else {
+									response.send({
+										error: "Please sign in first!"
+									});
+								}
+							});
+						} else {
+							response.send({
+								error: err.message
+							});
+						}
+					});
+				} else {
+					response.send({
+						error: "Wrong parameter!"
+					});
+				}
+			});
+		} else {
+			response.send({});
+		}
+	} else {
+		response.send({
+			error: "Please sign in first!"
+		});
+	}
+});
+
 module.exports = router;
