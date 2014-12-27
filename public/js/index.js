@@ -183,16 +183,16 @@ var app = (function() {
 			});
 		});
 
-		$("#searchButton").on("click", function(e) {
-			$(".nav-tabs a[href='#contentSearch']").tab('show');
-		});
+		// $("#searchButton").on("click", function(e) {
+		// 	$(".nav-tabs a[href='#contentSearch']").tab('show');
+		// });
 
-		$("#content h4, #content h5, #content img").on("click", function(e) {
-			$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
-		});
+		// $("#content h4, #content h5, #content img").on("click", function(e) {
+		// 	$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
+		// });
 
-		$("#content img").on("mouseover", function(e) {
-		});
+		// $("#content img").on("mouseover", function(e) {
+		// });
 
 		$("#contentHomePublishBlogButton").on("click", function(e) {
 			var content = $("#contentHomePublishBlogContent").val();
@@ -257,18 +257,29 @@ var app = (function() {
 			});
 		});
 
-		$("#contentSearchPeople").on("click", "[click-action]", function() {
+		$("#contentFollowings, #contentFollowers, #contentSearchPeople, " + 
+			"#contentMicroBloggingDetailInfoContainer").on("click", "[click-action]", function() {
 			var target = $(this);
 			var action = target.attr("click-action");
 			var container = target.closest("div[id]");
-			var id = container.attr("id");
+			var accountId = container.attr("id");
 			switch(action) {
 				case "personal":
+				case "blogs":
+					$.get("/blog/bloggerInfo?id=" + accountId, function(responseData) {
+						var html = template("contentMicroBloggingDetailInfoTemplate", { blogger: responseData });
+						$("#contentMicroBloggingDetailInfoContainer").html(html);
+						$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
+					});
+					$.get("/blog/blogs?id=" + accountId, function(responseData) {
+						var html = template("contentMicroBloggingDetailBlogsTemplate", { blogs: responseData });
+						$("#contentMicroBloggingDetailBlogsContainer").html(html);
+					});
 					break;
 
 				case "follow":
 					$.post("/account/follow", {
-						id: id
+						id: accountId
 					}).done(function(responseData) {
 						if(!responseData.error) {
 							$("#sidebarSearchButton").click();
@@ -281,7 +292,7 @@ var app = (function() {
 
 				case "unfollow":
 					$.post("/account/unfollow", {
-						id: id
+						id: accountId
 					}).done(function(responseData) {
 						if(!responseData.error) {
 							$("#sidebarSearchButton").click();
@@ -296,12 +307,19 @@ var app = (function() {
 					break;
 
 				case "followings":
+					$.get("/account/followings?id=" + accountId, function(responseData) {
+						var html = template("contentSearchPeopleTemplate", { bloggers: responseData });
+						$("#contentFollowings").html(html);
+						$(".nav-tabs a[href='#contentFollowings']").tab('show');
+					});
 					break;
 
 				case "followers":
-					break;
-
-				case "blogs":
+					$.get("/account/followers?id=" + accountId, function(responseData) {
+						var html = template("contentSearchPeopleTemplate", { bloggers: responseData });
+						$("#contentFollowers").html(html);
+						$(".nav-tabs a[href='#contentFollowers']").tab('show');
+					});
 					break;
 
 				default:
@@ -313,13 +331,24 @@ var app = (function() {
 			var target = $(this);
 			var action = target.attr("click-action");
 			var container = target.closest("div[id]");
-			var id = container.attr("id");
+			var blogId = container.attr("id");
+			var accountId;
 			switch(action) {
 				case "personal":
+					accountId = target.attr("account-id");
+					$.get("/blog/bloggerInfo?id=" + accountId, function(responseData) {
+						var html = template("contentMicroBloggingDetailInfoTemplate", { blogger: responseData });
+						$("#contentMicroBloggingDetailInfoContainer").html(html);
+						$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
+					});
+					$.get("/blog/blogs?id=" + accountId, function(responseData) {
+						var html = template("contentMicroBloggingDetailBlogsTemplate", { blogs: responseData });
+						$("#contentMicroBloggingDetailBlogsContainer").html(html);
+					});
 					break;
 
 				case "comment":
-					$("#comment_" + id).toggleClass("hidden");
+					$("#comment_" + blogId).toggleClass("hidden");
 					break;
 
 				case "forward":
@@ -327,7 +356,7 @@ var app = (function() {
 
 				case "great":
 					$.post("/blog/great", {
-						id: id
+						id: blogId
 					}).done(function(responseData) {
 						if(!responseData.error) {
 							alert("已赞！");

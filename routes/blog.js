@@ -143,14 +143,14 @@ router.get("/search", function(request, response) {
 					publisher: {
 						id: blog.publisher._id,
 						userName: blog.publisher.userName,
-						nickname: blog.nickname,
-						realName: blog.realName,
-						email: blog.email,
-						birthday: blog.birthday,
-						sex: blog.sex,
-						phone: blog.phone,
-						address: blog.address,
-						introduction: blog.introduction
+						nickname: blog.publisher.nickname,
+						realName: blog.publisher.realName,
+						email: blog.publisher.email,
+						birthday: blog.publisher.birthday,
+						sex: blog.publisher.sex,
+						phone: blog.publisher.phone,
+						address: blog.publisher.address,
+						introduction: blog.publisher.introduction
 					},
 					publishTime: blog.publishTime,
 					forward: blog.forward,

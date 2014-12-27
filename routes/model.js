@@ -16,6 +16,7 @@ var AccountSchema = new Schema({
 	followings: [{ type: Schema.Types.ObjectId, ref: "Account" }],
 	followers: [{ type: Schema.Types.ObjectId, ref: "Account" }],
 	blogs: [{ type: Schema.Types.ObjectId, ref: "Blog" }],
+	comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 	messages: [{ type: Schema.Types.ObjectId, ref: "Message" }]
 });
 
@@ -24,7 +25,17 @@ var BlogSchema = new Schema({
 	publisher: { type: Schema.Types.ObjectId, ref: "Account" },
 	publishTime: { type: Number, default: Date.now() },
 	forward: { type: Schema.Types.ObjectId, ref: "Blog", default: null },
-	comments: [{ type: Schema.Types.ObjectId, ref: "Message" }],
+	comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+	ats: [{ type: Schema.Types.ObjectId, ref: "Message" }],
+	greats: [{ type: Schema.Types.ObjectId, ref: "Message" }]
+});
+
+var CommentSchema = new Schema({
+	content: { type: String, default: null },
+	publisher: { type: Schema.Types.ObjectId, ref: "Account" },
+	publishTime: { type: Number, default: Date.now() },
+	receiveTime: { type: Number, default: 0 },
+	comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 	ats: [{ type: Schema.Types.ObjectId, ref: "Message" }],
 	greats: [{ type: Schema.Types.ObjectId, ref: "Message" }]
 });
@@ -35,10 +46,10 @@ var MessageSchema = new Schema({
 	receiveTime: { type: Number, default: 0 },
 	sender: { type: Schema.Types.ObjectId, ref: "Account" },
 	receiver: { type: Schema.Types.ObjectId, ref: "Account", default: null },
-	message: { type: Schema.Types.ObjectId, ref: "Message", default: null },
-	type: { type: String, default: "comment" }	//comment, great, at, whisper
+	type: { type: String, default: "great" }	//great, at, whisper
 });
 
 module.exports.Account = mongoose.model("Account", AccountSchema, "Account");
 module.exports.Blog = mongoose.model("Blog", BlogSchema, "Blog");
+module.exports.Comment = mongoose.model("Comment", CommentSchema, "Comment");
 module.exports.Message = mongoose.model("Message", MessageSchema, "Message");
