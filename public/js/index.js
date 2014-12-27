@@ -183,17 +183,6 @@ var app = (function() {
 			});
 		});
 
-		// $("#searchButton").on("click", function(e) {
-		// 	$(".nav-tabs a[href='#contentSearch']").tab('show');
-		// });
-
-		// $("#content h4, #content h5, #content img").on("click", function(e) {
-		// 	$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
-		// });
-
-		// $("#content img").on("mouseover", function(e) {
-		// });
-
 		$("#contentHomePublishBlogButton").on("click", function(e) {
 			var content = $("#contentHomePublishBlogContent").val();
 			$.post("/blog/publish", {

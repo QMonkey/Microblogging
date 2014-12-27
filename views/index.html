@@ -1012,7 +1012,7 @@
 								{{/if}}
 								<p>{{ blog.content }}</p>
 								<div>
-									<div class="pull-left">{{ blog.publishTime | dateFormat:'yyyy-MM-dd hh:mm' }}</div>
+									<div class="pull-left">{{ blog.publishTime | dateFormat: 'yyyy-MM-dd hh:mm' }}</div>
 									<div class="pull-right">
 										<a href="javascript:;" click-action="great">
 											<i class="fa fa-thumbs-up"></i>
@@ -1036,6 +1036,7 @@
 									</form>
 									<hr />
 
+									<div id="commentContainer_{{ blog.id }}"></div>
 									<div>
 										<div class="col-sm-2">
 											<a href="javascript:;">
@@ -1091,6 +1092,31 @@
 									<hr class="clear-both" />
 								</div>
 								<!-- Comment End -->
+							</div>
+						</div>
+						<hr class="clear-both" />
+						{{/each}}
+					</script>
+					<script id="contentMicroBloggingDetailBlogsCommentTemplate" type="text/html">
+						{{each comments as comment }}
+						<div id="{{ comment.id }}">
+							<div class="col-sm-2">
+								<a href="javascript:;">
+									<img src="img/yxh.gif" width="50" height="50">
+								</a>
+							</div>
+							<div class="col-sm-offset-2">
+								<h5>
+									<a href="javascript:;">{{ comment.publisher.nickname }}</a>
+								</h5>
+								<p>{{ comment.content }}({{ comment.publishTime | dateFormat: 'yyyy-MM-dd hh:mm'}})</p>
+								<div class="pull-right">
+									<a href="javascript:;">
+										<i class="fa fa-thumbs-up"></i>
+									</a>
+									&nbsp;|&nbsp;
+									<a href="javascript:;">回复</a>
+								</div>
 							</div>
 						</div>
 						<hr class="clear-both" />
