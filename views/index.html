@@ -1030,66 +1030,15 @@
 									<form role="form">
 										<fieldset>
 											<div class="form-group">
-												<input type="text" class="form-control" placeholder="评论"></div>
-											<button type="submit" class="btn btn-primary pull-right">评论</button>
+												<input type="hidden">
+												<input type="text" class="form-control" placeholder="评论">
+											</div>
+											<button type="button" class="btn btn-primary pull-right" click-action="commentButton">评论</button>
 										</fieldset>
 									</form>
 									<hr />
 
 									<div id="commentContainer_{{ blog.id }}"></div>
-									<div>
-										<div class="col-sm-2">
-											<a href="javascript:;">
-												<img src="img/yxh.gif" width="50"
-												height="50"></a>
-										</div>
-										<div class="col-sm-offset-2">
-											<h5>
-												<a href="javascript:;">QMonkey</a>
-											</h5>
-											<p>
-												Dont use data attributes from multiple plugins on the
-												same element. For example, a button cannot both have a
-												tooltip and toggle a modal. To accomplish this, use a
-												wrapping element.(2014-09-09 21:38)
-											</p>
-											<div class="pull-right">
-												<a href="javascript:;">
-													<i class="fa fa-thumbs-up"></i>
-												</a>
-												&nbsp;|&nbsp;
-												<a href="javascript:;">回复</a>
-											</div>
-										</div>
-									</div>
-									<hr class="clear-both" />
-
-									<div>
-										<div class="col-sm-2">
-											<a href="javascript:;">
-												<img src="img/yxh.gif" width="50"
-												height="50"></a>
-										</div>
-										<div class="col-sm-offset-2">
-											<h5>
-												<a href="javascript:;">QMonkey</a>
-											</h5>
-											<p>
-												Dont use data attributes from multiple plugins on the
-												same element. For example, a button cannot both have a
-												tooltip and toggle a modal. To accomplish this, use a
-												wrapping element.(2014-09-09 21:38)
-											</p>
-											<div class="pull-right">
-												<a href="javascript:;">
-													<i class="fa fa-thumbs-up"></i>
-												</a>
-												&nbsp;|&nbsp;
-												<a href="javascript:;">回复</a>
-											</div>
-										</div>
-									</div>
-									<hr class="clear-both" />
 								</div>
 								<!-- Comment End -->
 							</div>
@@ -1101,21 +1050,21 @@
 						{{each comments as comment }}
 						<div id="{{ comment.id }}">
 							<div class="col-sm-2">
-								<a href="javascript:;">
+								<a href="javascript:;" click-action="personal" account-id="{{ comment.publisher.id }}">
 									<img src="img/yxh.gif" width="50" height="50">
 								</a>
 							</div>
 							<div class="col-sm-offset-2">
 								<h5>
-									<a href="javascript:;">{{ comment.publisher.nickname }}</a>
+									<a href="javascript:;" click-action="personal" account-id="{{ comment.publisher.id }}">{{ comment.publisher.nickname }}</a>
 								</h5>
-								<p>{{ comment.content }}({{ comment.publishTime | dateFormat: 'yyyy-MM-dd hh:mm'}})</p>
+								<p>{{ comment.content }}({{ comment.publishTime | dateFormat: 'yyyy-MM-dd hh:mm' }})</p>
 								<div class="pull-right">
-									<a href="javascript:;">
-										<i class="fa fa-thumbs-up"></i>
+									<a href="javascript:;" click-action="commentGreat">
+										<i class="fa fa-thumbs-up"></i>{{if comment.greats > 0 }}({{ comment.greats }}){{/if}}
 									</a>
 									&nbsp;|&nbsp;
-									<a href="javascript:;">回复</a>
+									<a href="javascript:;" click-action="commentReply">回复</a>
 								</div>
 							</div>
 						</div>

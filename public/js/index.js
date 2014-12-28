@@ -321,6 +321,9 @@ var app = (function() {
 			var action = target.attr("click-action");
 			var container = target.closest("div[id]");
 			var blogId = container.attr("id");
+			if(blogId.indexOf("_") !== -1) {
+				blogId = blogId.substring(blogId.indexOf("_") + 1);
+			}
 			var accountId;
 			switch(action) {
 				case "personal":
@@ -338,6 +341,12 @@ var app = (function() {
 
 				case "comment":
 					$("#comment_" + blogId).toggleClass("hidden");
+					$.get("/comment/blogComments?id=" + blogId, function(responseData) {
+						var html = template("contentMicroBloggingDetailBlogsCommentTemplate", {
+							comments: responseData
+						});
+						$("#commentContainer_" + blogId).html(html);
+					});
 					break;
 
 				case "forward":
@@ -353,6 +362,44 @@ var app = (function() {
 							alert(responseData.error);
 						}
 					});
+					break;
+
+				case "commentButton":
+					var comment = container.find("input[type='text']").val();
+					var commentId = container.find("input[type='hidden']").val();
+					var param = {
+						blogId: blogId,
+						content: comment
+					};
+					if(commentId) {
+						param.commentId = commentId;
+					}
+					$.post("/comment/publish", param).done(function(responseData) {
+						if(!responseData.error) {
+							container.find("form")[0].reset();
+							$.get("/comment/blogComments?id=" + blogId, function(responseData) {
+								var html = template("contentMicroBloggingDetailBlogsCommentTemplate", {
+									comments: responseData
+								});
+								$("#commentContainer_" + blogId).html(html);
+							});
+						} else {
+							alert(responseData.error);
+						}
+					});
+					break;
+
+				case "commentGreat":
+					break;
+
+				case "commentReply":
+					var commentId = blogId;
+					blogId = container.parent().attr("id");
+					blogId = blogId.substring(blogId.indexOf("_") + 1);
+					var commentsContainer = $("#comment_" + blogId);
+					commentsContainer.find("input[type='hidden']").val(commentId);
+					commentsContainer.find("input[type='text']").attr("placeholder", 
+						"@" + container.find("h5 a").text() + ":");
 					break;
 
 				default:
