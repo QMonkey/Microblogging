@@ -140,6 +140,53 @@ router.post("/great", function(request, response) {
 	var accountId = request.session.accountId;
 	var commentId = request.body.id;
 	if(accountId) {
+		model.Account.findById(accountId, function(err, account) {
+			if(account) {
+				model.Comment.findById(commentId, function(err, comment) {
+					if(comment) {
+						var great = new model.Message({
+							sender: accountId,
+							type: "great"
+						});
+						great.save(function(err) {
+							if(!err) {
+								account.messages.push(great._id);
+								account.save(function(err) {
+									if(!err) {
+										comment.greats.push(great._id);
+										comment.save(function(err) {
+											if(!err) {
+												response.send({});
+											} else {
+												response.send({
+													error: err.message
+												});
+											}
+										});
+									} else {
+										response.send({
+											error: err.message
+										});
+									}
+								});
+							} else {
+								response.send({
+									error: err.message
+								});
+							}
+						});
+					} else {
+						response.send({
+							error: "Wrong parameter!"
+						});
+					}
+				});
+			} else {
+				response.send({
+					error: "Please sign in first!"
+				});
+			}
+		});
 	} else {
 		response.send({
 			error: "Please sign in first!"

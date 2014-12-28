@@ -390,6 +390,15 @@ var app = (function() {
 					break;
 
 				case "commentGreat":
+					var commentId = blogId;
+					$.post("/comment/great", {
+						id: commentId
+					}).done(function(responseData) {
+						if(!responseData.error) {
+						} else {
+							alert(responseData.error);
+						}
+					});
 					break;
 
 				case "commentReply":
