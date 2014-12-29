@@ -23,7 +23,7 @@ var AccountSchema = new Schema({
 var BlogSchema = new Schema({
 	content: { type: String, default: null },
 	publisher: { type: Schema.Types.ObjectId, ref: "Account" },
-	publishTime: { type: Number, default: Date.now() },
+	publishTime: Number,
 	forward: { type: Schema.Types.ObjectId, ref: "Blog", default: null },
 	comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 	ats: [{ type: Schema.Types.ObjectId, ref: "Message" }],
@@ -33,7 +33,7 @@ var BlogSchema = new Schema({
 var CommentSchema = new Schema({
 	content: { type: String, default: null },
 	publisher: { type: Schema.Types.ObjectId, ref: "Account" },
-	publishTime: { type: Number, default: Date.now() },
+	publishTime: Number,
 	receiveTime: { type: Number, default: 0 },
 	comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 	ats: [{ type: Schema.Types.ObjectId, ref: "Message" }],

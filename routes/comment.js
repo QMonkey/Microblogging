@@ -65,7 +65,8 @@ router.post("/publish", function(request, response) {
 			if(account) {
 				var comment = new model.Comment({
 					content: content,
-					publisher: accountId
+					publisher: accountId,
+					publishTime: Date.now()
 				});
 				comment.save(function(err) {
 					if(!err) {

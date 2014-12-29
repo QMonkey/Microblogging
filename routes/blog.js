@@ -212,7 +212,8 @@ router.post("/publish", function(request, response) {
 			if(doc) {
 				var blog = new model.Blog({
 					content: request.body.content,
-					publisher: accountId
+					publisher: accountId,
+					publishTime: Date.now()
 				});
 				blog.save(function(err) {
 					if(!err) {

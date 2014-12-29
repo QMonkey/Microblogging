@@ -1016,12 +1016,16 @@
 									<div class="pull-right">
 										<a href="javascript:;" click-action="great">
 											<i class="fa fa-thumbs-up"></i>
+											<span>
 											{{if blog.greats > 0 }}({{ blog.greats }}){{/if}}
+											</span>
 										</a>
 										&nbsp;|&nbsp;
 										<a href="javascript:;" click-action="forward">转发</a>
 										&nbsp;|&nbsp;
-										<a href="javascript:;" click-action="comment">评论{{if blog.comments > 0 }}({{ blog.comments }}){{/if}}</a>
+										<a href="javascript:;" click-action="comment">评论
+											<span>{{if blog.comments > 0 }}({{ blog.comments }}){{/if}}</span>
+										</a>
 									</div>
 								</div>
 
@@ -1061,7 +1065,8 @@
 								<p>{{ comment.content }}({{ comment.publishTime | dateFormat: 'yyyy-MM-dd hh:mm' }})</p>
 								<div class="pull-right">
 									<a href="javascript:;" click-action="commentGreat">
-										<i class="fa fa-thumbs-up"></i>{{if comment.greats > 0 }}({{ comment.greats }}){{/if}}
+										<i class="fa fa-thumbs-up"></i>
+										<span>{{if comment.greats > 0 }}({{ comment.greats }}){{/if}}</span>
 									</a>
 									&nbsp;|&nbsp;
 									<a href="javascript:;" click-action="commentReply">回复</a>

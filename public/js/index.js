@@ -357,7 +357,14 @@ var app = (function() {
 						id: blogId
 					}).done(function(responseData) {
 						if(!responseData.error) {
-							alert("已赞！");
+							var match = target.text().match(/(\d+)/);
+							var greats;
+							if(match) {
+								greats = Number(match[0]) + 1;
+							} else {
+								greats = 1;
+							}
+							target.find("span").text("(" + greats + ")");
 						} else {
 							alert(responseData.error);
 						}
@@ -378,10 +385,23 @@ var app = (function() {
 						if(!responseData.error) {
 							container.find("form")[0].reset();
 							$.get("/comment/blogComments?id=" + blogId, function(responseData) {
-								var html = template("contentMicroBloggingDetailBlogsCommentTemplate", {
-									comments: responseData
-								});
-								$("#commentContainer_" + blogId).html(html);
+								if(!responseData.error) {
+									var commentCounterNode = $("#" + blogId).find("a[click-action='comment'] span");
+									var match = commentCounterNode.text().match(/(\d+)/);
+									var comments;
+									if(match) {
+										comments = Number(match[0]) + 1;
+									} else {
+										comments = 1;
+									}
+									commentCounterNode.text("(" + comments + ")");
+									var html = template("contentMicroBloggingDetailBlogsCommentTemplate", {
+										comments: responseData
+									});
+									$("#commentContainer_" + blogId).html(html);
+								} else {
+									alert(responseData.error);
+								}
 							});
 						} else {
 							alert(responseData.error);
@@ -395,6 +415,14 @@ var app = (function() {
 						id: commentId
 					}).done(function(responseData) {
 						if(!responseData.error) {
+							var match = target.text().match(/(\d+)/);
+							var greats;
+							if(match) {
+								greats = Number(match[0]) + 1;
+							} else {
+								greats = 1;
+							}
+							target.find("span").text("(" + greats + ")");
 						} else {
 							alert(responseData.error);
 						}
