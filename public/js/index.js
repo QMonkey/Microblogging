@@ -121,6 +121,18 @@ var app = (function() {
 		});
 
 		$("#sidebarMyComment").on("click", function(e) {
+			$.get("/comment/myReceivedComments", function(responseData) {
+				if(responseData.length > 0) {
+					var html = template("contentMyCommentReceiveTemplate", { comments: responseData });
+					$("#contentMyCommentReceive").html(html);
+				}
+			});
+			$.get("/comment/myIssuedComments", function(responseData) {
+				if(responseData.length > 0) {
+					var html = template("contentMyCommentIssueTemplate", { comments: responseData });
+					$("#contentMyCommentIssue").html(html);
+				}
+			});
 			$(".nav-tabs a[href='#contentMyComment']").tab('show');
 		});
 

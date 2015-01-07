@@ -55,6 +55,114 @@ router.get("/blogComments", function(request, response) {
 	}
 });
 
+router.get("/myReceivedComments", function(request, response) {
+	var accountId = request.session.accountId;
+	if(accountId) {
+		model.Comment.find({
+			receiver: accountId
+		}).populate("publisher receiver").exec(function(err, comments) {
+			if(comments && comments.length > 0) {
+				response.send(comments.map(function(comment) {
+					return {
+						content: comment.content,
+						publisher: {
+							id: comment.publisher._id,
+							userName: comment.publisher.userName,
+							nickname: comment.publisher.nickname,
+							realName: comment.publisher.realName,
+							email: comment.publisher.email,
+							birthday: comment.publisher.birthday,
+							sex: comment.publisher.sex,
+							phone: comment.publisher.phone,
+							address: comment.publisher.address,
+							introduction: comment.publisher.introduction
+						},
+						receiver: {
+							id: comment.receiver._id,
+							userName: comment.receiver.userName,
+							nickname: comment.receiver.nickname,
+							realName: comment.receiver.realName,
+							email: comment.receiver.email,
+							birthday: comment.receiver.birthday,
+							sex: comment.receiver.sex,
+							phone: comment.receiver.phone,
+							address: comment.receiver.address,
+							introduction: comment.receiver.introduction
+						},
+						publishTime: comment.publishTime,
+						receiveTime: comment.receiveTime,
+						comments: comment.comments.length,
+						ats: comment.ats.length,
+						greats: comment.greats.length
+					};
+				}));
+			} else {
+				response.send({});
+			}
+		});
+	} else {
+		response.send({
+			error: "Please sign in first!"
+		});
+	}
+});
+
+router.get("/myIssuedComments", function(request, response) {
+	var accountId = request.session.accountId;
+	if (accountId) {
+		model.Account.findById(accountId).populate("comments").exec(function(err, account) {
+			if(account) {
+				model.Comment.populate(account.comments, "receiver", function(err, comments) {
+					if(comments && comments.length > 0) {
+						var publisher = {
+							id: account._id,
+							userName: account.userName,
+							nickname: account.nickname,
+							realName: account.realName,
+							email: account.email,
+							birthday: account.birthday,
+							sex: account.sex,
+							phone: account.phone,
+							address: account.address,
+							introduction: account.introduction
+						};
+							
+						response.send(comments.map(function(comment) {
+							return {
+								content: comment.content,
+								publisher: publisher,
+								receiver: {
+									id: comment.receiver._id,
+									userName: comment.receiver.userName,
+									nickname: comment.receiver.nickname,
+									realName: comment.receiver.realName,
+									email: comment.receiver.email,
+									birthday: comment.receiver.birthday,
+									sex: comment.receiver.sex,
+									phone: comment.receiver.phone,
+									address: comment.receiver.address,
+									introduction: comment.receiver.introduction
+								},
+								publishTime: comment.publishTime,
+								receiveTime: comment.receiveTime,
+								comments: comment.comments.length,
+								ats: comment.ats.length,
+								greats: comment.greats.length
+							};
+						}));
+					} else {
+						response.send({});
+					}
+				});
+			} else {
+				response.send({
+					error: "Please sign in first!"
+				});
+			}
+		});
+	}
+});
+
 router.post("/publish", function(request, response) {
 	var accountId = request.session.accountId;
 	var blogId = request.body.blogId;
@@ -68,13 +176,14 @@ router.post("/publish", function(request, response) {
 					publisher: accountId,
 					publishTime: Date.now()
 				});
-				comment.save(function(err) {
-					if(!err) {
-						account.comments.push(comment._id);
-						account.save(function(err) {
+				model.Blog.findById(blogId, function(err, blog) {
+					if(blog) {
+						comment.receiver = blog.publisher;
+						comment.save(function(err) {
 							if(!err) {
-								model.Blog.findById(blogId, function(err, blog) {
-									if(blog) {
+								account.comments.push(comment._id);
+								account.save(function(err) {
+									if(!err) {
 										blog.comments.push(comment._id);
 										blog.save(function(err) {
 											if(!err) {

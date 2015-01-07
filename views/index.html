@@ -625,40 +625,32 @@
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="active">
-							<a href="#contentMyCommentSend" role="tab"
-							data-toggle="tab">发出的评论</a>
+							<a href="#contentMyCommentReceive" role="tab" data-toggle="tab">收到的评论</a>
 						</li>
 						<li>
-							<a href="#contentMyCommentReceive" role="tab"
-							data-toggle="tab">收到的评论</a>
+							<a href="#contentMyCommentIssue" role="tab" data-toggle="tab">发出的评论</a>
 						</li>
 					</ul>
 
 					<!-- Tab panes -->
 					<div class="tab-content">
-						<div class="tab-pane fade in active" id="contentMyCommentSend">
-							<!-- Send Comment Start -->
+						<div class="tab-pane fade in active" id="contentMyCommentReceive"></div>
+
+						<script id="contentMyCommentReceiveTemplate" type="text/html">
+							<!-- Received Comment Start -->
+							{{each comments as comment }}
 							<div>
 								<div class="col-sm-2">
 									<a href="javascript:;">
-										<img src="img/yxh.gif" width="70"
-										height="70"></a>
+										<img src="img/yxh.gif" width="70" height="70">
+									</a>
 								</div>
 								<div class="col-sm-offset-2">
 									<h4>
-										<a href="javascript:;">QMonkey</a>
+										@<a href="javascript:;">{{ comment.publisher.nickname }}</a>回复我：
 									</h4>
-									<p>
-										Don't use data attributes from multiple plugins on the
-										same element. For example, a button cannot both have a tooltip
-										and toggle a modal. To accomplish this, use a wrapping
-										element.(2014-09-09 21:38)
-									</p>
+									<p>{{ comment.content }}({{ comment.publishTime | dateFormat: 'yyyy-MM-dd hh:mm'}})</p>
 									<div class="pull-right">
-										<a href="javascript:;">
-											<i class="fa fa-thumbs-up"></i>
-										</a>
-										&nbsp;|&nbsp;
 										<a href="javascript:;">回复</a>
 									</div>
 									<div class="clear-both">
@@ -666,38 +658,34 @@
 											<fieldset>
 												<div class="form-group">
 													<input type="text" class="form-control" placeholder="评论"></div>
-												<button type="submit" class="btn btn-primary pull-right">回复</button>
+												<button type="button" class="btn btn-primary pull-right">回复</button>
 											</fieldset>
 										</form>
 									</div>
 								</div>
 							</div>
-							<!-- Send Comment End -->
 							<hr />
-						</div>
-						<div class="tab-pane fade" id="contentMyCommentReceive">
-							<!-- Receive Comment Start -->
+							{{/each}}
+							<!-- Received Comment End -->
+						</script>
+						
+						<div class="tab-pane fade" id="contentMyCommentIssue"></div>
+
+						<script id="contentMyCommentIssueTemplate" type="text/html">
+							<!-- Issued Comment Start -->
+							{{each comments as comment }}
 							<div>
-								<div class="col-sm-2">
-									<a href="javascript:;">
-										<img src="img/yxh.gif" width="70"
-										height="70"></a>
-								</div>
-								<div class="col-sm-offset-2">
+								<div class="col-sm-offset-1">
 									<h4>
-										<a href="javascript:;">QMonkey</a>
+										回复@<a href="javascript:;">{{ comment.receiver.nickname }}</a>：
 									</h4>
-									<p>
-										Don't use data attributes from multiple plugins on the
-										same element. For example, a button cannot both have a tooltip
-										and toggle a modal. To accomplish this, use a wrapping
-										element.(2014-09-09 21:38)
-									</p>
+									<p>{{ comment.content }}({{ comment.publishTime | dateFormat: 'yyyy-MM-dd hh:mm'}})</p>
 								</div>
 							</div>
 							<hr />
-							<!-- Receive Comment End -->
-						</div>
+							{{/each}}
+							<!-- Issued Comment End -->
+						</script>
 					</div>
 				</div>
 				<!-- My Comment End -->

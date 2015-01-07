@@ -14,8 +14,7 @@ var comment = require("./routes/comment")
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
+mongoose.connect("mongodb://localhost/Microblogging");
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -33,8 +32,6 @@ app.use(session({
     }
 }));
 
-mongoose.connect("mongodb://localhost/Microblogging");
-
 app.use('/', routes);
 app.use("/account", account);
 app.use("/setting", setting);
@@ -49,28 +46,13 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-
-// development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.send({
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.send({
         message: err.message,
-        error: {}
+        error: err
     });
 });
-
 
 module.exports = app;

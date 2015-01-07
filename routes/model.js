@@ -33,6 +33,7 @@ var BlogSchema = new Schema({
 var CommentSchema = new Schema({
 	content: { type: String, default: null },
 	publisher: { type: Schema.Types.ObjectId, ref: "Account" },
+	receiver: { type: Schema.Types.ObjectId, ref: "Account" },
 	publishTime: Number,
 	receiveTime: { type: Number, default: 0 },
 	comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
