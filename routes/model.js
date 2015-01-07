@@ -21,9 +21,9 @@ var AccountSchema = new Schema({
 });
 
 var BlogSchema = new Schema({
-	content: { type: String, default: null },
-	publisher: { type: Schema.Types.ObjectId, ref: "Account" },
-	publishTime: Number,
+	content: { type: String, require: true },
+	publisher: { type: Schema.Types.ObjectId, ref: "Account", require: true },
+	publishTime: { type: Number, require: true },
 	forward: { type: Schema.Types.ObjectId, ref: "Blog", default: null },
 	comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 	ats: [{ type: Schema.Types.ObjectId, ref: "Message" }],
@@ -31,11 +31,12 @@ var BlogSchema = new Schema({
 });
 
 var CommentSchema = new Schema({
-	content: { type: String, default: null },
-	publisher: { type: Schema.Types.ObjectId, ref: "Account" },
-	receiver: { type: Schema.Types.ObjectId, ref: "Account" },
-	publishTime: Number,
+	content: { type: String, require: true },
+	publisher: { type: Schema.Types.ObjectId, ref: "Account", require: true },
+	receiver: { type: Schema.Types.ObjectId, ref: "Account", require: true },
+	publishTime: { type: Number, require: true},
 	receiveTime: { type: Number, default: 0 },
+	blog: { type: Schema.Types.ObjectId, ref: "Blog", require: true },
 	comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 	ats: [{ type: Schema.Types.ObjectId, ref: "Message" }],
 	greats: [{ type: Schema.Types.ObjectId, ref: "Message" }]
@@ -43,9 +44,9 @@ var CommentSchema = new Schema({
 
 var MessageSchema = new Schema({
 	content: { type: String, default: null },
-	sendTime: { type: Number, default: Date.now() },
+	sendTime: { type: Number, require: true },
 	receiveTime: { type: Number, default: 0 },
-	sender: { type: Schema.Types.ObjectId, ref: "Account" },
+	sender: { type: Schema.Types.ObjectId, ref: "Account", require: true },
 	receiver: { type: Schema.Types.ObjectId, ref: "Account", default: null },
 	type: { type: String, default: "great" }	//great, at, whisper
 });

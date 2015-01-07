@@ -171,8 +171,7 @@
 		</form>
 
 		<div id="signedIn" class="tab-pane fade">
-		<div id="sidebar"
-			class="navbar-collapse collapse templatemo-sidebar">
+		<div id="sidebar" class="navbar-collapse collapse templatemo-sidebar">
 			<ul class="nav nav-tabs hidden" role="tablist">
 				<li class="active">
 					<a href="#contentHome" role="tab" data-toggle="tab"></a>
@@ -635,49 +634,47 @@
 					<!-- Tab panes -->
 					<div class="tab-content">
 						<div class="tab-pane fade in active" id="contentMyCommentReceive"></div>
-
 						<script id="contentMyCommentReceiveTemplate" type="text/html">
 							<!-- Received Comment Start -->
 							{{each comments as comment }}
-							<div>
+							<div id="{{ comment.id }}">
 								<div class="col-sm-2">
-									<a href="javascript:;">
+									<a href="javascript:;" click-action="personal" account-id="{{ comment.publisher.id }}">
 										<img src="img/yxh.gif" width="70" height="70">
 									</a>
 								</div>
 								<div class="col-sm-offset-2">
 									<h4>
-										@<a href="javascript:;">{{ comment.publisher.nickname }}</a>回复我：
+										@<a href="javascript:;" click-action="personal" account-id="{{ comment.publisher.id }}">{{ comment.publisher.nickname }}</a>回复我：
 									</h4>
 									<p>{{ comment.content }}({{ comment.publishTime | dateFormat: 'yyyy-MM-dd hh:mm'}})</p>
 									<div class="pull-right">
-										<a href="javascript:;">回复</a>
+										<a href="javascript:;" click-action="replyButton">回复</a>
 									</div>
-									<div class="clear-both">
+									<div id="commentBox_{{ comment.id }}" blog-id="{{ comment.blog }}" class="clear-both hidden">
 										<form role="form">
 											<fieldset>
 												<div class="form-group">
 													<input type="text" class="form-control" placeholder="评论"></div>
-												<button type="button" class="btn btn-primary pull-right">回复</button>
+												<button type="button" class="btn btn-primary pull-right" click-action="reply">回复</button>
 											</fieldset>
 										</form>
 									</div>
 								</div>
 							</div>
-							<hr />
+							<hr class="clear-both" />
 							{{/each}}
 							<!-- Received Comment End -->
 						</script>
 						
 						<div class="tab-pane fade" id="contentMyCommentIssue"></div>
-
 						<script id="contentMyCommentIssueTemplate" type="text/html">
 							<!-- Issued Comment Start -->
 							{{each comments as comment }}
-							<div>
+							<div id="{{ comment.id }}">
 								<div class="col-sm-offset-1">
 									<h4>
-										回复@<a href="javascript:;">{{ comment.receiver.nickname }}</a>：
+										回复@<a href="javascript:;" click-action="personal" account-id="{{ comment.receiver.id }}">{{ comment.receiver.nickname }}</a>：
 									</h4>
 									<p>{{ comment.content }}({{ comment.publishTime | dateFormat: 'yyyy-MM-dd hh:mm'}})</p>
 								</div>

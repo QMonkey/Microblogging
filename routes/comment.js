@@ -10,7 +10,7 @@ router.get("/blogComments", function(request, response) {
 	if(blogId) {
 		model.Blog.findById(blogId).populate("comments").exec(function(err, blog) {
 			if(blog) {
-				model.Comment.populate(blog.comments, "publisher", function(err, comments) {
+				model.Comment.populate(blog.comments, "publisher receiver", function(err, comments) {
 					if(comments.length > 0) {
 						comments.sort(function(a, b) {
 							return a.publishTime < b.publishTime;
@@ -31,8 +31,21 @@ router.get("/blogComments", function(request, response) {
 									address: comment.publisher.address,
 									introduction: comment.publisher.introduction
 								},
+								receiver: {
+									id: comment.receiver._id,
+									userName: comment.receiver.userName,
+									nickname: comment.receiver.nickname,
+									realName: comment.receiver.realName,
+									email: comment.receiver.email,
+									birthday: comment.receiver.birthday,
+									sex: comment.receiver.sex,
+									phone: comment.receiver.phone,
+									address: comment.receiver.address,
+									introduction: comment.receiver.introduction
+								},
 								publishTime: comment.publishTime,
 								receiveTime: comment.receiveTime,
+								blog: comment.blog,
 								comments: comment.comments.length,
 								ats: comment.ats.length,
 								greats: comment.greats.length
@@ -62,8 +75,12 @@ router.get("/myReceivedComments", function(request, response) {
 			receiver: accountId
 		}).populate("publisher receiver").exec(function(err, comments) {
 			if(comments && comments.length > 0) {
+				comments.sort(function(a, b) {
+					return a.publishTime < b.publishTime;
+				});
 				response.send(comments.map(function(comment) {
 					return {
+						id: comment.id,
 						content: comment.content,
 						publisher: {
 							id: comment.publisher._id,
@@ -91,6 +108,7 @@ router.get("/myReceivedComments", function(request, response) {
 						},
 						publishTime: comment.publishTime,
 						receiveTime: comment.receiveTime,
+						blog: comment.blog,
 						comments: comment.comments.length,
 						ats: comment.ats.length,
 						greats: comment.greats.length
@@ -114,6 +132,9 @@ router.get("/myIssuedComments", function(request, response) {
 			if(account) {
 				model.Comment.populate(account.comments, "receiver", function(err, comments) {
 					if(comments && comments.length > 0) {
+						comments.sort(function(a, b) {
+							return a.publishTime < b.publishTime;
+						});
 						var publisher = {
 							id: account._id,
 							userName: account.userName,
@@ -129,6 +150,7 @@ router.get("/myIssuedComments", function(request, response) {
 							
 						response.send(comments.map(function(comment) {
 							return {
+								id: comment.id,
 								content: comment.content,
 								publisher: publisher,
 								receiver: {
@@ -145,6 +167,7 @@ router.get("/myIssuedComments", function(request, response) {
 								},
 								publishTime: comment.publishTime,
 								receiveTime: comment.receiveTime,
+								blog: comment.blog,
 								comments: comment.comments.length,
 								ats: comment.ats.length,
 								greats: comment.greats.length
@@ -174,7 +197,8 @@ router.post("/publish", function(request, response) {
 				var comment = new model.Comment({
 					content: content,
 					publisher: accountId,
-					publishTime: Date.now()
+					publishTime: Date.now(),
+					blog: blogId
 				});
 				model.Blog.findById(blogId, function(err, blog) {
 					if(blog) {
@@ -256,6 +280,7 @@ router.post("/great", function(request, response) {
 					if(comment) {
 						var great = new model.Message({
 							sender: accountId,
+							sendTime: Date.now(),
 							type: "great"
 						});
 						great.save(function(err) {

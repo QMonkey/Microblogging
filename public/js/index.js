@@ -336,10 +336,9 @@ var app = (function() {
 			if(blogId.indexOf("_") !== -1) {
 				blogId = blogId.substring(blogId.indexOf("_") + 1);
 			}
-			var accountId;
 			switch(action) {
 				case "personal":
-					accountId = target.attr("account-id");
+					var accountId = target.attr("account-id");
 					$.get("/blog/bloggerInfo?id=" + accountId, function(responseData) {
 						var html = template("contentMicroBloggingDetailInfoTemplate", { blogger: responseData });
 						$("#contentMicroBloggingDetailInfoContainer").html(html);
@@ -449,6 +448,59 @@ var app = (function() {
 					commentsContainer.find("input[type='hidden']").val(commentId);
 					commentsContainer.find("input[type='text']").attr("placeholder", 
 						"@" + container.find("h5 a").text() + ":");
+					break;
+
+				default:
+					break;
+			}
+		});
+
+		$("#contentMyCommentReceive, #contentMyCommentIssue").on("click", "[click-action]", function() {
+			var target = $(this);
+			var action = target.attr("click-action");
+			var container = target.closest("div[id]");
+			var commentId = container.attr("id");
+			switch(action) {
+				case "personal":
+					var accountId = target.attr("account-id");
+					$.get("/blog/bloggerInfo?id=" + accountId, function(responseData) {
+						var html = template("contentMicroBloggingDetailInfoTemplate", { blogger: responseData });
+						$("#contentMicroBloggingDetailInfoContainer").html(html);
+						$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
+					});
+					$.get("/blog/blogs?id=" + accountId, function(responseData) {
+						var html = template("contentMicroBloggingDetailBlogsTemplate", { blogs: responseData });
+						$("#contentMicroBloggingDetailBlogsContainer").html(html);
+					});
+					break;
+
+				case "replyButton":
+					$("#commentBox_" + commentId).toggleClass("hidden");
+					break;
+
+				case "reply":
+					var comment = container.find("input[type='text']").val();
+					commentId = commentId.substring(commentId.indexOf("_") + 1);
+					var blogId = container.attr("blog-id");
+					$.post("/comment/publish", {
+						blogId: blogId,
+						commentId: commentId,
+						content: comment
+					}).done(function(responseData) {
+						if(!responseData.error) {
+							container.find("form")[0].reset();
+							$.get("/comment/blogComments?id=" + blogId, function(responseData) {
+								if(!responseData.error) {
+									$("#sidebarMyComment").click();
+									alert("回复成功！");
+								} else {
+									alert(responseData.error);
+								}
+							});
+						} else {
+							alert(responseData.error);
+						}
+					});
 					break;
 
 				default:

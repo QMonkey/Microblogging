@@ -257,6 +257,7 @@ router.post("/great", function(request, response) {
 					if(doc) {
 						var great = new model.Message({
 							sender: accountId,
+							sendTime: Date.now(),
 							type: "great"
 						});
 						great.save(function(err) {
