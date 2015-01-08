@@ -186,6 +186,31 @@ router.get("/myIssuedComments", function(request, response) {
 	}
 });
 
+var commentAt = function(publisher, comment) {
+	comment.content.match(/@\w+/g).filter(function(nickname, index, ary) {
+		return ary.indexOf(nickname) === index;
+	}).forEach(function(nickname) {
+		model.Account.findOne({ nickname: nickname.slice(1) }, function(err, account) {
+			if(account) {
+				var at = new model.Message({
+					sender: publisher._id,
+					receiver: account._id,
+					sendTime: Date.now(),
+					type: "at"
+				});
+				at.save(function(err) {
+					if(!err) {
+						account.messages.push(at._id);
+						account.save(function() {});
+						comment.ats.push(at._id);
+						comment.save(function() {});
+					}
+				});
+			}
+		});
+	});
+};
+
 router.post("/publish", function(request, response) {
 	var accountId = request.session.accountId;
 	var blogId = request.body.blogId;
@@ -218,6 +243,7 @@ router.post("/publish", function(request, response) {
 															doc.save(function(err) {
 																if(!err) {
 																	response.send({});
+																	commentAt(account, comment);
 																} else {
 																	response.send({
 																		error: err.message
@@ -232,6 +258,7 @@ router.post("/publish", function(request, response) {
 													});
 												} else {
 													response.send({});
+													commentAt(account, comment);
 												}
 											} else {
 												response.send({

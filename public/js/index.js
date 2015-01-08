@@ -104,12 +104,12 @@ var app = (function() {
 			$.get("/blog/search/?key=" + key, function(responseData) {
 				var html = template("contentMicroBloggingDetailBlogsTemplate", { blogs: responseData });
 				$("#contentSearchBlogs").html(html);
-				$(".nav-tabs a[href='#contentSearch']").tab('show');
 			});
 			$.get("/blog/searchBloggers/?key=" + key, function(responseData) {
 				var html = template("contentSearchPeopleTemplate", { bloggers: responseData });
 				$("#contentSearchPeople").html(html);
 			});
+			$(".nav-tabs a[href='#contentSearch']").tab('show');
 		});
 
 		$("#sidebarHome").on("click", function(e) {
@@ -117,21 +117,25 @@ var app = (function() {
 		});
 
 		$("#sidebarAt").on("click", function(e) {
+			$.get("/at/blogAts", function(responseData) {
+				var html = template("contentMicroBloggingDetailBlogsTemplate", { blogs: responseData });
+				$("#contentAtBlog").html(html);
+			});
+			$.get("/at/commentAts", function(responseData) {
+				var html = template("contentMyCommentReceiveTemplate", { comments: responseData });
+				$("#contentAtComment").html(html);
+			});
 			$(".nav-tabs a[href='#contentAt']").tab('show');
 		});
 
 		$("#sidebarMyComment").on("click", function(e) {
 			$.get("/comment/myReceivedComments", function(responseData) {
-				if(responseData.length > 0) {
-					var html = template("contentMyCommentReceiveTemplate", { comments: responseData });
-					$("#contentMyCommentReceive").html(html);
-				}
+				var html = template("contentMyCommentReceiveTemplate", { comments: responseData });
+				$("#contentMyCommentReceive").html(html);
 			});
 			$.get("/comment/myIssuedComments", function(responseData) {
-				if(responseData.length > 0) {
-					var html = template("contentMyCommentIssueTemplate", { comments: responseData });
-					$("#contentMyCommentIssue").html(html);
-				}
+				var html = template("contentMyCommentIssueTemplate", { comments: responseData });
+				$("#contentMyCommentIssue").html(html);
 			});
 			$(".nav-tabs a[href='#contentMyComment']").tab('show');
 		});
@@ -187,12 +191,12 @@ var app = (function() {
 			$.get("/blog/bloggerInfo?id=" + id, function(responseData) {
 				var html = template("contentMicroBloggingDetailInfoTemplate", { blogger: responseData });
 				$("#contentMicroBloggingDetailInfoContainer").html(html);
-				$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
 			});
 			$.get("/blog/blogs?id=" + id, function(responseData) {
 				var html = template("contentMicroBloggingDetailBlogsTemplate", { blogs: responseData });
 				$("#contentMicroBloggingDetailBlogsContainer").html(html);
 			});
+			$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
 		});
 
 		$("#contentHomePublishBlogButton").on("click", function(e) {
@@ -270,12 +274,12 @@ var app = (function() {
 					$.get("/blog/bloggerInfo?id=" + accountId, function(responseData) {
 						var html = template("contentMicroBloggingDetailInfoTemplate", { blogger: responseData });
 						$("#contentMicroBloggingDetailInfoContainer").html(html);
-						$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
 					});
 					$.get("/blog/blogs?id=" + accountId, function(responseData) {
 						var html = template("contentMicroBloggingDetailBlogsTemplate", { blogs: responseData });
 						$("#contentMicroBloggingDetailBlogsContainer").html(html);
 					});
+					$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
 					break;
 
 				case "follow":
@@ -328,7 +332,7 @@ var app = (function() {
 			}
 		});
 
-		$("#contentSearchBlogs, #contentMicroBloggingDetailBlogsContainer").on("click", "[click-action]", function() {
+		$("#contentSearchBlogs, #contentAtBlog, #contentMicroBloggingDetailBlogsContainer").on("click", "[click-action]", function() {
 			var target = $(this);
 			var action = target.attr("click-action");
 			var container = target.closest("div[id]");
@@ -342,12 +346,12 @@ var app = (function() {
 					$.get("/blog/bloggerInfo?id=" + accountId, function(responseData) {
 						var html = template("contentMicroBloggingDetailInfoTemplate", { blogger: responseData });
 						$("#contentMicroBloggingDetailInfoContainer").html(html);
-						$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
 					});
 					$.get("/blog/blogs?id=" + accountId, function(responseData) {
 						var html = template("contentMicroBloggingDetailBlogsTemplate", { blogs: responseData });
 						$("#contentMicroBloggingDetailBlogsContainer").html(html);
 					});
+					$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
 					break;
 
 				case "comment":
@@ -455,7 +459,7 @@ var app = (function() {
 			}
 		});
 
-		$("#contentMyCommentReceive, #contentMyCommentIssue").on("click", "[click-action]", function() {
+		$("#contentAtComment, #contentMyCommentReceive, #contentMyCommentIssue").on("click", "[click-action]", function() {
 			var target = $(this);
 			var action = target.attr("click-action");
 			var container = target.closest("div[id]");
@@ -466,12 +470,12 @@ var app = (function() {
 					$.get("/blog/bloggerInfo?id=" + accountId, function(responseData) {
 						var html = template("contentMicroBloggingDetailInfoTemplate", { blogger: responseData });
 						$("#contentMicroBloggingDetailInfoContainer").html(html);
-						$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
 					});
 					$.get("/blog/blogs?id=" + accountId, function(responseData) {
 						var html = template("contentMicroBloggingDetailBlogsTemplate", { blogs: responseData });
 						$("#contentMicroBloggingDetailBlogsContainer").html(html);
 					});
+					$(".nav-tabs a[href='#contentMicroBloggingDetail']").tab('show');
 					break;
 
 				case "replyButton":

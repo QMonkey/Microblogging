@@ -2,10 +2,10 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var AccountSchema = new Schema({
-	userName: { type: String, require: true },
+	userName: { type: String, unique: true, require: true },
 	password: { type: String, require: true },
 	salt: { type: String, require: true },
-	nickname: String,
+	nickname: { type: String, unique: true, require: true },
 	realName: String,
 	email: String,
 	birthday: Number,
@@ -44,10 +44,10 @@ var CommentSchema = new Schema({
 
 var MessageSchema = new Schema({
 	content: { type: String, default: null },
-	sendTime: { type: Number, require: true },
-	receiveTime: { type: Number, default: 0 },
 	sender: { type: Schema.Types.ObjectId, ref: "Account", require: true },
 	receiver: { type: Schema.Types.ObjectId, ref: "Account", default: null },
+	sendTime: { type: Number, require: true },
+	receiveTime: { type: Number, default: 0 },
 	type: { type: String, default: "great" }	//great, at, whisper
 });
 

@@ -155,6 +155,7 @@ router.get("/search", function(request, response) {
 					publishTime: blog.publishTime,
 					forward: blog.forward,
 					comments: blog.comments.length,
+					ats: blog.ats.length,
 					greats: blog.greats.length
 				}
 			}));
@@ -193,8 +194,9 @@ router.get("/blogs", function(request, response) {
 						publishTime: blog.publishTime,
 						forward: blog.forward,
 						comments: blog.comments.length,
+						ats: blog.ats.length,
 						greats: blog.greats.length
-					}
+					};
 				}));
 			} else {
 				response.send({});
@@ -205,11 +207,36 @@ router.get("/blogs", function(request, response) {
 	}
 });
 
+var blogAt = function(publisher, blog) {
+	blog.content.match(/@\w+/g).filter(function(nickname, index, ary) {
+		return ary.indexOf(nickname) === index;
+	}).forEach(function(nickname) {
+		model.Account.findOne({ nickname: nickname.slice(1) }, function(err, account) {
+			if(account) {
+				var at = new model.Message({
+					sender: publisher._id,
+					receiver: account._id,
+					sendTime: Date.now(),
+					type: "at"
+				});
+				at.save(function(err) {
+					if(!err) {
+						account.messages.push(at._id);
+						account.save(function() {});
+						blog.ats.push(at._id);
+						blog.save(function() {});
+					}
+				});
+			}
+		});
+	});
+};
+
 router.post("/publish", function(request, response) {
 	var accountId = request.session.accountId;
 	if(accountId) {
-		model.Account.findById(accountId, function(err, doc) {
-			if(doc) {
+		model.Account.findById(accountId, function(err, account) {
+			if(account) {
 				var blog = new model.Blog({
 					content: request.body.content,
 					publisher: accountId,
@@ -217,10 +244,11 @@ router.post("/publish", function(request, response) {
 				});
 				blog.save(function(err) {
 					if(!err) {
-						doc.blogs.push(blog._id);
-						doc.save(function(err) {
+						account.blogs.push(blog._id);
+						account.save(function(err) {
 							if(!err) {
 								response.send({});
+								blogAt(account, blog);
 							} else {
 								response.send({
 									error: err.message
