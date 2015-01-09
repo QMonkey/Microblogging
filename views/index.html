@@ -205,7 +205,7 @@
 				<li>
 					<div class="navbar-icon">
 						<div>
-							<img src="img/yxh.gif" width="70" height="70">
+							<img id="sidebarIcon" src="" width="70" height="70">
 							<strong>
 								<a id="sidebarNickname" href="javascript:;"></a>
 							</strong> 
@@ -307,182 +307,7 @@
 						</div>
 					</form>
 
-					<div class="col-sm-offset-2 col-sm-8">
-						<!-- Blog Start -->
-						<div>
-							<div class="col-sm-2">
-								<a href="javascript:;">
-									<img src="img/yxh.gif" width="70"
-									height="70"></a>
-							</div>
-							<div class="col-sm-offset-2">
-								<h4>
-									<a href="javascript:;">QMonkey</a>
-								</h4>
-								<p>
-									Don't use data attributes from multiple plugins on the
-									same element. For example, a button cannot both have a tooltip
-									and toggle a modal. To accomplish this, use a wrapping element.
-								</p>
-								<div>
-									<div class="pull-left">2014-09-16 9:00</div>
-									<div class="pull-right">
-										<a href="javascript:;">
-											<i class="fa fa-thumbs-up"></i>
-										</a>
-										&nbsp;|&nbsp;
-										<a href="javascript:;">转发</a>
-										&nbsp;|&nbsp;
-										<a
-											href="javascript:;">评论</a>
-									</div>
-								</div>
-
-								<!-- Comment Start -->
-								<div class="clear-both">
-									<form role="form">
-										<fieldset>
-											<div class="form-group">
-												<input type="text" class="form-control" placeholder="评论"></div>
-											<button type="submit" class="btn btn-primary pull-right">评论</button>
-										</fieldset>
-									</form>
-									<hr />
-
-									<div>
-										<div class="col-sm-2">
-											<a href="javascript:;">
-												<img src="img/yxh.gif" width="50"
-												height="50"></a>
-										</div>
-										<div class="col-sm-offset-2">
-											<h5>
-												<a href="javascript:;">QMonkey</a>
-											</h5>
-											<p>
-												Don't use data attributes from multiple plugins on the
-												same element. For example, a button cannot both have a
-												tooltip and toggle a modal. To accomplish this, use a
-												wrapping element.(2014-09-09 21:38)
-											</p>
-											<div class="pull-right">
-												<a href="javascript:;">
-													<i class="fa fa-thumbs-up"></i>
-												</a>
-												&nbsp;|&nbsp;
-												<a href="javascript:;">回复</a>
-											</div>
-										</div>
-									</div>
-									<hr class="clear-both" />
-
-									<div>
-										<div class="col-sm-2">
-											<a href="javascript:;">
-												<img src="img/yxh.gif" width="50"
-												height="50"></a>
-										</div>
-										<div class="col-sm-offset-2">
-											<h5>
-												<a href="javascript:;">QMonkey</a>
-											</h5>
-											<p>
-												Don't use data attributes from multiple plugins on the
-												same element. For example, a button cannot both have a
-												tooltip and toggle a modal. To accomplish this, use a
-												wrapping element.(2014-09-09 21:38)
-											</p>
-											<div class="pull-right">
-												<a href="javascript:;">
-													<i class="fa fa-thumbs-up"></i>
-												</a>
-												&nbsp;|&nbsp;
-												<a href="javascript:;">回复</a>
-											</div>
-										</div>
-									</div>
-									<hr class="clear-both" />
-								</div>
-								<!-- Comment End -->
-							</div>
-						</div>
-						<hr />
-						<!-- Blog End -->
-
-						<!-- Blog Start -->
-						<div>
-							<div class="col-sm-2">
-								<a href="javascript:;">
-									<img src="img/yxh.gif" width="70"
-									height="70"></a>
-							</div>
-							<div class="col-sm-offset-2">
-								<h4>
-									<a href="javascript:;">QMonkey</a>
-								</h4>
-								<p>
-									Don't use data attributes from multiple plugins on the
-									same element. For example, a button cannot both have a tooltip
-									and toggle a modal. To accomplish this, use a wrapping element.
-								</p>
-								<div>
-									<div class="pull-left">2014-09-16 9:00</div>
-									<div class="pull-right">
-										<a href="javascript:;">
-											<i class="fa fa-thumbs-up"></i>
-										</a>
-										&nbsp;|&nbsp;
-										<a href="javascript:;">转发</a>
-										&nbsp;|&nbsp;
-										<a
-											href="javascript:;">评论</a>
-									</div>
-								</div>
-
-								<!-- Comment Start -->
-								<div class="clear-both">
-									<form role="form">
-										<fieldset>
-											<div class="form-group">
-												<input type="text" class="form-control" placeholder="评论"></div>
-											<button type="submit" class="btn btn-primary pull-right">评论</button>
-										</fieldset>
-									</form>
-									<hr />
-
-									<div>
-										<div class="col-sm-2">
-											<a href="javascript:;">
-												<img src="img/yxh.gif" width="50"
-												height="50"></a>
-										</div>
-										<div class="col-sm-offset-2">
-											<h5>
-												<a href="javascript:;">QMonkey</a>
-											</h5>
-											<p>
-												Don't use data attributes from multiple plugins on the
-												same element. For example, a button cannot both have a
-												tooltip and toggle a modal. To accomplish this, use a
-												wrapping element.(2014-09-09 21:38)
-											</p>
-											<div class="pull-right">
-												<a href="javascript:;">
-													<i class="fa fa-thumbs-up"></i>
-												</a>
-												&nbsp;|&nbsp;
-												<a href="javascript:;">回复</a>
-											</div>
-										</div>
-									</div>
-									<hr class="clear-both" />
-								</div>
-								<!-- Comment End -->
-							</div>
-						</div>
-						<hr />
-						<!-- Blog End -->
-					</div>
+					<div id="contentHomeBlogs" class="col-sm-offset-2 col-sm-8"></div>
 				</div>
 				<!-- Home End -->
 
@@ -528,7 +353,11 @@
 							<div id="{{ comment.id }}">
 								<div class="col-sm-2">
 									<a href="javascript:;" click-action="personal" account-id="{{ comment.publisher.id }}">
-										<img src="img/yxh.gif" width="70" height="70">
+										<img src="{{if comment.publisher.icon }}
+												{{ comment.publisher.icon.path | toUploadPath }}{{ comment.publisher.icon.name }}
+											{{else}}
+												/uploads/default.ico
+											{{/if}}" width="70" height="70">
 									</a>
 								</div>
 								<div class="col-sm-offset-2">
@@ -706,19 +535,19 @@
 						<div class="tab-pane fade" id="contentSettingIcon">
 							<iframe class="hidden" id="contentSettingIconFrame"
 								name="contentSettingIconFrame"></iframe>
-							<form class="form-horizontal tab-form" role="form"
+							<form class="form-horizontal tab-form" role="form" action="/setting/updateIcon"
 								target="contentSettingIconFrame" method="post"
 								enctype="multipart/form-data">
 								<div class="form-group">
 									<label class="col-sm-2 control-label">头像</label>
 									<div class="col-sm-8">
-										<img src="img/yxh.gif" width="150" height="150"></div>
+										<img id="contentSettingIconImg" src="" width="150" height="150"></div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label">上传头像</label>
 									<div class="col-sm-8">
 										<input type="file" class="form-control"
-											id="contentSettingIconFile" placeholder="icon"></div>
+											id="contentSettingIconFile" name="icon" placeholder="icon"></div>
 								</div>
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-8">
@@ -791,7 +620,11 @@
 								<div id="{{ blogger.id }}">
 									<div class="col-sm-3">
 										<a href="javascript:;" click-action="personal">
-											<img src="img/yxh.gif" width="120" height="120">
+											<img src="{{if blogger.icon }}
+												{{ blogger.icon.path | toUploadPath }}{{ blogger.icon.name }}
+											{{else}}
+												/uploads/default.ico
+											{{/if}}" width="120" height="120">
 										</a>
 									</div>
 									<div class="col-sm-offset-3">
@@ -834,7 +667,11 @@
 						<div id="{{ blogger.id }}">
 							<div class="col-sm-3">
 								<a href="javascript:;" click-action="personal">
-									<img src="img/yxh.gif" width="120" height="120">
+									<img src="{{if blogger.icon }}
+												{{ blogger.icon.path | toUploadPath }}{{ blogger.icon.name }}
+											{{else}}
+												/uploads/default.ico
+											{{/if}}" width="120" height="120">
 								</a>
 							</div>
 							<div class="col-sm-offset-3">
@@ -873,7 +710,11 @@
 							{{if blog.publisher }}
 							<div class="col-sm-2">
 								<a href="javascript:;" click-action="personal" account-id="{{ blog.publisher.id }}">
-									<img src="img/yxh.gif" width="70" height="70">
+									<img src="{{if blog.publisher.icon }}
+												{{ blog.publisher.icon.path | toUploadPath }}{{ blog.publisher.icon.name }}
+											{{else}}
+												/uploads/default.ico
+											{{/if}}" width="70" height="70">
 								</a>
 							</div>
 							{{/if}}
@@ -928,7 +769,11 @@
 						<div id="{{ comment.id }}">
 							<div class="col-sm-2">
 								<a href="javascript:;" click-action="personal" account-id="{{ comment.publisher.id }}">
-									<img src="img/yxh.gif" width="50" height="50">
+									<img src="{{if comment.publisher.icon }}
+												{{ comment.publisher.icon.path | toUploadPath }}{{ comment.publisher.icon.name }}
+											{{else}}
+												/uploads/default.ico
+											{{/if}}" width="50" height="50">
 								</a>
 							</div>
 							<div class="col-sm-offset-2">

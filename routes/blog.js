@@ -5,11 +5,65 @@ var model = require("./model");
 
 var router = express.Router();
 
+router.get("/home", function(request, response) {
+	var accountId = request.session.accountId;
+	if(accountId) {
+		model.Account.findById(accountId).populate("icon blogs followings").exec(function(err, account) {
+			if(account) {
+				model.Account.populate(account.followings, "icon blogs", function(err, followings) {
+					var homeBlogs = [];
+					[ account ].concat(followings).forEach(function(account) {
+						var publisher = {
+							id: account._id,
+							userName: account.userName,
+							nickname: account.nickname,
+							realName: account.realName,
+							email: account.email,
+							birthday: account.birthday,
+							sex: account.sex,
+							phone: account.phone,
+							address: account.address,
+							introduction: account.introduction,
+							icon: account.icon ? {
+								name: account.icon.name,
+								path: account.icon.path
+							} : null
+						};
+						homeBlogs = homeBlogs.concat(account.blogs.map(function(blog) {
+							return {
+								id: blog._id,
+								content: blog.content,
+								publisher: publisher,
+								publishTime: blog.publishTime,
+								forward: blog.forward,
+								comments: blog.comments.length,
+								ats: blog.ats.length,
+								greats: blog.greats.length
+							};
+						}));
+					});
+					response.send(homeBlogs.sort(function(a, b) {
+						return a.publishTime < b.publishTime;
+					}));
+				});
+			} else {
+				response.send({
+					error: "Please sign in first!"
+				});
+			}
+		});
+	} else {
+		response.send({
+			error: "Please sign in first!"
+		});
+	}
+});
+
 router.get("/bloggerInfo", function(request, response) {
 	var accountId = request.session.accountId;
 	var bloggerId = request.query.id;
 	if(bloggerId) {
-		model.Account.findById(bloggerId, function(err, doc) {
+		model.Account.findById(bloggerId).populate("icon").exec(function(err, doc) {
 			if(doc) {
 				var marks = 0;
 				var relation;
@@ -46,9 +100,6 @@ router.get("/bloggerInfo", function(request, response) {
 				response.send({
 					id: doc._id,
 					userName: doc.userName,
-					followings: doc.followings.length,
-					followers: doc.followers.length,
-					blogs: doc.blogs.length,
 					nickname: doc.nickname,
 					realName: doc.realName,
 					email: doc.email,
@@ -57,6 +108,13 @@ router.get("/bloggerInfo", function(request, response) {
 					phone: doc.phone,
 					address: doc.address,
 					introduction: doc.introduction,
+					icon: doc.icon ? {
+						name: doc.icon.name,
+						path: doc.icon.path
+					} : null,
+					followings: doc.followings.length,
+					followers: doc.followers.length,
+					blogs: doc.blogs.length,
 					relation: relation
 				});
 			} else {
@@ -71,7 +129,7 @@ router.get("/bloggerInfo", function(request, response) {
 router.get("/searchBloggers", function(request, response) {
 	var accountId = request.session.accountId;
 	var key = request.query.key;
-	model.Account.find({ nickname: new RegExp(key) }, function(err, docs) {
+	model.Account.find({ nickname: new RegExp(key) }).populate("icon").exec(function(err, docs) {
 		if(docs && docs.length > 0) {
 			response.send(docs.map(function(account) {
 				var marks = 0;
@@ -109,9 +167,6 @@ router.get("/searchBloggers", function(request, response) {
 				return {
 					id: account._id,
 					userName: account.userName,
-					followings: account.followings.length,
-					followers: account.followers.length,
-					blogs: account.blogs.length,
 					nickname: account.nickname,
 					realName: account.realName,
 					email: account.email,
@@ -120,6 +175,13 @@ router.get("/searchBloggers", function(request, response) {
 					phone: account.phone,
 					address: account.address,
 					introduction: account.introduction,
+					icon: account.icon ? {
+						name: account.icon.name,
+						path: account.icon.path
+					} : null,
+					followings: account.followings.length,
+					followers: account.followers.length,
+					blogs: account.blogs.length,
 					relation: relation
 				}
 			}));
@@ -134,31 +196,37 @@ router.get("/search", function(request, response) {
 	var key = request.query.key;
 	model.Blog.find({
 		content: new RegExp(key)
-	}).populate("publisher").sort({ publishTime: "desc" }).exec(function(err, docs) {
-		if(docs && docs.length > 0) {
-			response.send(docs.map(function(blog) {
-				return {
-					id: blog._id,
-					content: blog.content,
-					publisher: {
-						id: blog.publisher._id,
-						userName: blog.publisher.userName,
-						nickname: blog.publisher.nickname,
-						realName: blog.publisher.realName,
-						email: blog.publisher.email,
-						birthday: blog.publisher.birthday,
-						sex: blog.publisher.sex,
-						phone: blog.publisher.phone,
-						address: blog.publisher.address,
-						introduction: blog.publisher.introduction
-					},
-					publishTime: blog.publishTime,
-					forward: blog.forward,
-					comments: blog.comments.length,
-					ats: blog.ats.length,
-					greats: blog.greats.length
-				}
-			}));
+	}).populate("publisher").sort({ publishTime: "desc" }).exec(function(err, blogs) {
+		if(blogs && blogs.length > 0) {
+			model.File.populate(blogs, "publisher.icon", function(err, blogs) {
+				response.send(blogs.map(function(blog) {
+					return {
+						id: blog._id,
+						content: blog.content,
+						publisher: {
+							id: blog.publisher._id,
+							userName: blog.publisher.userName,
+							nickname: blog.publisher.nickname,
+							realName: blog.publisher.realName,
+							email: blog.publisher.email,
+							birthday: blog.publisher.birthday,
+							sex: blog.publisher.sex,
+							phone: blog.publisher.phone,
+							address: blog.publisher.address,
+							introduction: blog.publisher.introduction,
+							icon: blog.publisher.icon ? {
+								name: blog.publisher.icon.name,
+								path: blog.publisher.icon.path
+							} : null
+						},
+						publishTime: blog.publishTime,
+						forward: blog.forward,
+						comments: blog.comments.length,
+						ats: blog.ats.length,
+						greats: blog.greats.length
+					};
+				}));
+			});
 		} else {
 			response.send({});
 		}
@@ -169,7 +237,7 @@ router.get("/blogs", function(request, response) {
 	var accountId = request.session.accountId;
 	var bloggerId = request.query.id;
 	if(bloggerId) {
-		model.Account.findById(bloggerId).populate("blogs").exec(function(err, doc) {
+		model.Account.findById(bloggerId).populate("icon blogs").exec(function(err, doc) {
 			if(doc) {
 				var publisher = {
 					id: doc._id,
@@ -181,7 +249,11 @@ router.get("/blogs", function(request, response) {
 					sex: doc.sex,
 					phone: doc.phone,
 					address: doc.address,
-					introduction: doc.introduction
+					introduction: doc.introduction,
+					icon: doc.icon ? {
+						name: doc.icon.name,
+						path: doc.icon.path
+					} : null
 				};
 				doc.blogs.sort(function(a, b) {
 					return a.publishTime < b.publishTime;
@@ -208,28 +280,31 @@ router.get("/blogs", function(request, response) {
 });
 
 var blogAt = function(publisher, blog) {
-	blog.content.match(/@\w+/g).filter(function(nickname, index, ary) {
-		return ary.indexOf(nickname) === index;
-	}).forEach(function(nickname) {
-		model.Account.findOne({ nickname: nickname.slice(1) }, function(err, account) {
-			if(account) {
-				var at = new model.Message({
-					sender: publisher._id,
-					receiver: account._id,
-					sendTime: Date.now(),
-					type: "at"
-				});
-				at.save(function(err) {
-					if(!err) {
-						account.messages.push(at._id);
-						account.save(function() {});
-						blog.ats.push(at._id);
-						blog.save(function() {});
-					}
-				});
-			}
+	var matches = blog.content.match(/@\w+/g);
+	if(matches) {
+		matches.filter(function(nickname, index, ary) {
+			return ary.indexOf(nickname) === index;
+		}).forEach(function(nickname) {
+			model.Account.findOne({ nickname: nickname.slice(1) }, function(err, account) {
+				if(account) {
+					var at = new model.Message({
+						sender: publisher._id,
+						receiver: account._id,
+						sendTime: Date.now(),
+						type: "at"
+					});
+					at.save(function(err) {
+						if(!err) {
+							account.messages.push(at._id);
+							account.save(function() {});
+							blog.ats.push(at._id);
+							blog.save(function() {});
+						}
+					});
+				}
+			});
 		});
-	});
+	}
 };
 
 router.post("/publish", function(request, response) {

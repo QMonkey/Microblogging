@@ -12,45 +12,55 @@ router.get("/blogComments", function(request, response) {
 			if(blog) {
 				model.Comment.populate(blog.comments, "publisher receiver", function(err, comments) {
 					if(comments.length > 0) {
-						comments.sort(function(a, b) {
-							return a.publishTime < b.publishTime;
+						model.File.populate(comments, "publisher.icon receiver.icon", function(err, comments) {
+							comments.sort(function(a, b) {
+								return a.publishTime < b.publishTime;
+							});
+							response.send(comments.map(function(comment) {
+								return {
+									id: comment._id,
+									content: comment.content,
+									publisher: {
+										id: comment.publisher._id,
+										userName: comment.publisher.userName,
+										nickname: comment.publisher.nickname,
+										realName: comment.publisher.realName,
+										email: comment.publisher.email,
+										birthday: comment.publisher.birthday,
+										sex: comment.publisher.sex,
+										phone: comment.publisher.phone,
+										address: comment.publisher.address,
+										introduction: comment.publisher.introduction,
+										icon: comment.publisher.icon ? {
+											name: comment.publisher.icon.name,
+											path: comment.publisher.icon.path
+										} : null
+									},
+									receiver: {
+										id: comment.receiver._id,
+										userName: comment.receiver.userName,
+										nickname: comment.receiver.nickname,
+										realName: comment.receiver.realName,
+										email: comment.receiver.email,
+										birthday: comment.receiver.birthday,
+										sex: comment.receiver.sex,
+										phone: comment.receiver.phone,
+										address: comment.receiver.address,
+										introduction: comment.receiver.introduction,
+										icon: comment.receiver.icon ? {
+											name: comment.receiver.icon.name,
+											path: comment.receiver.icon.path
+										} : null
+									},
+									publishTime: comment.publishTime,
+									receiveTime: comment.receiveTime,
+									blog: comment.blog,
+									comments: comment.comments.length,
+									ats: comment.ats.length,
+									greats: comment.greats.length
+								};
+							}));
 						});
-						response.send(comments.map(function(comment) {
-							return {
-								id: comment._id,
-								content: comment.content,
-								publisher: {
-									id: comment.publisher._id,
-									userName: comment.publisher.userName,
-									nickname: comment.publisher.nickname,
-									realName: comment.publisher.realName,
-									email: comment.publisher.email,
-									birthday: comment.publisher.birthday,
-									sex: comment.publisher.sex,
-									phone: comment.publisher.phone,
-									address: comment.publisher.address,
-									introduction: comment.publisher.introduction
-								},
-								receiver: {
-									id: comment.receiver._id,
-									userName: comment.receiver.userName,
-									nickname: comment.receiver.nickname,
-									realName: comment.receiver.realName,
-									email: comment.receiver.email,
-									birthday: comment.receiver.birthday,
-									sex: comment.receiver.sex,
-									phone: comment.receiver.phone,
-									address: comment.receiver.address,
-									introduction: comment.receiver.introduction
-								},
-								publishTime: comment.publishTime,
-								receiveTime: comment.receiveTime,
-								blog: comment.blog,
-								comments: comment.comments.length,
-								ats: comment.ats.length,
-								greats: comment.greats.length
-							};
-						}));
 					} else {
 						response.send({});
 					}
@@ -75,45 +85,55 @@ router.get("/myReceivedComments", function(request, response) {
 			receiver: accountId
 		}).populate("publisher receiver").exec(function(err, comments) {
 			if(comments && comments.length > 0) {
-				comments.sort(function(a, b) {
-					return a.publishTime < b.publishTime;
+				model.File.populate(comments, "publisher.icon receiver.icon", function(err, comments) {
+					comments.sort(function(a, b) {
+						return a.publishTime < b.publishTime;
+					});
+					response.send(comments.map(function(comment) {
+						return {
+							id: comment.id,
+							content: comment.content,
+							publisher: {
+								id: comment.publisher._id,
+								userName: comment.publisher.userName,
+								nickname: comment.publisher.nickname,
+								realName: comment.publisher.realName,
+								email: comment.publisher.email,
+								birthday: comment.publisher.birthday,
+								sex: comment.publisher.sex,
+								phone: comment.publisher.phone,
+								address: comment.publisher.address,
+								introduction: comment.publisher.introduction,
+								icon: comment.publisher.icon ? {
+									name: comment.publisher.icon.name,
+									path: comment.publisher.icon.path
+								} : null
+							},
+							receiver: {
+								id: comment.receiver._id,
+								userName: comment.receiver.userName,
+								nickname: comment.receiver.nickname,
+								realName: comment.receiver.realName,
+								email: comment.receiver.email,
+								birthday: comment.receiver.birthday,
+								sex: comment.receiver.sex,
+								phone: comment.receiver.phone,
+								address: comment.receiver.address,
+								introduction: comment.receiver.introduction,
+								icon: comment.receiver.icon ? {
+									name: comment.receiver.icon.name,
+									path: comment.receiver.icon.path
+								} : null
+							},
+							publishTime: comment.publishTime,
+							receiveTime: comment.receiveTime,
+							blog: comment.blog,
+							comments: comment.comments.length,
+							ats: comment.ats.length,
+							greats: comment.greats.length
+						};
+					}));
 				});
-				response.send(comments.map(function(comment) {
-					return {
-						id: comment.id,
-						content: comment.content,
-						publisher: {
-							id: comment.publisher._id,
-							userName: comment.publisher.userName,
-							nickname: comment.publisher.nickname,
-							realName: comment.publisher.realName,
-							email: comment.publisher.email,
-							birthday: comment.publisher.birthday,
-							sex: comment.publisher.sex,
-							phone: comment.publisher.phone,
-							address: comment.publisher.address,
-							introduction: comment.publisher.introduction
-						},
-						receiver: {
-							id: comment.receiver._id,
-							userName: comment.receiver.userName,
-							nickname: comment.receiver.nickname,
-							realName: comment.receiver.realName,
-							email: comment.receiver.email,
-							birthday: comment.receiver.birthday,
-							sex: comment.receiver.sex,
-							phone: comment.receiver.phone,
-							address: comment.receiver.address,
-							introduction: comment.receiver.introduction
-						},
-						publishTime: comment.publishTime,
-						receiveTime: comment.receiveTime,
-						blog: comment.blog,
-						comments: comment.comments.length,
-						ats: comment.ats.length,
-						greats: comment.greats.length
-					};
-				}));
 			} else {
 				response.send({});
 			}
@@ -128,54 +148,64 @@ router.get("/myReceivedComments", function(request, response) {
 router.get("/myIssuedComments", function(request, response) {
 	var accountId = request.session.accountId;
 	if (accountId) {
-		model.Account.findById(accountId).populate("comments").exec(function(err, account) {
+		model.Account.findById(accountId).populate("icon comments").exec(function(err, account) {
 			if(account) {
 				model.Comment.populate(account.comments, "receiver", function(err, comments) {
-					if(comments && comments.length > 0) {
-						comments.sort(function(a, b) {
-							return a.publishTime < b.publishTime;
-						});
-						var publisher = {
-							id: account._id,
-							userName: account.userName,
-							nickname: account.nickname,
-							realName: account.realName,
-							email: account.email,
-							birthday: account.birthday,
-							sex: account.sex,
-							phone: account.phone,
-							address: account.address,
-							introduction: account.introduction
-						};
-							
-						response.send(comments.map(function(comment) {
-							return {
-								id: comment.id,
-								content: comment.content,
-								publisher: publisher,
-								receiver: {
-									id: comment.receiver._id,
-									userName: comment.receiver.userName,
-									nickname: comment.receiver.nickname,
-									realName: comment.receiver.realName,
-									email: comment.receiver.email,
-									birthday: comment.receiver.birthday,
-									sex: comment.receiver.sex,
-									phone: comment.receiver.phone,
-									address: comment.receiver.address,
-									introduction: comment.receiver.introduction
-								},
-								publishTime: comment.publishTime,
-								receiveTime: comment.receiveTime,
-								blog: comment.blog,
-								comments: comment.comments.length,
-								ats: comment.ats.length,
-								greats: comment.greats.length
+					model.File.populate(comments, "receiver.icon", function(err, comments) {
+						if(comments && comments.length > 0) {
+							comments.sort(function(a, b) {
+								return a.publishTime < b.publishTime;
+							});
+							var publisher = {
+								id: account._id,
+								userName: account.userName,
+								nickname: account.nickname,
+								realName: account.realName,
+								email: account.email,
+								birthday: account.birthday,
+								sex: account.sex,
+								phone: account.phone,
+								address: account.address,
+								introduction: account.introduction,
+								icon: account.icon.icon ? {
+									name: account.icon.name,
+									path: account.icon.path
+								} : null
 							};
-						}));
-					} else {
-						response.send({});
-					}
+					
+							response.send(comments.map(function(comment) {
+								return {
+									id: comment.id,
+									content: comment.content,
+									publisher: publisher,
+									receiver: {
+										id: comment.receiver._id,
+										userName: comment.receiver.userName,
+										nickname: comment.receiver.nickname,
+										realName: comment.receiver.realName,
+										email: comment.receiver.email,
+										birthday: comment.receiver.birthday,
+										sex: comment.receiver.sex,
+										phone: comment.receiver.phone,
+										address: comment.receiver.address,
+										introduction: comment.receiver.introduction,
+										icon: comment.receiver.icon ? {
+											name: comment.receiver.icon.name,
+											path: comment.receiver.icon.path
+										} : null
+									},
+									publishTime: comment.publishTime,
+									receiveTime: comment.receiveTime,
+									blog: comment.blog,
+									comments: comment.comments.length,
+									ats: comment.ats.length,
+									greats: comment.greats.length
+								};
+							}));
+						} else {
+							response.send({});
+						}
+					});
 				});
 			} else {
 				response.send({
@@ -187,28 +217,31 @@ router.get("/myIssuedComments", function(request, response) {
 });
 
 var commentAt = function(publisher, comment) {
-	comment.content.match(/@\w+/g).filter(function(nickname, index, ary) {
-		return ary.indexOf(nickname) === index;
-	}).forEach(function(nickname) {
-		model.Account.findOne({ nickname: nickname.slice(1) }, function(err, account) {
-			if(account) {
-				var at = new model.Message({
-					sender: publisher._id,
-					receiver: account._id,
-					sendTime: Date.now(),
-					type: "at"
-				});
-				at.save(function(err) {
-					if(!err) {
-						account.messages.push(at._id);
-						account.save(function() {});
-						comment.ats.push(at._id);
-						comment.save(function() {});
-					}
-				});
-			}
+	var matches = comment.content.match(/@\w+/g);
+	if(matches) {
+		matches.filter(function(nickname, index, ary) {
+			return ary.indexOf(nickname) === index;
+		}).forEach(function(nickname) {
+			model.Account.findOne({ nickname: nickname.slice(1) }, function(err, account) {
+				if(account) {
+					var at = new model.Message({
+						sender: publisher._id,
+						receiver: account._id,
+						sendTime: Date.now(),
+						type: "at"
+					});
+					at.save(function(err) {
+						if(!err) {
+							account.messages.push(at._id);
+							account.save(function() {});
+							comment.ats.push(at._id);
+							comment.save(function() {});
+						}
+					});
+				}
+			});
 		});
-	});
+	}
 };
 
 router.post("/publish", function(request, response) {

@@ -6,6 +6,11 @@ var app = (function() {
 		$.get("/account/current", function(responseData) {
 			if(responseData.id) {
 				id = responseData.id;
+				if(responseData.icon) {
+					$("#sidebarIcon").attr("src", toUploadPath(responseData.icon.path) + responseData.icon.name);
+				} else {
+					$("#sidebarIcon").attr("src", "/uploads/default.ico");
+				}
 				$("#sidebarNickname").text(responseData.nickname);
 				$("#sidebarFollowingCount").text(responseData.followings);
 				$("#sidebarFollowerCount").text(responseData.followers);
@@ -19,6 +24,11 @@ var app = (function() {
 			$.get("/account/current", function(responseData) {
 				if(responseData.id) {
 					id = responseData.id;
+					if(responseData.icon) {
+						$("#sidebarIcon").attr("src", toUploadPath(responseData.icon.path) + responseData.icon.name);
+					} else {
+						$("#sidebarIcon").attr("src", "/uploads/default.ico");
+					}
 					$("#sidebarNickname").text(responseData.nickname);
 					$("#sidebarFollowingCount").text(responseData.followings);
 					$("#sidebarFollowerCount").text(responseData.followers);
@@ -41,6 +51,11 @@ var app = (function() {
 			}).done(function(responseData) {
 				if(!responseData.error) {
 					id = responseData.id;
+					if(responseData.icon) {
+						$("#sidebarIcon").attr("src", toUploadPath(responseData.icon.path) + responseData.icon.name);
+					} else {
+						$("#sidebarIcon").attr("src", "/uploads/default.ico");
+					}
 					$("#sidebarNickname").text(responseData.nickname);
 					$("#sidebarFollowingCount").text(responseData.followings);
 					$("#sidebarFollowerCount").text(responseData.followers);
@@ -113,6 +128,10 @@ var app = (function() {
 		});
 
 		$("#sidebarHome").on("click", function(e) {
+			$.get("/blog/home", function(responseData) {
+				var html = template("contentMicroBloggingDetailBlogsTemplate", { blogs: responseData });
+				$("#contentHomeBlogs").html(html);
+			});
 			$(".nav-tabs a[href='#contentHome']").tab('show');
 		});
 
@@ -147,6 +166,11 @@ var app = (function() {
 		$("#sidebarSetting").on("click", function(e) {
 			$.get("/account/current", function(responseData) {
 				if(responseData.id) {
+					if(responseData.icon) {
+						$("#contentSettingIconImg").attr("src", toUploadPath(responseData.icon.path) + responseData.icon.name);
+					} else {
+						$("#contentSettingIconImg").attr("src", "/uploads/default.ico");
+					}
 					$("#contentSettingBasicInfoNickName").val(responseData.nickname);
 					$("#contentSettingBasicInfoRealName").val(responseData.realName);
 					$("#contentSettingBasicInfoEmail").val(responseData.email);
@@ -207,6 +231,7 @@ var app = (function() {
 				if(!responseData.error) {
 					$("#contentHome form")[0].reset();
 					updateSidebar();
+					$("#sidebarHome").click();
 				} else {
 					alert(responseData.error);
 				}
@@ -237,6 +262,11 @@ var app = (function() {
 					alert(responseData.error);
 				}
 			});
+		});
+
+		$("#contentSettingIconFrame").load(function() {
+			updateSidebar();
+			$("#sidebarSetting").click();
 		});
 
 		$("#contentSettingPasswordButton").on("click", function(e) {
@@ -332,7 +362,7 @@ var app = (function() {
 			}
 		});
 
-		$("#contentSearchBlogs, #contentAtBlog, #contentMicroBloggingDetailBlogsContainer").on("click", "[click-action]", function() {
+		$("#contentSearchBlogs, #contentHomeBlogs, #contentAtBlog, #contentMicroBloggingDetailBlogsContainer").on("click", "[click-action]", function() {
 			var target = $(this);
 			var action = target.attr("click-action");
 			var container = target.closest("div[id]");
@@ -539,9 +569,12 @@ var app = (function() {
 		});
 	};
 
+	var toUploadPath = function(path) {
+		return "/uploads/" + path.match(/.{1,4}/g).join("/") + "/";
+	};
+
 	var extendTemplate = function() {
 		template.helper('dateFormat', function (date, format) {
-
     		date = new Date(date);
     		var map = {
         		"M": date.getMonth() + 1, //月份 
@@ -569,6 +602,8 @@ var app = (function() {
     		});
     		return format;
     	});
+
+    	template.helper("toUploadPath", toUploadPath);
     };
 
 	app.getId = function() {

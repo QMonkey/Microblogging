@@ -10,14 +10,11 @@ var router = express.Router();
 router.get("/current", function(request, response) {
 	var accountId = request.session.accountId;
 	if(accountId) {
-		model.Account.findById(accountId).populate("blogs").exec(function(err, doc) {
+		model.Account.findById(accountId).populate("icon blogs").exec(function(err, doc) {
 			if(doc) {
 				response.send({
 					id: doc._id,
 					userName: doc.userName,
-					followings: doc.followings.length,
-					followers: doc.followers.length,
-					blogs: doc.blogs.length,
 					nickname: doc.nickname,
 					realName: doc.realName,
 					email: doc.email,
@@ -25,7 +22,14 @@ router.get("/current", function(request, response) {
 					sex: doc.sex,
 					phone: doc.phone,
 					address: doc.address,
-					introduction: doc.introduction
+					introduction: doc.introduction,
+					icon: doc.icon ? {
+						name: doc.icon.name,
+						path: doc.icon.path
+					} : null,
+					followings: doc.followings.length,
+					followers: doc.followers.length,
+					blogs: doc.blogs.length,
 				});
 			} else {
 				response.send({});
@@ -38,7 +42,7 @@ router.get("/current", function(request, response) {
 
 router.post("/doSignIn", function(request, response) {
 	var requestData = request.body;
-	model.Account.findOne({ userName: requestData.userName }).populate("blogs").exec(function(err, doc) {
+	model.Account.findOne({ userName: requestData.userName }).populate("icon blogs").exec(function(err, doc) {
 		if(err) {
 			response.send({
 				error: err.message
@@ -50,9 +54,6 @@ router.post("/doSignIn", function(request, response) {
 				response.send({
 					id: doc._id,
 					userName: doc.userName,
-					followings: doc.followings.length,
-					followers: doc.followers.length,
-					blogs: doc.blogs.length,
 					nickname: doc.nickname,
 					realName: doc.realName,
 					email: doc.email,
@@ -60,7 +61,14 @@ router.post("/doSignIn", function(request, response) {
 					sex: doc.sex,
 					phone: doc.phone,
 					address: doc.address,
-					introduction: doc.introduction
+					introduction: doc.introduction,
+					icon: doc.icon ? {
+						name: doc.icon.name,
+						path: doc.icon.path
+					} : null,
+					followings: doc.followings.length,
+					followers: doc.followers.length,
+					blogs: doc.blogs.length,
 				});
 			} else {
 				response.send({
@@ -108,26 +116,32 @@ router.get("/doSignOut", function(request, response) {
 
 router.get("/followers", function(request, response) {
 	var accountId = request.query.id;
-	model.Account.findById(accountId).populate("followers").exec(function(err, doc) {
-		if(doc && doc.followers.length > 0) {
-			response.send(doc.followers.map(function(account) {
-				return {
-					id: account._id,
-					userName: account.userName,
-					followings: account.followings.length,
-					followers: account.followers.length,
-					blogs: account.blogs.length,
-					nickname: account.nickname,
-					realName: account.realName,
-					email: account.email,
-					birthday: account.birthday,
-					sex: account.sex,
-					phone: account.phone,
-					address: account.address,
-					introduction: account.introduction,
-					relation: "follower"
-				}
-			}));
+	model.Account.findById(accountId).populate("icon followers").exec(function(err, account) {
+		if(account && account.followers.length > 0) {
+			model.File.populate(account.followers, "icon", function(err, followers) {
+				response.send(followers.map(function(account) {
+					return {
+						id: account._id,
+						userName: account.userName,
+						nickname: account.nickname,
+						realName: account.realName,
+						email: account.email,
+						birthday: account.birthday,
+						sex: account.sex,
+						phone: account.phone,
+						address: account.address,
+						introduction: account.introduction,
+						icon: account.icon ? {
+							name: account.icon.name,
+							path: account.icon.path
+						} : null,
+						followings: account.followings.length,
+						followers: account.followers.length,
+						blogs: account.blogs.length,
+						relation: "follower"
+					}
+				}));
+			});
 		} else {
 			response.send({});
 		}
@@ -136,26 +150,32 @@ router.get("/followers", function(request, response) {
 
 router.get("/followings", function(request, response) {
 	var accountId = request.query.id;
-	model.Account.findById(accountId).populate("followings").exec(function(err, doc) {
-		if(doc && doc.followings.length > 0) {
-			response.send(doc.followings.map(function(account) {
-				return {
-					id: account._id,
-					userName: account.userName,
-					followings: account.followings.length,
-					followers: account.followers.length,
-					blogs: account.blogs.length,
-					nickname: account.nickname,
-					realName: account.realName,
-					email: account.email,
-					birthday: account.birthday,
-					sex: account.sex,
-					phone: account.phone,
-					address: account.address,
-					introduction: account.introduction,
-					relation: "following"
-				}
-			}));
+	model.Account.findById(accountId).populate("icon followings").exec(function(err, account) {
+		if(account && account.followings.length > 0) {
+			model.File.populate(account.followings, "icon", function(err, followings) {
+				response.send(followings.map(function(account) {
+					return {
+						id: account._id,
+						userName: account.userName,
+						nickname: account.nickname,
+						realName: account.realName,
+						email: account.email,
+						birthday: account.birthday,
+						sex: account.sex,
+						phone: account.phone,
+						address: account.address,
+						introduction: account.introduction,
+						icon: account.icon ? {
+							name: account.icon.name,
+							path: account.icon.path
+						} : null,
+						followings: account.followings.length,
+						followers: account.followers.length,
+						blogs: account.blogs.length,
+						relation: "following"
+					}
+				}));
+			});
 		} else {
 			response.send({});
 		}

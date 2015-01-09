@@ -27,7 +27,7 @@ router.post("/updateInfo", function(request, response) {
 					} else {
 						response.send({
 							error: err.message
-						})
+						});
 					}
 				});
 			} else {
@@ -35,6 +35,50 @@ router.post("/updateInfo", function(request, response) {
 					error: "Please sign in first!"
 				});
 			}
+		});
+	}
+});
+
+router.post("/updateIcon", function(request, response) {
+	var accountId = request.session.accountId;
+	if(accountId) {
+		model.Account.findById(accountId, function(err, account) {
+			if(account) {
+				var icon = request.files.icon;
+				var path = icon.name.substring(0, icon.name.indexOf("_"));
+
+				var file = new model.File({
+					name: icon.originalname,
+					path: path,
+					mimeType: icon.mimetype
+				});
+				file.save(function(err) {
+					if(!err) {
+						account.icon = file._id;
+						account.save(function(err) {
+							if(!err) {
+								response.send({});
+							} else {
+								response.send({
+									error: err.message
+								});
+							}
+						});
+					} else {
+						response.send({
+							error: err
+						});
+					}
+				});
+			} else {
+				response.send({
+					error: "Please sign in first!"
+				});
+			}
+		});
+	} else {
+		response.send({
+			error: "Please sign in first!"
 		});
 	}
 });

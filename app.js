@@ -1,10 +1,14 @@
 var express = require('express');
 var path = require('path');
+var fs = require("fs");
 var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require("express-session");
 var mongoose = require("mongoose");
+var multer = require("multer");
+var mkdirp = require("mkdirp");
+var uuid = require("node-uuid");
 
 var routes = require('./routes/index');
 var account = require("./routes/account");
@@ -30,6 +34,38 @@ app.use(session({
     cookie: {
         secure: false,
         maxAge: 3600000
+    }
+}));
+app.use(multer({
+    dest: path.join("public", "uploads"),
+    rename: function (fieldname, filename) {
+        return uuid.v4().replace(/-/g, "") + "_" + filename;
+    },
+    onFileUploadComplete: function(file) {
+        var newPath = path.join.apply(this, file.name.substring(0, file.name.indexOf("_")).match(/.{1,4}/g));
+        newPath = path.join("public", "uploads", newPath, file.originalname);
+        var newPathDirname = path.dirname(newPath);
+
+        mkdirp(newPathDirname, 0755, function(err) {
+            if(!err) {
+                var source = fs.createReadStream(file.path);
+                var dest = fs.createWriteStream(newPath);
+
+                source.pipe(dest);
+                source.on('end', function() {
+                    fs.unlink(file.path, function(){
+                        if(err) {
+                            console.log(err);
+                        }
+                    });
+                });
+                source.on('error', function(err) {
+                    console.log(err);
+                });
+            } else {
+                console.log(err);
+            }
+        });
     }
 }));
 

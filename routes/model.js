@@ -13,11 +13,18 @@ var AccountSchema = new Schema({
 	phone: String,
 	address: String,
 	introduction: String,
+	icon: { type: Schema.Types.ObjectId, ref: "File", default: null },
 	followings: [{ type: Schema.Types.ObjectId, ref: "Account" }],
 	followers: [{ type: Schema.Types.ObjectId, ref: "Account" }],
 	blogs: [{ type: Schema.Types.ObjectId, ref: "Blog" }],
 	comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 	messages: [{ type: Schema.Types.ObjectId, ref: "Message" }]
+});
+
+var FileSchema = new Schema({
+	name: { type: String, require: true },
+	path: { type: String, require: true },
+	mimeType: { type: String, require: true }
 });
 
 var BlogSchema = new Schema({
@@ -52,6 +59,7 @@ var MessageSchema = new Schema({
 });
 
 module.exports.Account = mongoose.model("Account", AccountSchema, "Account");
+module.exports.File = mongoose.model("File", FileSchema, "File");
 module.exports.Blog = mongoose.model("Blog", BlogSchema, "Blog");
 module.exports.Comment = mongoose.model("Comment", CommentSchema, "Comment");
 module.exports.Message = mongoose.model("Message", MessageSchema, "Message");
