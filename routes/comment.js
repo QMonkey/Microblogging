@@ -85,6 +85,16 @@ router.get("/myReceivedComments", function(request, response) {
 			receiver: accountId
 		}).populate("publisher receiver").exec(function(err, comments) {
 			if(comments && comments.length > 0) {
+				comments.forEach(function(comment) {
+					if(comment.receiveTime === 0) {
+						comment.receiveTime = Date.now();
+						comment.save(function(err) {
+							if(err) {
+								console.log(err);
+							}
+						});
+					}
+				});
 				model.File.populate(comments, "publisher.icon receiver.icon", function(err, comments) {
 					comments.sort(function(a, b) {
 						return a.publishTime < b.publishTime;

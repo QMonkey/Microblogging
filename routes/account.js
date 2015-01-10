@@ -114,6 +114,62 @@ router.get("/doSignOut", function(request, response) {
 	response.send({});
 });
 
+router.get("/unreadMessages", function(request, response) {
+	var accountId = request.session.accountId;
+	if(accountId) {
+		var prompt = {};
+		model.Message.count({
+			receiver: accountId,
+			receiveTime: 0,
+			type: "at"
+		}, function(err, cnt) {
+			if(!err) {
+				if(cnt) {
+					prompt.ats = cnt;
+				}
+				model.Message.count({
+					receiver: accountId,
+					receiveTime: 0,
+					type: "whisper"
+				}, function(err, cnt) {
+					if(!err) {
+						if(cnt) {
+							prompt.whispers = cnt;
+						}
+						model.Comment.count({
+							receiver: accountId,
+							receiveTime: 0
+						}, function(err, cnt) {
+							if(!err) {
+								if(cnt) {
+									prompt.comments = cnt;
+								}
+								response.send(prompt);
+							} else {
+								response.send({
+									error: err.message
+								});
+							}
+						});
+					} else {
+						response.send({
+							error: err.message
+						});
+					}
+				});
+			} else {
+				response.send({
+					error: err.message
+				});
+			}
+		});
+	} else {
+		response.send({
+			error: "Please sign in first!"
+		});
+	}
+});
+
 router.get("/followers", function(request, response) {
 	var accountId = request.query.id;
 	model.Account.findById(accountId).populate("icon followers").exec(function(err, account) {

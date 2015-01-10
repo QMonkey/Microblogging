@@ -13,7 +13,19 @@ router.get("/blogAts", function(request, response) {
 			type: "at"
 		}, function(err, ats) {
 			if(ats && ats.length > 0) {
-				model.Blog.find({}).populate("publisher").exec(function(err, blogs) {
+				model.Blog.find({}).populate("publisher ats").exec(function(err, blogs) {
+					blogs.forEach(function(blog) {
+						blog.ats.forEach(function(at) {
+							if(at.receiveTime === 0) {
+								at.receiveTime = Date.now();
+								at.save(function(err) {
+									if(err) {
+										console.log(err);
+									}
+								});
+							}
+						});
+					});
 					model.File.populate(blogs, "publisher.icon", function(err, blogs) {
 						var atIds = ats.map(function(at) {
 							return at._id.toString();
@@ -76,7 +88,19 @@ router.get("/commentAts", function(request, response) {
 			type: "at"
 		}, function(err, ats) {
 			if(ats && ats.length > 0) {
-				model.Comment.find({}).populate("publisher receiver").exec(function(err, comments) {
+				model.Comment.find({}).populate("publisher receiver ats").exec(function(err, comments) {
+					comments.forEach(function(comment) {
+						comment.ats.forEach(function(at) {
+							if(at.receiveTime === 0) {
+								at.receiveTime = Date.now();
+								at.save(function(err) {
+									if(err) {
+										console.log(err);
+									}
+								});
+							}
+						});
+					});
 					model.File.populate(comments, "publisher.icon receiver.icon", function(err, comments) {
 						var atIds = ats.map(function(at) {
 							return at._id.toString();

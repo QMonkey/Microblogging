@@ -251,7 +251,7 @@
 					<a href="javascript:;">
 						<i
 						class="fa fa-at"></i>
-						<span class="badge pull-right">9</span>
+						<span class="badge pull-right"></span>
 						提到我的
 					</a>
 				</li>
@@ -259,7 +259,7 @@
 					<a href="javascript:;">
 						<i
 						class="fa fa-comment"></i>
-						<span class="badge pull-right">42</span>
+						<span class="badge pull-right"></span>
 						我的评论
 					</a>
 				</li>
@@ -267,7 +267,7 @@
 					<a href="javascript:;">
 						<i
 						class="fa fa-envelope"></i>
-						<span class="badge pull-right">10</span>
+						<span class="badge pull-right"></span>
 						我的私信
 					</a>
 				</li>
@@ -812,25 +812,35 @@
 					</button>
 				</div>
 				<div class="popover-content">
-					<p>
-						1位新粉丝，
-						<a href="javascript:;">查看粉丝</a>
-					</p>
-					<p>
-						1条@我，
-						<a href="javascript:;">查看@我</a>
-					</p>
-					<p>
-						1条新评论，
-						<a href="javascript:;">查看评论</a>
-					</p>
-					<p>
-						1条新私信，
-						<a href="javascript:;">查看私信</a>
-					</p>
 				</div>
 			</div>
 		</div>
+		<script id="messengerTemplate" type="text/html">
+			{{if prompt.followers }}
+			<p>
+				{{ prompt.followers }}位新粉丝，
+				<a href="javascript:;" click-action="follower">查看粉丝</a>
+			</p>
+			{{/if}}
+			{{if prompt.ats }}
+			<p>
+				{{ prompt.ats }}条@我，
+				<a href="javascript:;" click-action="at">查看@我</a>
+			</p>
+			{{/if}}
+			{{if prompt.comments }}
+			<p>
+				{{ prompt.comments }}条新评论，
+				<a href="javascript:;" click-action="comment">查看评论</a>
+			</p>
+			{{/if}}
+			{{if prompt.whispers }}
+			<p>
+				{{ prompt.whispers }}条新私信，
+				<a href="javascript:;" click-action="whisper">查看私信</a>
+			</p>
+			{{/if}}
+		</script>
 		<!-- Messenger End -->
 
 		<!-- Whisper Start -->
