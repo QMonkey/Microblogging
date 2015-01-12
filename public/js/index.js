@@ -22,7 +22,7 @@ var app = (function() {
 				updateMessenger();
 			} else {
 				if(unsignedIn instanceof Function) {
-					unsignedIn.apply(this, Array.prototype.slice.call(arguments, 2));
+					unsignedIn.apply(this, [responseData].concat(Array.prototype.slice.call(arguments, 2)));
 				}
 			}
 		});
