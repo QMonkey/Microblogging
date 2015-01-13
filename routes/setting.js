@@ -7,6 +7,8 @@ var model = require("./model");
 var router = express.Router();
 var ObjectId = mongoose.Types.ObjectId;
 
+var app, io;
+
 router.post("/updateInfo", function(request, response) {
 	var requestData = request.body;
 	var accountId = request.session.accountId;
@@ -117,4 +119,8 @@ router.post("/changePassword", function(request, response) {
 	}
 });
 
-module.exports = router;
+module.exports = function(application, socketIO) {
+	app = application;
+	io = socketIO;
+	return router;
+};

@@ -5,6 +5,8 @@ var model = require("./model");
 
 var router = express.Router();
 
+var app, io;
+
 router.get("/blogComments", function(request, response) {
 	var blogId = request.query.id;
 	if(blogId) {
@@ -177,7 +179,7 @@ router.get("/myIssuedComments", function(request, response) {
 								phone: account.phone,
 								address: account.address,
 								introduction: account.introduction,
-								icon: account.icon.icon ? {
+								icon: account.icon ? {
 									name: account.icon.name,
 									path: account.icon.path
 								} : null
@@ -241,9 +243,15 @@ var commentAt = function(publisher, comment) {
 						type: "at"
 					});
 					at.save(function(err) {
+						var accountMap = app.get("accountMap");
 						if(!err) {
-							account.messages.push(at._id);
-							account.save(function() {});
+							accountMap[account._id].forEach(function(info) {
+								if(info.online) {
+									io.sockets.connected[info.socketId].emit("prompt", {});
+								}
+							});
+							publisher.messages.push(at._id);
+							publisher.save(function() {});
 							comment.ats.push(at._id);
 							comment.save(function() {});
 						}
@@ -269,10 +277,16 @@ router.post("/publish", function(request, response) {
 					blog: blogId
 				});
 				model.Blog.findById(blogId, function(err, blog) {
+					var accountMap = app.get("accountMap");
 					if(blog) {
 						comment.receiver = blog.publisher;
 						comment.save(function(err) {
 							if(!err) {
+								accountMap[comment.receiver].forEach(function(info) {
+									if(info.online) {
+										io.sockets.connected[info.socketId].emit("prompt", {});
+									}
+								});
 								account.comments.push(comment._id);
 								account.save(function(err) {
 									if(!err) {
@@ -399,4 +413,8 @@ router.post("/great", function(request, response) {
 	}
 });
 
-module.exports = router;
+module.exports = function(application, socketIO) {
+	app = application;
+	io = socketIO;
+	return router;
+};

@@ -10,24 +10,27 @@ var mongoose = require("mongoose");
 var multer = require("multer");
 var mkdirp = require("mkdirp");
 var uuid = require("node-uuid");
+var socketIO = require("socket.io");
 var debug = require('debug')('Microblogging');
 
-var routes = require('./routes/index');
+var index = require('./routes/index');
 var account = require("./routes/account");
 var setting = require("./routes/setting");
 var blog = require("./routes/blog");
 var comment = require("./routes/comment");
 var at = require("./routes/at");
+var sio = require("./routes/sio");
 
 var app = express();
 
+app.set("accountMap", {});
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
     debug('Express server listening on port ' + server.address().port);
 });
 
-app.set("accountMap", {});
+var io = socketIO(server);
 
 mongoose.connect("mongodb://localhost/Microblogging");
 
@@ -64,7 +67,7 @@ app.use(multer({
 
                 source.pipe(dest);
                 source.on('end', function() {
-                    fs.unlink(file.path, function(){
+                    fs.unlink(file.path, function() {
                         if(err) {
                             console.log(err);
                         }
@@ -80,12 +83,13 @@ app.use(multer({
     }
 }));
 
-app.use('/', routes);
-app.use("/account", account);
-app.use("/setting", setting);
-app.use("/blog", blog);
-app.use("/comment", comment);
-app.use("/at", at);
+app.use('/', index(app, io));
+app.use("/account", account(app, io));
+app.use("/setting", setting(app, io));
+app.use("/blog", blog(app, io));
+app.use("/comment", comment(app, io));
+app.use("/at", at(app, io));
+sio(app, io);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -5,6 +5,8 @@ var model = require("./model");
 
 var router = express.Router();
 
+var app, io;
+
 router.get("/home", function(request, response) {
 	var accountId = request.session.accountId;
 	if(accountId) {
@@ -294,11 +296,25 @@ var blogAt = function(publisher, blog) {
 						type: "at"
 					});
 					at.save(function(err) {
+						var accountMap = app.get("accountMap");
 						if(!err) {
-							account.messages.push(at._id);
-							account.save(function() {});
+							accountMap[account._id].forEach(function(info) {
+								if(info.online) {
+									io.sockets.connected[info.socketId].emit("prompt", {});
+								}
+							});
+							publisher.messages.push(at._id);
+							publisher.save(function(err) {
+								if(err) {
+									console.log(err);
+								}
+							});
 							blog.ats.push(at._id);
-							blog.save(function() {});
+							blog.save(function(err) {
+								if(err) {
+									console.log(err);
+								}
+							});
 						}
 					});
 				}
@@ -417,4 +433,8 @@ router.post("/great", function(request, response) {
 	}
 });
 
-module.exports = router;
+module.exports = function(application, socketIO) {
+	app = application;
+	io = socketIO;
+	return router;
+};

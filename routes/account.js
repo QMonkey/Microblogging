@@ -7,6 +7,8 @@ var model = require("./model");
 
 var router = express.Router();
 
+var app, io;
+
 router.get("/current", function(request, response) {
 	var accountId = request.session.accountId;
 	if(accountId) {
@@ -175,26 +177,27 @@ router.get("/followers", function(request, response) {
 	model.Account.findById(accountId).populate("icon followers").exec(function(err, account) {
 		if(account && account.followers.length > 0) {
 			model.File.populate(account.followers, "icon", function(err, followers) {
-				response.send(followers.map(function(account) {
+				response.send(followers.map(function(follower) {
 					return {
-						id: account._id,
-						userName: account.userName,
-						nickname: account.nickname,
-						realName: account.realName,
-						email: account.email,
-						birthday: account.birthday,
-						sex: account.sex,
-						phone: account.phone,
-						address: account.address,
-						introduction: account.introduction,
-						icon: account.icon ? {
-							name: account.icon.name,
-							path: account.icon.path
+						id: follower._id,
+						userName: follower.userName,
+						nickname: follower.nickname,
+						realName: follower.realName,
+						email: follower.email,
+						birthday: follower.birthday,
+						sex: follower.sex,
+						phone: follower.phone,
+						address: follower.address,
+						introduction: follower.introduction,
+						icon: follower.icon ? {
+							name: follower.icon.name,
+							path: follower.icon.path
 						} : null,
-						followings: account.followings.length,
-						followers: account.followers.length,
-						blogs: account.blogs.length,
-						relation: "follower"
+						followings: follower.followings.length,
+						followers: follower.followers.length,
+						blogs: follower.blogs.length,
+						relation: account.followings.indexOf(follower._id.toString()) !== -1 ? 
+							"friend" : "follower"
 					}
 				}));
 			});
@@ -209,26 +212,26 @@ router.get("/followings", function(request, response) {
 	model.Account.findById(accountId).populate("icon followings").exec(function(err, account) {
 		if(account && account.followings.length > 0) {
 			model.File.populate(account.followings, "icon", function(err, followings) {
-				response.send(followings.map(function(account) {
+				response.send(followings.map(function(following) {
 					return {
-						id: account._id,
-						userName: account.userName,
-						nickname: account.nickname,
-						realName: account.realName,
-						email: account.email,
-						birthday: account.birthday,
-						sex: account.sex,
-						phone: account.phone,
-						address: account.address,
-						introduction: account.introduction,
-						icon: account.icon ? {
-							name: account.icon.name,
-							path: account.icon.path
+						id: following._id,
+						userName: following.userName,
+						nickname: following.nickname,
+						realName: following.realName,
+						email: following.email,
+						birthday: following.birthday,
+						sex: following.sex,
+						phone: following.phone,
+						address: following.address,
+						introduction: following.introduction,
+						icon: following.icon ? {
+							name: following.icon.name,
+							path: following.icon.path
 						} : null,
-						followings: account.followings.length,
-						followers: account.followers.length,
-						blogs: account.blogs.length,
-						relation: "following"
+						followings: following.followings.length,
+						followers: following.followers.length,
+						blogs: following.blogs.length,
+						relation: following.followers.indexOf(accountId) !== -1 ? "friend" : "following"
 					}
 				}));
 			});
@@ -340,4 +343,8 @@ router.post("/unfollow", function(request, response) {
 	}
 });
 
-module.exports = router;
+module.exports = function(application, socketIO) {
+	app = application;
+	io = socketIO;
+	return router;
+};

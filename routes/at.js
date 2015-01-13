@@ -5,6 +5,8 @@ var model = require("./model");
 
 var router = express.Router();
 
+var app, io;
+
 router.get("/blogAts", function(request, response) {
 	var accountId = request.session.accountId;
 	if(accountId) {
@@ -16,7 +18,7 @@ router.get("/blogAts", function(request, response) {
 				model.Blog.find({}).populate("publisher ats").exec(function(err, blogs) {
 					blogs.forEach(function(blog) {
 						blog.ats.forEach(function(at) {
-							if(at.receiveTime === 0) {
+							if(at.receiver.toString() === accountId && at.receiveTime === 0) {
 								at.receiveTime = Date.now();
 								at.save(function(err) {
 									if(err) {
@@ -33,7 +35,7 @@ router.get("/blogAts", function(request, response) {
 						if(blogs && blogs.length > 0) {
 							response.send(blogs.filter(function(blog) {
 								return blog.ats.some(function(atId) {
-									return atIds.indexOf(atId.toString()) !== -1;
+									return atIds.indexOf(atId._id.toString()) !== -1;
 								});
 							}).sort(function(a, b) {
 								return a.publishTime < b.publishTime;
@@ -91,7 +93,7 @@ router.get("/commentAts", function(request, response) {
 				model.Comment.find({}).populate("publisher receiver ats").exec(function(err, comments) {
 					comments.forEach(function(comment) {
 						comment.ats.forEach(function(at) {
-							if(at.receiveTime === 0) {
+							if(at.receiver.toString() === accountId && at.receiveTime === 0) {
 								at.receiveTime = Date.now();
 								at.save(function(err) {
 									if(err) {
@@ -108,7 +110,7 @@ router.get("/commentAts", function(request, response) {
 						if(comments && comments.length > 0) {
 							response.send(comments.filter(function(comment) {
 								return comment.ats.some(function(atId) {
-									return atIds.indexOf(atId.toString()) !== -1;
+									return atIds.indexOf(atId._id.toString()) !== -1;
 								});
 							}).sort(function(a, b) {
 								return a.publishTime < b.publishTime;
@@ -172,4 +174,8 @@ router.get("/commentAts", function(request, response) {
 	}
 });
 
-module.exports = router;
+module.exports = function(application, socketIO) {
+	app = application;
+	io = socketIO;
+	return router;
+};

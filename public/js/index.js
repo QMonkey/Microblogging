@@ -1,6 +1,6 @@
 var app = (function() {
 	var app = {};
-	var id;
+	var id, socket;
 
 	var updateSidebar = function(signedIn, unsignedIn) {
 		var args = arguments;
@@ -34,11 +34,14 @@ var app = (function() {
 				$("#sidebarAt span").text(responseData.ats ? responseData.ats : "");
 				$("#sidebarMyComment span").text(responseData.comments ? responseData.comments : "");
 				$("#sidebarPrivateMessage span").text(responseData.whispers ? responseData.whispers : "");
-				if(responseData.followers && responseData.ats && 
-					responseData.comments && responseData.whispers) {
+				if(responseData.followers || responseData.ats || 
+					responseData.comments || responseData.whispers) {
 					var html = template("messengerTemplate", { prompt: responseData });
 					$("#messenger div[class='popover-content']").html(html);
 					$("#messenger").removeClass("hidden");
+				} else {
+					$("#messenger div[class='popover-content']").empty();
+					$("#messenger").addClass("hidden");
 				}
 			} else {
 				alert(responseData.error);
@@ -48,11 +51,17 @@ var app = (function() {
 
 	var bindEvent = function() {
 		$().ready(function() {
+			socket = io();
+			socket.on("prompt", function() {
+				updateMessenger();
+			});
 			updateSidebar(function() {
 				$(".nav-tabs a[href='#signedIn']").tab('show');
 				$("#sidebarHome").click();
+				socket.emit("signIn", { id: id });
 			}, function() {
 				$(".nav-tabs a[href='#signIn']").tab('show');
+				socket.emit("signOut", { id: id });
 			});
 		});
 
@@ -81,6 +90,7 @@ var app = (function() {
 					$("#signIn")[0].reset();
 					$(".nav-tabs a[href='#signedIn']").tab('show');
 					$("#sidebarHome").click();
+					socket.emit("signIn", { id: id });
 				} else {
 					alert(responseData.error);
 				}
@@ -154,22 +164,15 @@ var app = (function() {
 		});
 
 		$("#sidebarAt").on("click", function(e) {
-			var counter = 0;
 			$.get("/at/blogAts", function(responseData) {
 				var html = template("contentMicroBloggingDetailBlogsTemplate", { blogs: responseData });
 				$("#contentAtBlog").html(html);
-				++counter;
-				if(counter === 2) {
-					updateMessenger();
-				}
+				updateMessenger();
 			});
 			$.get("/at/commentAts", function(responseData) {
 				var html = template("contentMyCommentReceiveTemplate", { comments: responseData });
 				$("#contentAtComment").html(html);
-				++counter;
-				if(counter === 2) {
-					updateMessenger();
-				}
+				updateMessenger();
 			});
 			$(".nav-tabs a[href='#contentAt']").tab('show');
 		});
@@ -219,6 +222,7 @@ var app = (function() {
 		$("#sidebarSignOut").on("click", function(e) {
 			$.get("/account/doSignOut", function() {
 				$(".nav-tabs a[href='#signIn']").tab('show');
+				socket.emit("signOut", { id: id });
 			});
 		});
 
@@ -593,6 +597,7 @@ var app = (function() {
 				default:
 					break;
 			}
+			updateMessenger();
 		});
 
 		$("#messengerButton").on("click", function(e) {
@@ -658,10 +663,6 @@ var app = (function() {
 
     	template.helper("toUploadPath", toUploadPath);
     };
-
-	app.getId = function() {
-		return id;
-	};
 
 	app.init = function() {
 		bindEvent();
