@@ -29,6 +29,19 @@ module.exports = function(app, io) {
 			});
 		});
 
+		/*
+		socket.on("whisper", function(data) {
+			var id = data.id;
+			if(id && accountMap[id]) {
+				accountMap[id].forEach(function(info) {
+					if(info.online) {
+						io.sockets.connected[info.socketId].emit("whisper", {});
+					}
+				});
+			}
+		});
+		*/
+
 		socket.on("signOut", function(data) {
 			var id = data.id;
 			if(id && accountMap[id]) {

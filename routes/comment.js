@@ -87,9 +87,10 @@ router.get("/myReceivedComments", function(request, response) {
 			receiver: accountId
 		}).populate("publisher receiver").exec(function(err, comments) {
 			if(comments && comments.length > 0) {
+				var currentTime = Date.now();
 				comments.forEach(function(comment) {
 					if(comment.receiveTime === 0) {
-						comment.receiveTime = Date.now();
+						comment.receiveTime = currentTime;
 						comment.save(function(err) {
 							if(err) {
 								console.log(err);
@@ -245,11 +246,13 @@ var commentAt = function(publisher, comment) {
 					at.save(function(err) {
 						var accountMap = app.get("accountMap");
 						if(!err) {
-							accountMap[account._id].forEach(function(info) {
-								if(info.online) {
-									io.sockets.connected[info.socketId].emit("prompt", {});
-								}
-							});
+							if(accountMap[account._id]) {
+								accountMap[account._id].forEach(function(info) {
+									if(info.online) {
+										io.sockets.connected[info.socketId].emit("prompt", {});
+									}
+								});
+							}
 							publisher.messages.push(at._id);
 							publisher.save(function() {});
 							comment.ats.push(at._id);
@@ -282,11 +285,13 @@ router.post("/publish", function(request, response) {
 						comment.receiver = blog.publisher;
 						comment.save(function(err) {
 							if(!err) {
-								accountMap[comment.receiver].forEach(function(info) {
-									if(info.online) {
-										io.sockets.connected[info.socketId].emit("prompt", {});
-									}
-								});
+								if(accountMap[comment.receiver]) {
+									accountMap[comment.receiver].forEach(function(info) {
+										if(info.online) {
+											io.sockets.connected[info.socketId].emit("prompt", {});
+										}
+									});
+								}
 								account.comments.push(comment._id);
 								account.save(function(err) {
 									if(!err) {
@@ -364,6 +369,7 @@ router.post("/great", function(request, response) {
 					if(comment) {
 						var great = new model.Message({
 							sender: accountId,
+							receiver: comment.publisher,
 							sendTime: Date.now(),
 							type: "great"
 						});

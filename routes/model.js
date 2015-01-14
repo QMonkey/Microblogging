@@ -52,10 +52,10 @@ var CommentSchema = new Schema({
 var MessageSchema = new Schema({
 	content: { type: String, default: null },
 	sender: { type: Schema.Types.ObjectId, ref: "Account", require: true },
-	receiver: { type: Schema.Types.ObjectId, ref: "Account", default: null },
+	receiver: { type: Schema.Types.ObjectId, ref: "Account", require: true },
 	sendTime: { type: Number, require: true },
 	receiveTime: { type: Number, default: 0 },
-	type: { type: String, default: "great" }	//great, at, whisper
+	type: { type: String, enum: ["great", "at", "whisper"] }
 });
 
 module.exports.Account = mongoose.model("Account", AccountSchema, "Account");

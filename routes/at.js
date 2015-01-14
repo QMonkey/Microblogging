@@ -16,10 +16,11 @@ router.get("/blogAts", function(request, response) {
 		}, function(err, ats) {
 			if(ats && ats.length > 0) {
 				model.Blog.find({}).populate("publisher ats").exec(function(err, blogs) {
+					var currentTime = Date.now();
 					blogs.forEach(function(blog) {
 						blog.ats.forEach(function(at) {
 							if(at.receiver.toString() === accountId && at.receiveTime === 0) {
-								at.receiveTime = Date.now();
+								at.receiveTime = currentTime;
 								at.save(function(err) {
 									if(err) {
 										console.log(err);
@@ -91,10 +92,11 @@ router.get("/commentAts", function(request, response) {
 		}, function(err, ats) {
 			if(ats && ats.length > 0) {
 				model.Comment.find({}).populate("publisher receiver ats").exec(function(err, comments) {
+					var currentTime = Date.now();
 					comments.forEach(function(comment) {
 						comment.ats.forEach(function(at) {
 							if(at.receiver.toString() === accountId && at.receiveTime === 0) {
-								at.receiveTime = Date.now();
+								at.receiveTime = currentTime;
 								at.save(function(err) {
 									if(err) {
 										console.log(err);

@@ -298,11 +298,13 @@ var blogAt = function(publisher, blog) {
 					at.save(function(err) {
 						var accountMap = app.get("accountMap");
 						if(!err) {
-							accountMap[account._id].forEach(function(info) {
-								if(info.online) {
-									io.sockets.connected[info.socketId].emit("prompt", {});
-								}
-							});
+							if(accountMap[account._id]) {
+								accountMap[account._id].forEach(function(info) {
+									if(info.online) {
+										io.sockets.connected[info.socketId].emit("prompt", {});
+									}
+								});
+							}
 							publisher.messages.push(at._id);
 							publisher.save(function(err) {
 								if(err) {
@@ -376,6 +378,7 @@ router.post("/great", function(request, response) {
 					if(doc) {
 						var great = new model.Message({
 							sender: accountId,
+							receiver: doc.publisher,
 							sendTime: Date.now(),
 							type: "great"
 						});

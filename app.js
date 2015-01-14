@@ -19,7 +19,8 @@ var setting = require("./routes/setting");
 var blog = require("./routes/blog");
 var comment = require("./routes/comment");
 var at = require("./routes/at");
-var sio = require("./routes/sio");
+var whisper = require("./routes/whisper");
+var prompt = require("./routes/prompt");
 
 var app = express();
 
@@ -89,7 +90,8 @@ app.use("/setting", setting(app, io));
 app.use("/blog", blog(app, io));
 app.use("/comment", comment(app, io));
 app.use("/at", at(app, io));
-sio(app, io);
+app.use("/whisper", whisper(app, io));
+prompt(app, io);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
