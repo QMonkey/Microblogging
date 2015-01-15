@@ -2,17 +2,21 @@ var app = (function() {
 	var app = {};
 	var id, socket;
 
-	var updateSidebar = function(signedIn, unsignedIn) {
+	var updatePage = function(signedIn, unsignedIn) {
 		var args = arguments;
 		$.get("/account/current", function(responseData) {
 			if(responseData.id) {
 				id = responseData.id;
+				var path;
 				if(responseData.icon) {
-					$("#sidebarIcon").attr("src", toUploadPath(responseData.icon.path) + responseData.icon.name);
+					path = toUploadPath(responseData.icon.path) + responseData.icon.name;
 				} else {
-					$("#sidebarIcon").attr("src", "/uploads/default.ico");
+					path = "/uploads/default.ico";
 				}
+				$("#sidebarIcon").attr("src", path);
+				$("#whisperBoxIcon").attr("src", path);
 				$("#sidebarNickname").text(responseData.nickname);
+				$("#whisperBoxNickname").text(responseData.nickname);
 				$("#sidebarFollowingCount").text(responseData.followings);
 				$("#sidebarFollowerCount").text(responseData.followers);
 				$("#sidebarBlogCount").text(responseData.blogs);
@@ -33,7 +37,7 @@ var app = (function() {
 			if(!responseData.error) {
 				$("#sidebarAt span").text(responseData.ats ? responseData.ats : "");
 				$("#sidebarMyComment span").text(responseData.comments ? responseData.comments : "");
-				$("#sidebarPrivateMessage span").text(responseData.whispers ? responseData.whispers : "");
+				$("#sidebarMyWhisper span").text(responseData.whispers ? responseData.whispers : "");
 				if(responseData.followers || responseData.ats || 
 					responseData.comments || responseData.whispers) {
 					var html = template("messengerTemplate", { prompt: responseData });
@@ -55,7 +59,7 @@ var app = (function() {
 			socket.on("prompt", function() {
 				updateMessenger();
 			});
-			updateSidebar(function() {
+			updatePage(function() {
 				$(".nav-tabs a[href='#signedIn']").tab('show');
 				$("#sidebarHome").click();
 				socket.emit("signIn", { id: id });
@@ -77,13 +81,16 @@ var app = (function() {
 					updateMessenger();
 
 					id = responseData.id;
+					var path;
 					if(responseData.icon) {
-						$("#sidebarIcon").attr("src", toUploadPath(responseData.icon.path) + 
-							responseData.icon.name);
+						path = toUploadPath(responseData.icon.path) + responseData.icon.name;
 					} else {
-						$("#sidebarIcon").attr("src", "/uploads/default.ico");
+						path = "/uploads/default.ico";
 					}
+					$("#sidebarIcon").attr("src", path);
+					$("#whisperBoxIcon").attr("src", path);
 					$("#sidebarNickname").text(responseData.nickname);
+					$("#whisperBoxNickname").text(responseData.nickname);
 					$("#sidebarFollowingCount").text(responseData.followings);
 					$("#sidebarFollowerCount").text(responseData.followers);
 					$("#sidebarBlogCount").text(responseData.blogs);
@@ -190,12 +197,16 @@ var app = (function() {
 			$(".nav-tabs a[href='#contentMyComment']").tab('show');
 		});
 
-		$("#sidebarPrivateMessage").on("click", function(e) {
-			$(".nav-tabs a[href='#contentPrivateMessage']").tab('show');
+		$("#sidebarMyWhisper").on("click", function(e) {
+			$.get("/whisper/myWhispers", function(responseData) {
+				var html = template("contentMyWhisperTemplate", { whispers: responseData });
+				$("#contentMyWhisper").html(html);
+			});
+			$(".nav-tabs a[href='#contentMyWhisper']").tab('show');
 		});
 
 		$("#sidebarSetting").on("click", function(e) {
-			updateSidebar(function(responseData) {
+			updatePage(function(responseData) {
 				$("#contentSettingBasicInfoNickName").val(responseData.nickname);
 				$("#contentSettingBasicInfoRealName").val(responseData.realName);
 				$("#contentSettingBasicInfoEmail").val(responseData.email);
@@ -261,7 +272,7 @@ var app = (function() {
 			}).done(function(responseData) {
 				if(!responseData.error) {
 					$("#contentHome form")[0].reset();
-					updateSidebar();
+					updatePage();
 					$("#sidebarHome").click();
 				} else {
 					alert(responseData.error);
@@ -296,7 +307,7 @@ var app = (function() {
 		});
 
 		$("#contentSettingIconFrame").load(function() {
-			updateSidebar();
+			updatePage();
 			$("#sidebarSetting").click();
 		});
 
@@ -349,7 +360,7 @@ var app = (function() {
 					}).done(function(responseData) {
 						if(!responseData.error) {
 							$("#sidebarSearchButton").click();
-							updateSidebar();
+							updatePage();
 						} else {
 							alert(responseData.error);
 						}
@@ -362,7 +373,7 @@ var app = (function() {
 					}).done(function(responseData) {
 						if(!responseData.error) {
 							$("#sidebarSearchButton").click();
-							updateSidebar();
+							updatePage();
 						} else {
 							alert(responseData.error);
 						}
@@ -575,6 +586,39 @@ var app = (function() {
 			}
 		});
 
+		$("#contentMyWhisper").on("click", "[click-action]", function() {
+			var target = $(this);
+			var action = target.attr("click-action");
+			var container = target.closest("div[account-id]");
+			var accountId = container.attr("account-id");
+			var nickname = container.find("h4 a").text();
+			switch(action) {
+				case "detail":
+					var param = {
+						id: accountId,
+						nickname: nickname
+					}
+					var html = template("whisperBoxNavTemplate", { receiver: param });
+					$("#whisperBox ul").append(html);
+					html = template("whisperMessageBoxTemplate", { receiver: param });
+					$("#whisperBoxContent").append(html);
+					$.get("/whisper/whispers", function(responseData) {
+						if(!responseData.error) {
+							html = template("whisperMessageTemplate", { whispers: responseData });
+							$("#whisper_" + accountId).find("div[class='whisperMessageBox']").html(html);
+							$(".nav-tabs a[href='#whisper_" + accountId + "']").tab('show');
+							$(".nav-tabs a[href='#whisperBox']").tab('show');
+						} else {
+							alert(responseData.error);
+						}
+					});
+					break;
+
+				default:
+					break;
+			}
+		});
+
 		$("#messenger div[class='popover-content']").on("click", "[click-action]", function() {
 			var target = $(this);
 			var action = target.attr("click-action");
@@ -622,6 +666,31 @@ var app = (function() {
 				$(this).on("click", function(e) {
 					$("#whisper").removeClass("hidden");
 					$(".nav-tabs a[href='#whisperMiniBox']").tab('show');
+				});
+			}
+		});
+
+		$("#whisperBoxContent").on("click", "[click-action]", function() {
+			var target = $(this);
+			var action = target.attr("click-action");
+			var container = target.closest("div[id]");
+			var receiverId = container.attr("id");
+			receiverId = receiverId.substring(receiverId.indexOf("_") + 1);
+			if(action === "send") {
+				var content = container.find("textarea").val()
+				$.post("/whisper/send", {
+					content: content,
+					receiver: receiverId
+				}).done(function(responseData) {
+					if(!responseData.error) {
+						var html = template("whisperMessageTemplate", { whispers: [{
+							content: content,
+							action: "send"
+						}]});
+						$("#whisper_" + receiverId).find("div[class='whisperMessageBox']").append(html);
+					} else {
+						alert(responseData.error);
+					}
 				});
 			}
 		});

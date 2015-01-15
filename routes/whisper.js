@@ -11,16 +11,16 @@ router.get("/myWhispers", function(request, response) {
 	var accountId = request.session.accountId;
 	if(accountId) {
 		model.Message.find({
-			sender: accountId,
+			receiver: accountId,
 			type: "whisper"
 		}).populate("sender receiver").sort({ receiveTime: "desc" }).exec(function(err, whispers) {
 			model.File.populate(whispers, "sender.icon receiver.icon", function(err, whispers) {
-				model.Message.distinct("receiver", function(err, accountIds) {
+				model.Message.distinct("sender", function(err, accountIds) {
 					var lastestWhispers = [];
 					if(accountIds && accountIds.length > 0) {
 						accountIds.forEach(function(accountId) {
 							whispers.some(function(whisper) {
-								if(whisper.receiver._id.toString() === accountId.toString()) {
+								if(whisper.sender._id.toString() === accountId.toString()) {
 									lastestWhispers.push(whisper);
 									return true;
 								}
