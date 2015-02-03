@@ -1,4 +1,4 @@
 Microblogging
 =============
 
-A micro blogging written by Node.js.
+A microblog written by Node.js.
