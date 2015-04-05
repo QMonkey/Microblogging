@@ -340,6 +340,7 @@ var app = (function() {
 			var action = target.attr("click-action");
 			var container = target.closest("div[id]");
 			var accountId = container.attr("id");
+			var nickname = container.find("h4 a").text()
 			switch(action) {
 				case "personal":
 				case "blogs":
@@ -381,6 +382,17 @@ var app = (function() {
 					break;
 
 				case "whisper":
+					var receiver = {
+						id: accountId,
+						nickname: nickname
+					};
+					$("#whisper").removeClass("hidden");
+					var html = template("whisperBoxNavTemplate", { receiver: receiver });
+					$("#whisperBox ul").append(html);
+					html = template("whisperMessageBoxTemplate", { receiver: receiver });
+					$("#whisperBoxContent").html(html);
+					$(".nav-tabs a[href='#whisper_" + accountId + "']").tab("show");
+					$(".nav-tabs a[href='#whisperBox']").tab('show');
 					break;
 
 				case "followings":
@@ -602,12 +614,14 @@ var app = (function() {
 					$("#whisperBox ul").append(html);
 					html = template("whisperMessageBoxTemplate", { receiver: param });
 					$("#whisperBoxContent").append(html);
-					$.get("/whisper/whispers", function(responseData) {
+					$.get("/whisper/whispers?sender=" + accountId, function(responseData) {
 						if(!responseData.error) {
+							$("#whisper").removeClass("hidden");
 							html = template("whisperMessageTemplate", { whispers: responseData });
 							$("#whisper_" + accountId).find("div[class='whisperMessageBox']").html(html);
 							$(".nav-tabs a[href='#whisper_" + accountId + "']").tab('show');
 							$(".nav-tabs a[href='#whisperBox']").tab('show');
+							updateMessenger();
 						} else {
 							alert(responseData.error);
 						}
@@ -636,6 +650,7 @@ var app = (function() {
 					break;
 
 				case "whisper":
+					$("#sidebarMyWhisper").click();
 					break;
 
 				default:
@@ -661,15 +676,6 @@ var app = (function() {
 			$("#whisper, #whisperBox").addClass("hidden");
 		});
 
-		$(".pull-right button").each(function(index) {
-			if($(this).text() === "私信") {
-				$(this).on("click", function(e) {
-					$("#whisper").removeClass("hidden");
-					$(".nav-tabs a[href='#whisperMiniBox']").tab('show');
-				});
-			}
-		});
-
 		$("#whisperBoxContent").on("click", "[click-action]", function() {
 			var target = $(this);
 			var action = target.attr("click-action");
@@ -685,9 +691,11 @@ var app = (function() {
 					if(!responseData.error) {
 						var html = template("whisperMessageTemplate", { whispers: [{
 							content: content,
+							sendTime: Date.now(),
 							action: "send"
 						}]});
 						$("#whisper_" + receiverId).find("div[class='whisperMessageBox']").append(html);
+						$("#whisper_" + receiverId).find("textarea").val("");
 					} else {
 						alert(responseData.error);
 					}

@@ -550,7 +550,7 @@
 				<!-- Messenger End -->
 
 				<!-- Whisper Start -->
-				<div id="whisper" class="">
+				<div id="whisper" class="hidden">
 					<ul class="nav nav-tabs hidden" role="tablist">
 						<li class="active">
 							<a href="#whisperMiniBox" role="tab" data-toggle="tab"></a>
@@ -896,7 +896,7 @@
 			</form>
 		</div>
 	</script>
-	
+
 	<script id="whisperMessageTemplate" type="text/html">
 		{{each whispers as whisper }}
 		<div class="pull-{{if whisper.action === 'send'}}right{{else}}left{{/if}} col-sm-7">

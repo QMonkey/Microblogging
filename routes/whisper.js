@@ -81,13 +81,13 @@ router.get("/myWhispers", function(request, response) {
 
 router.get("/whispers", function(request, response) {
 	var accountId = request.session.accountId;
-	var receiver = request.query.receiver;
+	var sender = request.query.sender;
 	var params = {
-		sender: accountId,
+		receiver: accountId,
 		type: "whisper"
 	};
-	if(receiver) {
-		params.receiver = receiver;
+	if(sender) {
+		params.sender = sender;
 	}
 	if(accountId) {
 		model.Message.find(params).populate("sender receiver").exec(function(err, whispers) {
