@@ -2,9 +2,6 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<!--[if IE]>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<![endif]-->
 	<title>Micro Blogging</title>
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
@@ -46,867 +43,875 @@
 		</ul>
 
 		<div class="tab-content">
-		<form id="signIn" class="form-horizontal templatemo-signin-form tab-pane fade"
-			role="form">
-			<div class="form-group">
-				<div class="col-md-12">
-					<label for="username" class="col-sm-2 control-label">用户名</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="signInUserName"
-							placeholder="User Name"></div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-12">
-					<label for="password" class="col-sm-2 control-label">密码</label>
-					<div class="col-sm-10">
-						<input type="password" class="form-control" id="signInPassword"
-							placeholder="Password"></div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-12">
-					<div class="col-sm-offset-2 col-sm-10">
-						<a id="signInGoToSignUp" href="javascript:;" class="pull-right">还没有帐号？赶快去注册吧！</a>
-						<input id="signInButton" type="button" value="登录"
-							class="btn btn-default"></div>
-				</div>
-			</div>
-		</form>
-
-		<form id="signUp"
-			class="form-horizontal templatemo-signin-form tab-pane fade" role="form">
-			<div class="form-group">
-				<div class="col-md-12">
-					<label class="col-sm-2 control-label">用户名</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="signUpUserName"
-							placeholder="User Name"></div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-12">
-					<label class="col-sm-2 control-label">密码</label>
-					<div class="col-sm-10">
-						<input type="password" class="form-control" id="signUpPassword"
-							placeholder="Password"></div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-12">
-					<label class="col-sm-2 control-label">确认密码</label>
-					<div class="col-sm-10">
-						<input type="password" class="form-control"
-							id="signUpConfirmPassword" placeholder="Confirm Password"></div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-12">
-					<label class="col-sm-2 control-label">昵称</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="signUpNickname"
-							placeholder="Nickname"></div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-12">
-					<label class="col-sm-2 control-label">真实姓名</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="signUpRealName"
-							placeholder="Real Name"></div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-12">
-					<label class="col-sm-2 control-label">Email</label>
-					<div class="col-sm-10">
-						<input type="email" class="form-control" id="signUpEmail"
-							placeholder="Email"></div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-12">
-					<label class="col-sm-2 control-label">生日</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="signUpBirthday"
-							readonly=""></div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-12">
-					<label class="col-sm-2 control-label">性别</label>
-					<div class="col-sm-10">
-						<select id="signUpSex" class="form-control">
-							<option value="0">男</option>
-							<option value="1">女</option>
-						</select>
+			<form id="signIn" class="form-horizontal templatemo-signin-form tab-pane fade"
+				role="form">
+				<div class="form-group">
+					<div class="col-md-12">
+						<label for="username" class="col-sm-2 control-label">用户名</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="signInUserName"
+								placeholder="User Name"></div>
 					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-12">
-					<label class="col-sm-2 control-label">手机号</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="signUpPhone"
-							placeholder="Phone"></div>
+				<div class="form-group">
+					<div class="col-md-12">
+						<label for="password" class="col-sm-2 control-label">密码</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" id="signInPassword"
+								placeholder="Password"></div>
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-12">
-					<label class="col-sm-2 control-label">所在地</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="signUpAddress"
-							placeholder="Address"></div>
+				<div class="form-group">
+					<div class="col-md-12">
+						<div class="col-sm-offset-2 col-sm-10">
+							<a id="signInGoToSignUp" href="javascript:;" class="pull-right">还没有帐号？赶快去注册吧！</a>
+							<input id="signInButton" type="button" value="登录"
+								class="btn btn-default"></div>
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-12">
-					<div class="col-sm-offset-2 col-sm-10">
-						<input id="signUpButton" type="button" value="注册"
-							class="btn btn-default">
-						<input id="signUpReturn"
-							type="button" value="返回" class="btn btn-default"></div>
-				</div>
-			</div>
-		</form>
+			</form>
 
-		<div id="signedIn" class="tab-pane fade">
-		<div id="sidebar" class="navbar-collapse collapse templatemo-sidebar">
-			<ul class="nav nav-tabs hidden" role="tablist">
-				<li class="active">
-					<a href="#contentHome" role="tab" data-toggle="tab"></a>
-				</li>
-				<li>
-					<a href="#contentAt" role="tab" data-toggle="tab"></a>
-				</li>
-				<li>
-					<a href="#contentMyComment" role="tab" data-toggle="tab"></a>
-				</li>
-				<li>
-					<a href="#contentMyWhisper" role="tab" data-toggle="tab"></a>
-				</li>
-				<li>
-					<a href="#contentSetting" role="tab" data-toggle="tab"></a>
-				</li>
-				<li>
-					<a href="#contentFollowings" role="tab" data-toggle="tab"></a>
-				</li>
-				<li>
-					<a href="#contentFollowers" role="tab" data-toggle="tab"></a>
-				</li>
-				<li>
-					<a href="#contentMicroBloggingDetail" role="tab" data-toggle="tab"></a>
-				</li>
-				<li>
-					<a href="#contentSearch" role="tab" data-toggle="tab"></a>
-				</li>
-			</ul>
-			<ul class="templatemo-sidebar-menu">
-				<li>
-					<div class="navbar-icon">
-						<div>
-							<img id="sidebarIcon" src="" width="70" height="70">
-							<strong>
-								<a id="sidebarNickname" href="javascript:;"></a>
-							</strong> 
+			<form id="signUp"
+				class="form-horizontal templatemo-signin-form tab-pane fade" role="form">
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="col-sm-2 control-label">用户名</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="signUpUserName"
+								placeholder="User Name"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="col-sm-2 control-label">密码</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" id="signUpPassword"
+								placeholder="Password"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="col-sm-2 control-label">确认密码</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control"
+								id="signUpConfirmPassword" placeholder="Confirm Password"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="col-sm-2 control-label">昵称</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="signUpNickname"
+								placeholder="Nickname"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="col-sm-2 control-label">真实姓名</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="signUpRealName"
+								placeholder="Real Name"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="col-sm-2 control-label">Email</label>
+						<div class="col-sm-10">
+							<input type="email" class="form-control" id="signUpEmail"
+								placeholder="Email"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="col-sm-2 control-label">生日</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="signUpBirthday"
+								readonly=""></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="col-sm-2 control-label">性别</label>
+						<div class="col-sm-10">
+							<select id="signUpSex" class="form-control">
+								<option value="0">男</option>
+								<option value="1">女</option>
+							</select>
 						</div>
 					</div>
-				</li>
-				<li>
-					<ul class="sidebar-basic-infos">
-						<li id="sidebarFollowings" class="sidebar-basic-info">
-							<a href="javascript:;" style="display: block;">
-								<span>关注</span>
-								<strong id="sidebarFollowingCount"></strong>
-							</a>
-						</li>
-						<li id="sidebarFollowers" class="sidebar-basic-info">
-							<a href="javascript:;" style="display: block;">
-								<span>粉丝</span>
-								<strong id="sidebarFollowerCount"></strong>
-							</a>
-						</li>
-						<li id="sidebarBlog">
-							<a href="javascript:;" style="display: block;">
-								<span>微博</span>
-								<strong id="sidebarBlogCount"></strong>
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li id="sidebarSearch">
-					<form class="navbar-form">
-						<input type="text" class="form-control" id="templatemo_search_box"
-							placeholder="搜索微博或人">
-						<button type="button" id="sidebarSearchButton" class="btn btn-default"> <i class="fa fa-search"></i>
-						</button>
-					</form>
-				</li>
-				<li id="sidebarHome" class="active">
-					<a href="javascript:;"> <i class="fa fa-home"></i>
-						我的首页
-					</a>
-				</li>
-				<li id="sidebarAt">
-					<a href="javascript:;">
-						<i
-						class="fa fa-at"></i>
-						<span class="badge pull-right"></span>
-						提到我的
-					</a>
-				</li>
-				<li id="sidebarMyComment">
-					<a href="javascript:;">
-						<i
-						class="fa fa-comment"></i>
-						<span class="badge pull-right"></span>
-						我的评论
-					</a>
-				</li>
-				<li id="sidebarMyWhisper">
-					<a href="javascript:;">
-						<i
-						class="fa fa-envelope"></i>
-						<span class="badge pull-right"></span>
-						我的私信
-					</a>
-				</li>
-				<li id="sidebarSetting">
-					<a href="javascript:;">
-						<i
-						class="fa fa-cog"></i>
-						个人设置
-					</a>
-				</li>
-				<li id="sidebarSignOut">
-					<a href="javascript:;">
-						<i
-						class="fa fa-sign-out"></i>
-						注销
-					</a>
-				</li>
-			</ul>
-		</div>
-		<!--/.navbar-collapse -->
-
-		<div id="content" class="templatemo-content-wrapper">
-			<div class="templatemo-content tab-content">
-				<!-- Home Start -->
-				<div id="contentHome" class="tab-pane fade in active">
-					<form class="form-horizontal" role="form">
-						<div class="form-group">
-							<label class="col-sm-2 control-label">发微博</label>
-							<div class="col-sm-8">
-								<textarea id="contentHomePublishBlogContent" class="form-control" rows="5"></textarea>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-8">
-								<button type="button" id="contentHomePublishBlogButton" class="btn btn-default pull-right">发布</button>
-							</div>
-						</div>
-					</form>
-
-					<div id="contentHomeBlogs" class="col-sm-offset-2 col-sm-8"></div>
 				</div>
-				<!-- Home End -->
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="col-sm-2 control-label">手机号</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="signUpPhone"
+								placeholder="Phone"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-12">
+						<label class="col-sm-2 control-label">所在地</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="signUpAddress"
+								placeholder="Address"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-12">
+						<div class="col-sm-offset-2 col-sm-10">
+							<input id="signUpButton" type="button" value="注册"
+								class="btn btn-default">
+							<input id="signUpReturn"
+								type="button" value="返回" class="btn btn-default"></div>
+					</div>
+				</div>
+			</form>
 
-				<!-- At Start -->
-				<div id="contentAt" class="col-sm-offset-2 col-sm-8 tab-pane fade">
-					<!-- Nav tabs -->
-					<ul class="nav nav-tabs" role="tablist">
+			<div id="signedIn" class="tab-pane fade">
+				<div id="sidebar" class="navbar-collapse collapse templatemo-sidebar">
+					<ul class="nav nav-tabs hidden" role="tablist">
 						<li class="active">
-							<a href="#contentAtBlog" role="tab"
-							data-toggle="tab">@我的微博</a>
+							<a href="#contentHome" role="tab" data-toggle="tab"></a>
 						</li>
 						<li>
-							<a href="#contentAtComment" role="tab" data-toggle="tab">@我的评论</a>
+							<a href="#contentAt" role="tab" data-toggle="tab"></a>
+						</li>
+						<li>
+							<a href="#contentMyComment" role="tab" data-toggle="tab"></a>
+						</li>
+						<li>
+							<a href="#contentMyWhisper" role="tab" data-toggle="tab"></a>
+						</li>
+						<li>
+							<a href="#contentSetting" role="tab" data-toggle="tab"></a>
+						</li>
+						<li>
+							<a href="#contentFollowings" role="tab" data-toggle="tab"></a>
+						</li>
+						<li>
+							<a href="#contentFollowers" role="tab" data-toggle="tab"></a>
+						</li>
+						<li>
+							<a href="#contentMicroBloggingDetail" role="tab" data-toggle="tab"></a>
+						</li>
+						<li>
+							<a href="#contentSearch" role="tab" data-toggle="tab"></a>
 						</li>
 					</ul>
-
-					<!-- Tab panes -->
-					<div class="tab-content">
-						<div class="tab-pane fade in active" id="contentAtBlog"></div>
-						<div class="tab-pane fade" id="contentAtComment"></div>
-					</div>
-				</div>
-				<!-- At End -->
-
-				<!-- My Comment Start -->
-				<div id="contentMyComment" class="col-sm-offset-2 col-sm-8 tab-pane fade">
-					<!-- Nav tabs -->
-					<ul class="nav nav-tabs" role="tablist">
-						<li class="active">
-							<a href="#contentMyCommentReceive" role="tab" data-toggle="tab">收到的评论</a>
-						</li>
+					<ul class="templatemo-sidebar-menu">
 						<li>
-							<a href="#contentMyCommentIssue" role="tab" data-toggle="tab">发出的评论</a>
-						</li>
-					</ul>
-
-					<!-- Tab panes -->
-					<div class="tab-content">
-						<div class="tab-pane fade in active" id="contentMyCommentReceive"></div>
-						<script id="contentMyCommentReceiveTemplate" type="text/html">
-							<!-- Received Comment Start -->
-							{{each comments as comment }}
-							<div id="{{ comment.id }}">
-								<div class="col-sm-2">
-									<a href="javascript:;" click-action="personal" account-id="{{ comment.publisher.id }}">
-										<img src="{{if comment.publisher.icon }}
-												{{ comment.publisher.icon.path | toUploadPath }}{{ comment.publisher.icon.name }}
-											{{else}}
-												/uploads/default.ico
-											{{/if}}" width="70" height="70">
-									</a>
-								</div>
-								<div class="col-sm-offset-2">
-									<h4>
-										@<a href="javascript:;" click-action="personal" account-id="{{ comment.publisher.id }}">{{ comment.publisher.nickname }}</a>回复我：
-									</h4>
-									<p>{{ comment.content }}({{ comment.publishTime | dateFormat: 'yyyy-MM-dd hh:mm'}})</p>
-									<div class="pull-right">
-										<a href="javascript:;" click-action="replyButton">回复</a>
-									</div>
-									<div id="commentBox_{{ comment.id }}" blog-id="{{ comment.blog }}" class="clear-both hidden">
-										<form role="form">
-											<fieldset>
-												<div class="form-group">
-													<input type="text" class="form-control" placeholder="评论"></div>
-												<button type="button" class="btn btn-primary pull-right" click-action="reply">回复</button>
-											</fieldset>
-										</form>
-									</div>
-								</div>
-							</div>
-							<hr class="clear-both" />
-							{{/each}}
-							<!-- Received Comment End -->
-						</script>
-						
-						<div class="tab-pane fade" id="contentMyCommentIssue"></div>
-						<script id="contentMyCommentIssueTemplate" type="text/html">
-							<!-- Issued Comment Start -->
-							{{each comments as comment }}
-							<div id="{{ comment.id }}">
-								<div class="col-sm-offset-1">
-									<h4>
-										回复@<a href="javascript:;" click-action="personal" account-id="{{ comment.receiver.id }}">{{ comment.receiver.nickname }}</a>：
-									</h4>
-									<p>{{ comment.content }}({{ comment.publishTime | dateFormat: 'yyyy-MM-dd hh:mm'}})</p>
-								</div>
-							</div>
-							<hr />
-							{{/each}}
-							<!-- Issued Comment End -->
-						</script>
-					</div>
-				</div>
-				<!-- My Comment End -->
-
-				<!-- My Whisper Start -->
-				<div id="contentMyWhisper" class="col-sm-offset-2 col-sm-8 tab-pane fade"></div>
-				<script id="contentMyWhisperTemplate" type="text/html">
-					<!-- My Whisper Start -->
-					{{each whispers as whisper }}
-					<div account-id="{{ whisper.sender.id }}">
-						<div class="col-sm-2">
-							<a href="javascript:;" click-action="personal">
-								<img src="{{if whisper.sender.icon }}
-										{{ whisper.sender.icon.path | toUploadPath }}{{ whisper.sender.icon.name }}
-									{{else}}
-										/uploads/default.ico
-									{{/if}}" width="70" height="70">
-							</a>
-						</div>
-						<div class="col-sm-offset-2">
-							<h4>
-								@<a href="javascript:;" click-action="personal">{{ whisper.sender.nickname }}</a>对我说：
-							</h4>
-							<p>{{ whisper.content }}({{ whisper.sendTime | dateFormat: 'yyyy-MM-dd hh:mm'}})</p>
-							<div class="pull-right">
-								<a href="javascript:;" click-action="detail">查看</a>
-							</div>
-						</div>
-					</div>
-					<hr class="clear-both" />
-					{{/each}}
-					<!-- My Whisper End -->
-				</script>
-				<!-- My Whisper End -->
-
-				<!-- Setting Start -->
-				<div id="contentSetting" class="col-sm-offset-2 col-sm-8 tab-pane fade">
-					<!-- Nav tabs -->
-					<ul class="nav nav-tabs" role="tablist">
-						<li class="active">
-							<a href="#contentSettingBasicInfo"
-							role="tab" data-toggle="tab">基本信息</a>
-						</li>
-						<li>
-							<a href="#contentSettingIcon" role="tab"
-							data-toggle="tab">头像</a>
-						</li>
-						<li>
-							<a href="#contentSettingPassword" role="tab"
-							data-toggle="tab">修改密码</a>
-						</li>
-					</ul>
-
-					<!-- Tab panes -->
-					<div class="tab-content">
-						<div class="tab-pane fade in active" id="contentSettingBasicInfo">
-							<form class="form-horizontal tab-form" role="form">
-								<div class="form-group">
-									<label class="col-sm-2 control-label">昵称</label>
-									<div class="col-sm-8">
-										<input type="text" class="form-control"
-											id="contentSettingBasicInfoNickName" placeholder="昵称"></div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">真实姓名</label>
-									<div class="col-sm-8">
-										<input type="text" class="form-control"
-											id="contentSettingBasicInfoRealName" placeholder="真实姓名"></div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">邮箱</label>
-									<div class="col-sm-8">
-										<input type="email" class="form-control"
-											id="contentSettingBasicInfoEmail" placeholder="邮箱"></div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">生日</label>
-									<div class="col-sm-8">
-										<input type="text" class="form-control"
-											id="contentSettingBasicInfoBirthday" readonly=""></div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">性别</label>
-									<div class="col-sm-8">
-										<select id="contentSettingBasicInfoSex" class="form-control">
-											<option value="0">男</option>
-											<option value="1">女</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">手机号</label>
-									<div class="col-sm-8">
-										<input type="text" class="form-control"
-											id="contentSettingBasicInfoPhone" placeholder="手机号"></div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">所在地</label>
-									<div class="col-sm-8">
-										<input type="text" class="form-control"
-											id="contentSettingBasicInfoAddress" placeholder="所在地"></div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">简介</label>
-									<div class="col-sm-9">
-										<textarea class="form-control"
-											id="contentSettingBasicInfoIntroduction" rows="9"
-											placeholder="简介"></textarea>
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-offset-2 col-sm-8">
-										<button type="button" id="contentSettingBasicInfoButton" class="btn btn-default">提交</button>
-									</div>
-								</div>
-							</form>
-						</div>
-
-						<div class="tab-pane fade" id="contentSettingIcon">
-							<iframe class="hidden" id="contentSettingIconFrame"
-								name="contentSettingIconFrame"></iframe>
-							<form class="form-horizontal tab-form" role="form" action="/setting/updateIcon"
-								target="contentSettingIconFrame" method="post"
-								enctype="multipart/form-data">
-								<div class="form-group">
-									<label class="col-sm-2 control-label">头像</label>
-									<div class="col-sm-8">
-										<img id="contentSettingIconImg" src="" width="150" height="150"></div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">上传头像</label>
-									<div class="col-sm-8">
-										<input type="file" class="form-control"
-											id="contentSettingIconFile" name="icon" placeholder="icon"></div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-offset-2 col-sm-8">
-										<button type="submit" class="btn btn-default">提交</button>
-									</div>
-								</div>
-							</form>
-						</div>
-
-						<div class="tab-pane fade" id="contentSettingPassword">
-							<form class="form-horizontal tab-form" role="form">
-								<div class="form-group">
-									<label class="col-sm-2 control-label">原密码</label>
-									<div class="col-sm-8">
-										<input type="password" class="form-control" id="contentSettingOriginalPassword"
-											placeholder="原密码"></div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">新密码</label>
-									<div class="col-sm-8">
-										<input type="password" class="form-control" id="contentSettingNewPassword"
-											placeholder="新密码"></div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">确认新密码</label>
-									<div class="col-sm-8">
-										<input type="password" class="form-control"
-											id="contentSettingConfirmPassword" placeholder="确认新密码"></div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-offset-2 col-sm-8">
-										<button type="button" id="contentSettingPasswordButton" class="btn btn-default">提交</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<!-- Setting End -->
-
-				<!-- Followings Start -->
-				<div id="contentFollowings" class="col-sm-offset-2 col-sm-8 tab-pane fade"></div>
-				<!-- Followings End -->
-
-				<!-- Followers Start -->
-				<div id="contentFollowers" class="col-sm-offset-2 col-sm-8 tab-pane fade"></div>
-				<!-- Followers End -->
-
-				<!-- Search Start -->
-				<div id="contentSearch" class="col-sm-offset-2 col-sm-8 tab-pane fade">
-					<!-- Nav tabs -->
-					<ul class="nav nav-tabs" role="tablist">
-						<li class="active">
-							<a href="#contentSearchBlogs" role="tab"
-							data-toggle="tab">找微博</a>
-						</li>
-						<li>
-							<a href="#contentSearchPeople" role="tab"
-							data-toggle="tab">找人</a>
-						</li>
-					</ul>
-
-					<!-- Tab panes -->
-					<div class="tab-content">
-						<div class="tab-pane fade in active" id="contentSearchBlogs"></div>
-
-						<div class="tab-pane fade" id="contentSearchPeople"></div>
-						<script id="contentSearchPeopleTemplate" type="text/html">
-							{{each bloggers as blogger}}
-								<div id="{{ blogger.id }}">
-									<div class="col-sm-3">
-										<a href="javascript:;" click-action="personal">
-											<img src="{{if blogger.icon }}
-												{{ blogger.icon.path | toUploadPath }}{{ blogger.icon.name }}
-											{{else}}
-												/uploads/default.ico
-											{{/if}}" width="120" height="120">
-										</a>
-									</div>
-									<div class="col-sm-offset-3">
-										<h4>
-											<a href="javascript:;" click-action="personal">{{ blogger.nickname }}</a>
-										</h4>
-										{{if blogger.relation }}
-										<div class="pull-right">
-											{{if blogger.relation === "friend" || blogger.relation === "following" }}
-												<button type="button" class="btn btn-default" click-action="unfollow">取消关注</button>
-											{{else}}
-												<button type="button" class="btn btn-default" click-action="follow">关注</button>
-											{{/if}}
-											<button type="button" class="btn btn-default" click-action="whisper">私信</button>
-										</div>
-										{{/if}}
-										<p><strong>所在地：&nbsp;</strong>{{ blogger.address }}</p>
-										<p>
-											<strong>关注</strong>
-											<a href="javascript:;" click-action="followings">{{ blogger.followings }}</a>
-											<strong>&nbsp;粉丝</strong>
-											<a href="javascript:;" click-action="followers">{{ blogger.followers }}</a>
-											<strong>&nbsp;微博</strong>
-											<a href="javascript:;" click-action="blogs">{{ blogger.blogs }}</a>
-										</p>
-										<p><strong>简介：&nbsp;</strong>{{ blogger.introduction }}</p>
-									</div>
-								</div>
-								<hr class="clear-both" />
-							{{/each}}
-						</script>
-					</div>
-				</div>
-				<!-- Search End -->
-
-				<!-- MicroBloggingDetail Start -->
-				<div id="contentMicroBloggingDetail" class="col-sm-offset-2 col-sm-8 tab-pane fade">
-					<div id="contentMicroBloggingDetailInfoContainer"></div>
-					<script id="contentMicroBloggingDetailInfoTemplate" type="text/html">
-						<div id="{{ blogger.id }}">
-							<div class="col-sm-3">
-								<a href="javascript:;" click-action="personal">
-									<img src="{{if blogger.icon }}
-												{{ blogger.icon.path | toUploadPath }}{{ blogger.icon.name }}
-											{{else}}
-												/uploads/default.ico
-											{{/if}}" width="120" height="120">
-								</a>
-							</div>
-							<div class="col-sm-offset-3">
-								<h4>
-									<a href="javascript:;" click-action="personal">{{ blogger.nickname }}</a>
-								</h4>
-								{{if blogger.relation }}
-								<div class="pull-right">
-									{{if blogger.relation === "friend" || blogger.relation === "following" }}
-										<button type="button" class="btn btn-default" click-action="unfollow">取消关注</button>
-									{{else}}
-										<button type="button" class="btn btn-default" click-action="follow">关注</button>
-									{{/if}}
-									<button type="button" class="btn btn-default" click-action="whisper">私信</button>
-								</div>
-								{{/if}}
-								<p><strong>所在地：&nbsp;</strong>{{ blogger.address }}</p>
-								<p>
-									<strong>关注</strong>
-									<a href="javascript:;" click-action="followings">{{ blogger.followings }}</a>
-									<strong>&nbsp;粉丝</strong>
-									<a href="javascript:;" click-action="followers">{{ blogger.followers }}</a>
-									<strong>&nbsp;微博</strong>
-									<a href="javascript:;" click-action="blogs">{{ blogger.blogs }}</a>
-								</p>
-								<p><strong>简介：&nbsp;</strong>{{ blogger.introduction }}</p>
-							</div>
-						</div>
-					</script>
-					<hr class="clear-both" />
-
-					<div id="contentMicroBloggingDetailBlogsContainer"></div>
-					<script id="contentMicroBloggingDetailBlogsTemplate" type="text/html">
-						{{each blogs as blog}}
-						<div id="{{ blog.id }}">
-							{{if blog.publisher }}
-							<div class="col-sm-2">
-								<a href="javascript:;" click-action="personal" account-id="{{ blog.publisher.id }}">
-									<img src="{{if blog.publisher.icon }}
-												{{ blog.publisher.icon.path | toUploadPath }}{{ blog.publisher.icon.name }}
-											{{else}}
-												/uploads/default.ico
-											{{/if}}" width="70" height="70">
-								</a>
-							</div>
-							{{/if}}
-							<div class={{if blog.publisher }}"col-sm-offset-2"{{else}}"col-sm-offset-1"{{/if}}>
-								{{if blog.publisher }}
-								<h4>
-									<a href="javascript:;" click-action="personal" account-id="{{ blog.publisher.id }}">{{ blog.publisher.nickname }}</a>
-								</h4>
-								{{/if}}
-								<p>{{ blog.content }}</p>
+							<div class="navbar-icon">
 								<div>
-									<div class="pull-left">{{ blog.publishTime | dateFormat: 'yyyy-MM-dd hh:mm' }}</div>
-									<div class="pull-right">
-										<a href="javascript:;" click-action="great">
-											<i class="fa fa-thumbs-up"></i>
-											<span>
-											{{if blog.greats > 0 }}({{ blog.greats }}){{/if}}
-											</span>
-										</a>
-										&nbsp;|&nbsp;
-										<a href="javascript:;" click-action="forward">转发</a>
-										&nbsp;|&nbsp;
-										<a href="javascript:;" click-action="comment">评论
-											<span>{{if blog.comments > 0 }}({{ blog.comments }}){{/if}}</span>
-										</a>
-									</div>
-								</div>
-
-								<!-- Comment Start -->
-								<div id="comment_{{ blog.id }}" class="clear-both hidden">
-									<form role="form">
-										<fieldset>
-											<div class="form-group">
-												<input type="hidden">
-												<input type="text" class="form-control" placeholder="评论">
-											</div>
-											<button type="button" class="btn btn-primary pull-right" click-action="commentButton">评论</button>
-										</fieldset>
-									</form>
-									<hr />
-
-									<div id="commentContainer_{{ blog.id }}"></div>
-								</div>
-								<!-- Comment End -->
-							</div>
-						</div>
-						<hr class="clear-both" />
-						{{/each}}
-					</script>
-					<script id="contentMicroBloggingDetailBlogsCommentTemplate" type="text/html">
-						{{each comments as comment }}
-						<div id="{{ comment.id }}">
-							<div class="col-sm-2">
-								<a href="javascript:;" click-action="personal" account-id="{{ comment.publisher.id }}">
-									<img src="{{if comment.publisher.icon }}
-												{{ comment.publisher.icon.path | toUploadPath }}{{ comment.publisher.icon.name }}
-											{{else}}
-												/uploads/default.ico
-											{{/if}}" width="50" height="50">
-								</a>
-							</div>
-							<div class="col-sm-offset-2">
-								<h5>
-									<a href="javascript:;" click-action="personal" account-id="{{ comment.publisher.id }}">{{ comment.publisher.nickname }}</a>
-								</h5>
-								<p>{{ comment.content }}({{ comment.publishTime | dateFormat: 'yyyy-MM-dd hh:mm' }})</p>
-								<div class="pull-right">
-									<a href="javascript:;" click-action="commentGreat">
-										<i class="fa fa-thumbs-up"></i>
-										<span>{{if comment.greats > 0 }}({{ comment.greats }}){{/if}}</span>
-									</a>
-									&nbsp;|&nbsp;
-									<a href="javascript:;" click-action="commentReply">回复</a>
+									<img id="sidebarIcon" src="" width="70" height="70">
+									<strong>
+										<a id="sidebarNickname" href="javascript:;"></a>
+									</strong> 
 								</div>
 							</div>
-						</div>
-						<hr class="clear-both" />
-						{{/each}}
-					</script>
-				</div>
-				<!-- MicroBloggingDetail End -->
-			</div>
-		</div>
-
-		<!-- Messenger Start -->
-		<div id="messenger" class="hidden">
-			<!-- NEW -->
-			<div class="popover bottom">
-				<div class="arrow"></div>
-				<div class="popover-title">
-					【新消息】
-					<button id="messengerButton" type="button" class="close">
-						<span aria-hidden="true">&times;</span>
-						<span class="sr-only">Close</span>
-					</button>
-				</div>
-				<div class="popover-content"></div>
-			</div>
-		</div>
-		<script id="messengerTemplate" type="text/html">
-			{{if prompt.followers }}
-			<p>
-				{{ prompt.followers }}位新粉丝，
-				<a href="javascript:;" click-action="follower">查看粉丝</a>
-			</p>
-			{{/if}}
-			{{if prompt.ats }}
-			<p>
-				{{ prompt.ats }}条@我，
-				<a href="javascript:;" click-action="at">查看@我</a>
-			</p>
-			{{/if}}
-			{{if prompt.comments }}
-			<p>
-				{{ prompt.comments }}条新评论，
-				<a href="javascript:;" click-action="comment">查看评论</a>
-			</p>
-			{{/if}}
-			{{if prompt.whispers }}
-			<p>
-				{{ prompt.whispers }}条新私信，
-				<a href="javascript:;" click-action="whisper">查看私信</a>
-			</p>
-			{{/if}}
-		</script>
-		<!-- Messenger End -->
-
-		<!-- Whisper Start -->
-		<div id="whisper" class="">
-			<ul class="nav nav-tabs hidden" role="tablist">
-				<li class="active">
-					<a href="#whisperMiniBox" role="tab" data-toggle="tab"></a>
-				</li>
-				<li>
-					<a href="#whisperBox" role="tab" data-toggle="tab"></a>
-				</li>
-			</ul>
-			<div class="tab-content">
-				<div id="whisperMiniBox" class="tab-pane active">QMonkey</div>
-				<div id="whisperBox" class="tab-pane tabbable tabs-left">
-					<div class="popover-title">
-						<img id="whisperBoxIcon" src="" width="50" height="50">
-						<span id="whisperBoxNickname"></span>
-						<button id="whisperBoxClose" type="button" class="close">
-							<span class="glyphicon glyphicon-remove"></span>
-						</button>
-						<button id="whisperBoxMinimize" type="button" class="close">
-							<span class="glyphicon glyphicon-minus"></span>
-						</button>
-					</div>
-					<!-- Nav tabs -->
-					<ul class="nav nav-tabs" role="tablist"></ul>
-					<script id="whisperBoxNavTemplate" type="text/html">
-						<li>
-							<a href="#whisper_{{ receiver.id }}" role="tab" data-toggle="tab">{{ receiver.nickname }}</a>
 						</li>
-					</script>
+						<li>
+							<ul class="sidebar-basic-infos">
+								<li id="sidebarFollowings" class="sidebar-basic-info">
+									<a href="javascript:;" style="display: block;">
+										<span>关注</span>
+										<strong id="sidebarFollowingCount"></strong>
+									</a>
+								</li>
+								<li id="sidebarFollowers" class="sidebar-basic-info">
+									<a href="javascript:;" style="display: block;">
+										<span>粉丝</span>
+										<strong id="sidebarFollowerCount"></strong>
+									</a>
+								</li>
+								<li id="sidebarBlog">
+									<a href="javascript:;" style="display: block;">
+										<span>微博</span>
+										<strong id="sidebarBlogCount"></strong>
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li id="sidebarSearch">
+							<form class="navbar-form">
+								<input type="text" class="form-control" id="templatemo_search_box"
+									placeholder="搜索微博或人">
+								<button type="button" id="sidebarSearchButton" class="btn btn-default"> <i class="fa fa-search"></i>
+								</button>
+							</form>
+						</li>
+						<li id="sidebarHome" class="active">
+							<a href="javascript:;"> <i class="fa fa-home"></i>
+								我的首页
+							</a>
+						</li>
+						<li id="sidebarAt">
+							<a href="javascript:;">
+								<i
+								class="fa fa-at"></i>
+								<span class="badge pull-right"></span>
+								提到我的
+							</a>
+						</li>
+						<li id="sidebarMyComment">
+							<a href="javascript:;">
+								<i
+								class="fa fa-comment"></i>
+								<span class="badge pull-right"></span>
+								我的评论
+							</a>
+						</li>
+						<li id="sidebarMyWhisper">
+							<a href="javascript:;">
+								<i
+								class="fa fa-envelope"></i>
+								<span class="badge pull-right"></span>
+								我的私信
+							</a>
+						</li>
+						<li id="sidebarSetting">
+							<a href="javascript:;">
+								<i
+								class="fa fa-cog"></i>
+								个人设置
+							</a>
+						</li>
+						<li id="sidebarSignOut">
+							<a href="javascript:;">
+								<i
+								class="fa fa-sign-out"></i>
+								注销
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!--/.navbar-collapse -->
 
-					<!-- Tab panes -->
-					<div id="whisperBoxContent" class="tab-content"></div>
-					<script id="whisperMessageBoxTemplate" type="text/html">
-						<div class="tab-pane fade col-sm-offset-3" id="whisper_{{ receiver.id }}">
-							<div class="whisperMessageBox"></div>
-							<hr class="whisper-split-line" />
+				<div id="content" class="templatemo-content-wrapper">
+					<div class="templatemo-content tab-content">
+						<!-- Home Start -->
+						<div id="contentHome" class="tab-pane fade in active">
 							<form class="form-horizontal" role="form">
 								<div class="form-group">
-									<div class="col-sm-12">
-										<textarea class="form-control" rows="5"></textarea>
+									<label class="col-sm-2 control-label">发微博</label>
+									<div class="col-sm-8">
+										<textarea id="contentHomePublishBlogContent" class="form-control" rows="5"></textarea>
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-sm-12">
-										<button type="button" class="btn btn-default pull-right" click-action="send">发送</button>
+									<div class="col-sm-offset-2 col-sm-8">
+										<button type="button" id="contentHomePublishBlogButton" class="btn btn-default pull-right">发布</button>
 									</div>
 								</div>
 							</form>
+
+							<div id="contentHomeBlogs" class="col-sm-offset-2 col-sm-8"></div>
 						</div>
-					</script>
-					<script id="whisperMessageTemplate" type="text/html">
-						{{each whispers as whisper }}
-						<div class="pull-{{if whisper.action === 'send'}}right{{else}}left{{/if}} col-sm-7">
-							<div class="popover left clear-both">
-								<div class="arrow"></div>
-								<div class="popover-title">
-									<small>{{ whisper.sendTime | dateFormat: 'yyyy-MM-dd hh:mm'}}</small>
+						<!-- Home End -->
+
+						<!-- At Start -->
+						<div id="contentAt" class="col-sm-offset-2 col-sm-8 tab-pane fade">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li class="active">
+									<a href="#contentAtBlog" role="tab"
+									data-toggle="tab">@我的微博</a>
+								</li>
+								<li>
+									<a href="#contentAtComment" role="tab" data-toggle="tab">@我的评论</a>
+								</li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div class="tab-pane fade in active" id="contentAtBlog"></div>
+								<div class="tab-pane fade" id="contentAtComment"></div>
+							</div>
+						</div>
+						<!-- At End -->
+
+						<!-- My Comment Start -->
+						<div id="contentMyComment" class="col-sm-offset-2 col-sm-8 tab-pane fade">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li class="active">
+									<a href="#contentMyCommentReceive" role="tab" data-toggle="tab">收到的评论</a>
+								</li>
+								<li>
+									<a href="#contentMyCommentIssue" role="tab" data-toggle="tab">发出的评论</a>
+								</li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div class="tab-pane fade in active" id="contentMyCommentReceive"></div>
+								<div class="tab-pane fade" id="contentMyCommentIssue"></div>
+							</div>
+						</div>
+						<!-- My Comment End -->
+
+						<!-- My Whisper Start -->
+						<div id="contentMyWhisper" class="col-sm-offset-2 col-sm-8 tab-pane fade"></div>
+						<!-- My Whisper End -->
+
+						<!-- Setting Start -->
+						<div id="contentSetting" class="col-sm-offset-2 col-sm-8 tab-pane fade">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li class="active">
+									<a href="#contentSettingBasicInfo"
+									role="tab" data-toggle="tab">基本信息</a>
+								</li>
+								<li>
+									<a href="#contentSettingIcon" role="tab"
+									data-toggle="tab">头像</a>
+								</li>
+								<li>
+									<a href="#contentSettingPassword" role="tab"
+									data-toggle="tab">修改密码</a>
+								</li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div class="tab-pane fade in active" id="contentSettingBasicInfo">
+									<form class="form-horizontal tab-form" role="form">
+										<div class="form-group">
+											<label class="col-sm-2 control-label">昵称</label>
+											<div class="col-sm-8">
+												<input type="text" class="form-control"
+													id="contentSettingBasicInfoNickName" placeholder="昵称"></div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">真实姓名</label>
+											<div class="col-sm-8">
+												<input type="text" class="form-control"
+													id="contentSettingBasicInfoRealName" placeholder="真实姓名"></div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">邮箱</label>
+											<div class="col-sm-8">
+												<input type="email" class="form-control"
+													id="contentSettingBasicInfoEmail" placeholder="邮箱"></div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">生日</label>
+											<div class="col-sm-8">
+												<input type="text" class="form-control"
+													id="contentSettingBasicInfoBirthday" readonly=""></div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">性别</label>
+											<div class="col-sm-8">
+												<select id="contentSettingBasicInfoSex" class="form-control">
+													<option value="0">男</option>
+													<option value="1">女</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">手机号</label>
+											<div class="col-sm-8">
+												<input type="text" class="form-control"
+													id="contentSettingBasicInfoPhone" placeholder="手机号"></div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">所在地</label>
+											<div class="col-sm-8">
+												<input type="text" class="form-control"
+													id="contentSettingBasicInfoAddress" placeholder="所在地"></div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">简介</label>
+											<div class="col-sm-9">
+												<textarea class="form-control"
+													id="contentSettingBasicInfoIntroduction" rows="9"
+													placeholder="简介"></textarea>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-8">
+												<button type="button" id="contentSettingBasicInfoButton" class="btn btn-default">提交</button>
+											</div>
+										</div>
+									</form>
 								</div>
-								<div class="popover-content">
-									<p class="whisperMessageContent">{{ whisper.content }}</p>
+
+								<div class="tab-pane fade" id="contentSettingIcon">
+									<iframe class="hidden" id="contentSettingIconFrame"
+										name="contentSettingIconFrame"></iframe>
+									<form class="form-horizontal tab-form" role="form" action="/setting/updateIcon"
+										target="contentSettingIconFrame" method="post"
+										enctype="multipart/form-data">
+										<div class="form-group">
+											<label class="col-sm-2 control-label">头像</label>
+											<div class="col-sm-8">
+												<img id="contentSettingIconImg" src="" width="150" height="150"></div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">上传头像</label>
+											<div class="col-sm-8">
+												<input type="file" class="form-control"
+													id="contentSettingIconFile" name="icon" placeholder="icon"></div>
+										</div>
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-8">
+												<button type="submit" class="btn btn-default">提交</button>
+											</div>
+										</div>
+									</form>
+								</div>
+
+								<div class="tab-pane fade" id="contentSettingPassword">
+									<form class="form-horizontal tab-form" role="form">
+										<div class="form-group">
+											<label class="col-sm-2 control-label">原密码</label>
+											<div class="col-sm-8">
+												<input type="password" class="form-control" id="contentSettingOriginalPassword"
+													placeholder="原密码"></div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">新密码</label>
+											<div class="col-sm-8">
+												<input type="password" class="form-control" id="contentSettingNewPassword"
+													placeholder="新密码"></div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">确认新密码</label>
+											<div class="col-sm-8">
+												<input type="password" class="form-control"
+													id="contentSettingConfirmPassword" placeholder="确认新密码"></div>
+										</div>
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-8">
+												<button type="button" id="contentSettingPasswordButton" class="btn btn-default">提交</button>
+											</div>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
-						{{/each}}
-					</script>
+						<!-- Setting End -->
+
+						<!-- Followings Start -->
+						<div id="contentFollowings" class="col-sm-offset-2 col-sm-8 tab-pane fade"></div>
+						<!-- Followings End -->
+
+						<!-- Followers Start -->
+						<div id="contentFollowers" class="col-sm-offset-2 col-sm-8 tab-pane fade"></div>
+						<!-- Followers End -->
+
+						<!-- Search Start -->
+						<div id="contentSearch" class="col-sm-offset-2 col-sm-8 tab-pane fade">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li class="active">
+									<a href="#contentSearchBlogs" role="tab"
+									data-toggle="tab">找微博</a>
+								</li>
+								<li>
+									<a href="#contentSearchPeople" role="tab"
+									data-toggle="tab">找人</a>
+								</li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div class="tab-pane fade in active" id="contentSearchBlogs"></div>
+								<div class="tab-pane fade" id="contentSearchPeople"></div>
+							</div>
+						</div>
+						<!-- Search End -->
+
+						<!-- MicroBloggingDetail Start -->
+						<div id="contentMicroBloggingDetail" class="col-sm-offset-2 col-sm-8 tab-pane fade">
+							<div id="contentMicroBloggingDetailInfoContainer"></div>
+							<hr class="clear-both" />
+							<div id="contentMicroBloggingDetailBlogsContainer"></div>
+						</div>
+						<!-- MicroBloggingDetail End -->
+					</div>
+				</div>
+
+				<!-- Messenger Start -->
+				<div id="messenger" class="hidden">
+					<!-- NEW -->
+					<div class="popover bottom">
+						<div class="arrow"></div>
+						<div class="popover-title">
+							【新消息】
+							<button id="messengerButton" type="button" class="close">
+								<span aria-hidden="true">&times;</span>
+								<span class="sr-only">Close</span>
+							</button>
+						</div>
+						<div class="popover-content"></div>
+					</div>
+				</div>
+				<!-- Messenger End -->
+
+				<!-- Whisper Start -->
+				<div id="whisper" class="">
+					<ul class="nav nav-tabs hidden" role="tablist">
+						<li class="active">
+							<a href="#whisperMiniBox" role="tab" data-toggle="tab"></a>
+						</li>
+						<li>
+							<a href="#whisperBox" role="tab" data-toggle="tab"></a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div id="whisperMiniBox" class="tab-pane active">QMonkey</div>
+						<div id="whisperBox" class="tab-pane tabbable tabs-left">
+							<div class="popover-title">
+								<img id="whisperBoxIcon" src="" width="50" height="50">
+								<span id="whisperBoxNickname"></span>
+								<button id="whisperBoxClose" type="button" class="close">
+									<span class="glyphicon glyphicon-remove"></span>
+								</button>
+								<button id="whisperBoxMinimize" type="button" class="close">
+									<span class="glyphicon glyphicon-minus"></span>
+								</button>
+							</div>
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist"></ul>
+
+							<!-- Tab panes -->
+							<div id="whisperBoxContent" class="tab-content"></div>
+						</div>
+					</div>
+				</div>
+				<!-- Whisper End -->
+
+				<footer class="templatemo-footer">
+					<div class="templatemo-copyright">
+						<p>Copyright &copy; 2014 QMonkey</p>
+					</div>
+				</footer>
+			</div>
+		</div>
+	</div>
+
+	<script id="contentMyCommentReceiveTemplate" type="text/html">
+		<!-- Received Comment Start -->
+		{{each comments as comment }}
+		<div id="{{ comment.id }}">
+			<div class="col-sm-2">
+				<a href="javascript:;" click-action="personal" account-id="{{ comment.publisher.id }}">
+					<img src="{{if comment.publisher.icon }}
+							{{ comment.publisher.icon.path | toUploadPath }}{{ comment.publisher.icon.name }}
+						{{else}}
+							/uploads/default.ico
+						{{/if}}" width="70" height="70">
+				</a>
+			</div>
+			<div class="col-sm-offset-2">
+				<h4>
+					@<a href="javascript:;" click-action="personal" account-id="{{ comment.publisher.id }}">{{ comment.publisher.nickname }}</a>回复我：
+				</h4>
+				<p>{{ comment.content }}({{ comment.publishTime | dateFormat: 'yyyy-MM-dd hh:mm'}})</p>
+				<div class="pull-right">
+					<a href="javascript:;" click-action="replyButton">回复</a>
+				</div>
+				<div id="commentBox_{{ comment.id }}" blog-id="{{ comment.blog }}" class="clear-both hidden">
+					<form role="form">
+						<fieldset>
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="评论"></div>
+							<button type="button" class="btn btn-primary pull-right" click-action="reply">回复</button>
+						</fieldset>
+					</form>
 				</div>
 			</div>
 		</div>
-		<!-- Whisper End -->
+		<hr class="clear-both" />
+		{{/each}}
+		<!-- Received Comment End -->
+	</script>
 
-		<footer class="templatemo-footer">
-			<div class="templatemo-copyright">
-				<p>Copyright &copy; 2014 QMonkey</p>
+	<script id="contentMyCommentIssueTemplate" type="text/html">
+		<!-- Issued Comment Start -->
+		{{each comments as comment }}
+		<div id="{{ comment.id }}">
+			<div class="col-sm-offset-1">
+				<h4>
+					回复@<a href="javascript:;" click-action="personal" account-id="{{ comment.receiver.id }}">{{ comment.receiver.nickname }}</a>：
+				</h4>
+				<p>{{ comment.content }}({{ comment.publishTime | dateFormat: 'yyyy-MM-dd hh:mm'}})</p>
 			</div>
-		</footer>
 		</div>
+		<hr />
+		{{/each}}
+		<!-- Issued Comment End -->
+	</script>
+
+	<script id="contentMyWhisperTemplate" type="text/html">
+		<!-- My Whisper Start -->
+		{{each whispers as whisper }}
+		<div account-id="{{ whisper.sender.id }}">
+			<div class="col-sm-2">
+				<a href="javascript:;" click-action="personal">
+					<img src="{{if whisper.sender.icon }}
+							{{ whisper.sender.icon.path | toUploadPath }}{{ whisper.sender.icon.name }}
+						{{else}}
+							/uploads/default.ico
+						{{/if}}" width="70" height="70">
+				</a>
+			</div>
+			<div class="col-sm-offset-2">
+				<h4>
+					@<a href="javascript:;" click-action="personal">{{ whisper.sender.nickname }}</a>对我说：
+				</h4>
+				<p>{{ whisper.content }}({{ whisper.sendTime | dateFormat: 'yyyy-MM-dd hh:mm'}})</p>
+				<div class="pull-right">
+					<a href="javascript:;" click-action="detail">查看</a>
+				</div>
+			</div>
 		</div>
-	</div>
+		<hr class="clear-both" />
+		{{/each}}
+		<!-- My Whisper End -->
+	</script>
+
+	<script id="contentSearchPeopleTemplate" type="text/html">
+		{{each bloggers as blogger}}
+			<div id="{{ blogger.id }}">
+				<div class="col-sm-3">
+					<a href="javascript:;" click-action="personal">
+						<img src="{{if blogger.icon }}
+							{{ blogger.icon.path | toUploadPath }}{{ blogger.icon.name }}
+						{{else}}
+							/uploads/default.ico
+						{{/if}}" width="120" height="120">
+					</a>
+				</div>
+				<div class="col-sm-offset-3">
+					<h4>
+						<a href="javascript:;" click-action="personal">{{ blogger.nickname }}</a>
+					</h4>
+					{{if blogger.relation }}
+					<div class="pull-right">
+						{{if blogger.relation === "friend" || blogger.relation === "following" }}
+							<button type="button" class="btn btn-default" click-action="unfollow">取消关注</button>
+						{{else}}
+							<button type="button" class="btn btn-default" click-action="follow">关注</button>
+						{{/if}}
+						<button type="button" class="btn btn-default" click-action="whisper">私信</button>
+					</div>
+					{{/if}}
+					<p><strong>所在地：&nbsp;</strong>{{ blogger.address }}</p>
+					<p>
+						<strong>关注</strong>
+						<a href="javascript:;" click-action="followings">{{ blogger.followings }}</a>
+						<strong>&nbsp;粉丝</strong>
+						<a href="javascript:;" click-action="followers">{{ blogger.followers }}</a>
+						<strong>&nbsp;微博</strong>
+						<a href="javascript:;" click-action="blogs">{{ blogger.blogs }}</a>
+					</p>
+					<p><strong>简介：&nbsp;</strong>{{ blogger.introduction }}</p>
+				</div>
+			</div>
+			<hr class="clear-both" />
+		{{/each}}
+	</script>
+
+	<script id="contentMicroBloggingDetailInfoTemplate" type="text/html">
+		<div id="{{ blogger.id }}">
+			<div class="col-sm-3">
+				<a href="javascript:;" click-action="personal">
+					<img src="{{if blogger.icon }}
+								{{ blogger.icon.path | toUploadPath }}{{ blogger.icon.name }}
+							{{else}}
+								/uploads/default.ico
+							{{/if}}" width="120" height="120">
+				</a>
+			</div>
+			<div class="col-sm-offset-3">
+				<h4>
+					<a href="javascript:;" click-action="personal">{{ blogger.nickname }}</a>
+				</h4>
+				{{if blogger.relation }}
+				<div class="pull-right">
+					{{if blogger.relation === "friend" || blogger.relation === "following" }}
+						<button type="button" class="btn btn-default" click-action="unfollow">取消关注</button>
+					{{else}}
+						<button type="button" class="btn btn-default" click-action="follow">关注</button>
+					{{/if}}
+					<button type="button" class="btn btn-default" click-action="whisper">私信</button>
+				</div>
+				{{/if}}
+				<p><strong>所在地：&nbsp;</strong>{{ blogger.address }}</p>
+				<p>
+					<strong>关注</strong>
+					<a href="javascript:;" click-action="followings">{{ blogger.followings }}</a>
+					<strong>&nbsp;粉丝</strong>
+					<a href="javascript:;" click-action="followers">{{ blogger.followers }}</a>
+					<strong>&nbsp;微博</strong>
+					<a href="javascript:;" click-action="blogs">{{ blogger.blogs }}</a>
+				</p>
+				<p><strong>简介：&nbsp;</strong>{{ blogger.introduction }}</p>
+			</div>
+		</div>
+	</script>
+
+	<script id="contentMicroBloggingDetailBlogsTemplate" type="text/html">
+		{{each blogs as blog}}
+		<div id="{{ blog.id }}">
+			{{if blog.publisher }}
+			<div class="col-sm-2">
+				<a href="javascript:;" click-action="personal" account-id="{{ blog.publisher.id }}">
+					<img src="{{if blog.publisher.icon }}
+								{{ blog.publisher.icon.path | toUploadPath }}{{ blog.publisher.icon.name }}
+							{{else}}
+								/uploads/default.ico
+							{{/if}}" width="70" height="70">
+				</a>
+			</div>
+			{{/if}}
+			<div class={{if blog.publisher }}"col-sm-offset-2"{{else}}"col-sm-offset-1"{{/if}}>
+				{{if blog.publisher }}
+				<h4>
+					<a href="javascript:;" click-action="personal" account-id="{{ blog.publisher.id }}">{{ blog.publisher.nickname }}</a>
+				</h4>
+				{{/if}}
+				<p>{{ blog.content }}</p>
+				<div>
+					<div class="pull-left">{{ blog.publishTime | dateFormat: 'yyyy-MM-dd hh:mm' }}</div>
+					<div class="pull-right">
+						<a href="javascript:;" click-action="great">
+							<i class="fa fa-thumbs-up"></i>
+							<span>
+							{{if blog.greats > 0 }}({{ blog.greats }}){{/if}}
+							</span>
+						</a>
+						&nbsp;|&nbsp;
+						<a href="javascript:;" click-action="forward">转发</a>
+						&nbsp;|&nbsp;
+						<a href="javascript:;" click-action="comment">评论
+							<span>{{if blog.comments > 0 }}({{ blog.comments }}){{/if}}</span>
+						</a>
+					</div>
+				</div>
+
+				<!-- Comment Start -->
+				<div id="comment_{{ blog.id }}" class="clear-both hidden">
+					<form role="form">
+						<fieldset>
+							<div class="form-group">
+								<input type="hidden">
+								<input type="text" class="form-control" placeholder="评论">
+							</div>
+							<button type="button" class="btn btn-primary pull-right" click-action="commentButton">评论</button>
+						</fieldset>
+					</form>
+					<hr />
+
+					<div id="commentContainer_{{ blog.id }}"></div>
+				</div>
+				<!-- Comment End -->
+			</div>
+		</div>
+		<hr class="clear-both" />
+		{{/each}}
+	</script>
+
+	<script id="contentMicroBloggingDetailBlogsCommentTemplate" type="text/html">
+		{{each comments as comment }}
+		<div id="{{ comment.id }}">
+			<div class="col-sm-2">
+				<a href="javascript:;" click-action="personal" account-id="{{ comment.publisher.id }}">
+					<img src="{{if comment.publisher.icon }}
+								{{ comment.publisher.icon.path | toUploadPath }}{{ comment.publisher.icon.name }}
+							{{else}}
+								/uploads/default.ico
+							{{/if}}" width="50" height="50">
+				</a>
+			</div>
+			<div class="col-sm-offset-2">
+				<h5>
+					<a href="javascript:;" click-action="personal" account-id="{{ comment.publisher.id }}">{{ comment.publisher.nickname }}</a>
+				</h5>
+				<p>{{ comment.content }}({{ comment.publishTime | dateFormat: 'yyyy-MM-dd hh:mm' }})</p>
+				<div class="pull-right">
+					<a href="javascript:;" click-action="commentGreat">
+						<i class="fa fa-thumbs-up"></i>
+						<span>{{if comment.greats > 0 }}({{ comment.greats }}){{/if}}</span>
+					</a>
+					&nbsp;|&nbsp;
+					<a href="javascript:;" click-action="commentReply">回复</a>
+				</div>
+			</div>
+		</div>
+		<hr class="clear-both" />
+		{{/each}}
+	</script>
+
+	<script id="messengerTemplate" type="text/html">
+		{{if prompt.followers }}
+		<p>
+			{{ prompt.followers }}位新粉丝，
+			<a href="javascript:;" click-action="follower">查看粉丝</a>
+		</p>
+		{{/if}}
+		{{if prompt.ats }}
+		<p>
+			{{ prompt.ats }}条@我，
+			<a href="javascript:;" click-action="at">查看@我</a>
+		</p>
+		{{/if}}
+		{{if prompt.comments }}
+		<p>
+			{{ prompt.comments }}条新评论，
+			<a href="javascript:;" click-action="comment">查看评论</a>
+		</p>
+		{{/if}}
+		{{if prompt.whispers }}
+		<p>
+			{{ prompt.whispers }}条新私信，
+			<a href="javascript:;" click-action="whisper">查看私信</a>
+		</p>
+		{{/if}}
+	</script>
+
+	<script id="whisperBoxNavTemplate" type="text/html">
+		<li>
+			<a href="#whisper_{{ receiver.id }}" role="tab" data-toggle="tab">{{ receiver.nickname }}</a>
+		</li>
+	</script>
+
+	<script id="whisperMessageBoxTemplate" type="text/html">
+		<div class="tab-pane fade col-sm-offset-3" id="whisper_{{ receiver.id }}">
+			<div class="whisperMessageBox"></div>
+			<hr class="whisper-split-line" />
+			<form class="form-horizontal" role="form">
+				<div class="form-group">
+					<div class="col-sm-12">
+						<textarea class="form-control" rows="5"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<button type="button" class="btn btn-default pull-right" click-action="send">发送</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</script>
+	
+	<script id="whisperMessageTemplate" type="text/html">
+		{{each whispers as whisper }}
+		<div class="pull-{{if whisper.action === 'send'}}right{{else}}left{{/if}} col-sm-7">
+			<div class="popover left clear-both">
+				<div class="arrow"></div>
+				<div class="popover-title">
+					<small>{{ whisper.sendTime | dateFormat: 'yyyy-MM-dd hh:mm'}}</small>
+				</div>
+				<div class="popover-content">
+					<p class="whisperMessageContent">{{ whisper.content }}</p>
+				</div>
+			</div>
+		</div>
+		{{/each}}
+	</script>
 
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

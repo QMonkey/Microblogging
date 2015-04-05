@@ -428,12 +428,12 @@ var app = (function() {
 					break;
 
 				case "comment":
-					$("#comment_" + blogId).toggleClass("hidden");
+					container.find("#comment_" + blogId).toggleClass("hidden");
 					$.get("/comment/blogComments?id=" + blogId, function(responseData) {
 						var html = template("contentMicroBloggingDetailBlogsCommentTemplate", {
 							comments: responseData
 						});
-						$("#commentContainer_" + blogId).html(html);
+						container.find("#commentContainer_" + blogId).html(html);
 					});
 					break;
 
@@ -486,7 +486,7 @@ var app = (function() {
 									var html = template("contentMicroBloggingDetailBlogsCommentTemplate", {
 										comments: responseData
 									});
-									$("#commentContainer_" + blogId).html(html);
+									container.find("#commentContainer_" + blogId).html(html);
 								} else {
 									alert(responseData.error);
 								}
