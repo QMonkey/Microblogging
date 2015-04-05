@@ -398,9 +398,13 @@ var app = (function() {
 					};
 					$("#whisper").removeClass("hidden");
 					var html = template("whisperBoxNavTemplate", { receiver: receiver });
-					$("#whisperBox ul").append(html);
+					if($("#whisper_" + accountId).length == 0) {
+						$("#whisperBox ul").append(html);
+					}
 					html = template("whisperMessageBoxTemplate", { receiver: receiver });
-					$("#whisperBoxContent").html(html);
+					if($("#whisper_" + accountId).length == 0) {
+						$("#whisperBoxContent").append(html);
+					}
 					$(".nav-tabs a[href='#whisper_" + accountId + "']").tab("show");
 					$(".nav-tabs a[href='#whisperBox']").tab('show');
 					break;
@@ -621,9 +625,13 @@ var app = (function() {
 						nickname: nickname
 					}
 					var html = template("whisperBoxNavTemplate", { receiver: param });
-					$("#whisperBox ul").append(html);
+					if($("#whisper_" + accountId).length == 0) {
+						$("#whisperBox ul").append(html);
+					}
 					html = template("whisperMessageBoxTemplate", { receiver: param });
-					$("#whisperBoxContent").append(html);
+					if($("#whisper_" + accountId).length == 0) {
+						$("#whisperBoxContent").append(html);
+					}
 					$.get("/whisper/whispers?sender=" + accountId, function(responseData) {
 						if(!responseData.error) {
 							$("#whisper").removeClass("hidden");
