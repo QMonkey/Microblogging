@@ -596,7 +596,6 @@ var app = (function() {
 							$.get("/comment/blogComments?id=" + blogId, function(responseData) {
 								if(!responseData.error) {
 									$("#sidebarMyComment").click();
-									alert("回复成功！");
 								} else {
 									alert(responseData.error);
 								}
