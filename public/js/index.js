@@ -53,6 +53,11 @@ var app = (function() {
 		});
 	}
 
+	var activeSidebar = function(sidebar) {
+		$("#sidebarHome, #sidebarAt, #sidebarMyComment, #sidebarMyWhisper, #sidebarSetting").removeClass("active");
+		$("#" + sidebar).addClass("active");
+	}
+
 	var bindEvent = function() {
 		$().ready(function() {
 			socket = io();
@@ -167,6 +172,7 @@ var app = (function() {
 				var html = template("contentMicroBloggingDetailBlogsTemplate", { blogs: responseData });
 				$("#contentHomeBlogs").html(html);
 			});
+			activeSidebar("sidebarHome");
 			$(".nav-tabs a[href='#contentHome']").tab('show');
 		});
 
@@ -181,6 +187,7 @@ var app = (function() {
 				$("#contentAtComment").html(html);
 				updateMessenger();
 			});
+			activeSidebar("sidebarAt");
 			$(".nav-tabs a[href='#contentAt']").tab('show');
 		});
 
@@ -194,6 +201,7 @@ var app = (function() {
 				var html = template("contentMyCommentIssueTemplate", { comments: responseData });
 				$("#contentMyCommentIssue").html(html);
 			});
+			activeSidebar("sidebarMyComment");
 			$(".nav-tabs a[href='#contentMyComment']").tab('show');
 		});
 
@@ -202,6 +210,7 @@ var app = (function() {
 				var html = template("contentMyWhisperTemplate", { whispers: responseData });
 				$("#contentMyWhisper").html(html);
 			});
+			activeSidebar("sidebarMyWhisper");
 			$(".nav-tabs a[href='#contentMyWhisper']").tab('show');
 		});
 
@@ -223,6 +232,7 @@ var app = (function() {
 				} else {
 					$("#contentSettingIconImg").attr("src", "/uploads/default.ico");
 				}
+				activeSidebar("sidebarSetting");
 				$(".nav-tabs a[href='#contentSetting']").tab('show');
 			}, function() {
 				alert("Please sign in first!");
